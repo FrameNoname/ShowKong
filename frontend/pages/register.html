@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>สมัครสมาชิก - โชว์ของ</title>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-6">
+  
+  <div class="bg-white rounded-2xl shadow-xl w-full max-w-2xl p-8">
+    <div class="text-center mb-8">
+      <h1 class="text-3xl font-bold text-blue-600">โชว์ของ</h1>
+      <p class="text-gray-500 mt-2">สร้างโปรไฟล์ของคุณ เพื่อเชื่อมต่อกับ HR และเพื่อนร่วมโปรเจค</p>
+    </div>
+
+    <form id="registerForm" class="space-y-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Username</label>
+          <input type="text" id="username" required class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Gmail</label>
+          <input type="email" id="email" required class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+        </div>
+        <div class="md:col-span-2">
+          <label class="block text-sm font-medium text-gray-700">Password</label>
+          <input type="password" id="password" required class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+        </div>
+      </div>
+
+      <hr class="border-gray-200">
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="md:col-span-2">
+          <label class="block text-sm font-medium text-gray-700">ชื่อ - นามสกุล</label>
+          <input type="text" id="fullName" required class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">อายุ</label>
+          <input type="number" id="age" required class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">มหาวิทยาลัย</label>
+          <input type="text" id="university" placeholder="เช่น มหาวิทยาลัยแม่ฟ้าหลวง" required class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">คณะ / สาขา</label>
+          <input type="text" id="faculty" required class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">ชั้นปีที่เรียนอยู่</label>
+          <select id="year" class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500">
+            <option value="1">ปี 1</option>
+            <option value="2">ปี 2</option>
+            <option value="3">ปี 3</option>
+            <option value="4">ปี 4</option>
+            <option value="จบการศึกษาแล้ว">จบการศึกษาแล้ว</option>
+          </select>
+        </div>
+      </div>
+
+      <hr class="border-gray-200">
+
+      <div class="grid grid-cols-1 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700">รูปโปรไฟล์ (URL สำหรับทดสอบ หรือจะทำระบบอัปโหลดทีหลัง)</label>
+          <input type="url" id="avatarUrl" placeholder="https://..." class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">GitHub Profile / Portfolio Link</label>
+          <input type="url" id="githubUrl" placeholder="เช่น https://github.com/FrameNoname" class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+        </div>
+      </div>
+
+      <button type="submit" class="w-full bg-blue-600 text-white font-semibold py-3 px-4 rounded-md hover:bg-blue-700 transition duration-200">
+        สมัครสมาชิกและสร้างโปรไฟล์
+      </button>
+      <div class="text-center mt-4 text-sm text-gray-500">
+        มีบัญชีอยู่แล้ว? <a href="/pages/login.html" class="text-blue-600 hover:underline">เข้าสู่ระบบที่นี่</a>
+      </div>
+      <p id="errorMessage" class="text-red-500 text-sm text-center hidden"></p>
+    </form>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
