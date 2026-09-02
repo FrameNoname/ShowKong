@@ -4,10 +4,28 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>client</title>
+    <title>ShowKong</title>
   </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+  <body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col items-center justify-center p-6">
+    <div class="max-w-md w-full bg-slate-800 border border-slate-700 rounded-2xl p-8 shadow-2xl text-center space-y-6">
+      <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+        <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+      </div>
+
+      <div class="space-y-2">
+        <h1 class="text-3xl font-bold tracking-tight text-white">ShowKong</h1>
+        <p class="text-slate-400 text-sm">Vanilla HTML/JS + Tailwind CSS + Supabase</p>
+      </div>
+
+      <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-700/60 text-left text-xs text-slate-300 font-mono space-y-1">
+        <p><span class="text-emerald-400">✓</span> Tailwind CSS Ready</p>
+        <p><span class="text-emerald-400">✓</span> Supabase Client Ready</p>
+        <p><span class="text-emerald-400">✓</span> Vanilla JavaScript</p>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
   </body>
 </html>
