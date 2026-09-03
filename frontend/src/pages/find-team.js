@@ -30,7 +30,7 @@ function teamCard(team) {
       <p><strong>ตรงกับคุณ ${team.match}%</strong> · เปิดรับ ${team.open} คน</p>
       <p>หัวข้อ: ${team.topic} · ${team.focus}<br>ทีมมีแล้ว: ${team.members}</p>
       <p>ประวัติทีม: ${team.history}</p>
-      <div class="team-card-actions"><button class="button button-small button-neutral" type="button">ดูประวัติทีม</button><button class="button button-small button-primary js-request-join" type="button" data-team="${team.name}" data-role="${team.role}">ขอ Join ทีม</button></div>
+      <div class="team-card-actions"><a class="button button-small button-neutral" href="/pages/team-detail.html?team=${encodeURIComponent(team.name)}">ดูประวัติทีม</a><button class="button button-small button-primary js-request-join" type="button" data-team="${team.name}" data-role="${team.role}">ขอ Join ทีม</button></div>
     </article>
   `
 }

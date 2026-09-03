@@ -15,7 +15,7 @@ const posts = [
     title: 'กำลังหา User Researcher มาช่วยทดสอบ SafeWalk',
     body: 'ทีมกำลังทำแอปช่วยนักศึกษาเลือกเส้นทางกลับหอที่ปลอดภัย อยากได้คนช่วยวางแผนสัมภาษณ์และสรุป insight จากผู้ใช้จริง',
     detailTitle: 'สิ่งที่ทีมต้องการ', detail: 'สัมภาษณ์ผู้ใช้ 8–10 คน · ใช้เวลาประมาณ 2 สัปดาห์ · มี Mentor ดูแล',
-    stats: '18 สนใจ · 6 ความคิดเห็น', actions: ['ดูประวัติทีม', 'ขอ Join ทีม'], accent: 'purple',
+    stats: '18 สนใจ · 6 ความคิดเห็น', actions: ['ดูประวัติทีม', 'ขอ Join ทีม'], accent: 'purple', team: 'SafeWalk',
   },
   {
     type: 'ขอ Feedback', author: 'Mew', initial: 'M', meta: '5 ชม. · สิ่งแวดล้อม',
@@ -59,7 +59,13 @@ function postCard(post) {
       <h2>${escapeHtml(post.title)}</h2>
       <p>${escapeHtml(post.body)}</p>
       <div class="post-detail"><strong>${escapeHtml(post.detailTitle)}</strong><span>${escapeHtml(post.detail)}</span></div>
-      <div class="post-footer"><span>${escapeHtml(post.stats)}</span><div>${post.actions.map((action, index) => `<button class="button button-small ${index === post.actions.length - 1 ? 'button-primary' : 'button-neutral'}" type="button">${escapeHtml(action)}</button>`).join('')}</div></div>
+      <div class="post-footer"><span>${escapeHtml(post.stats)}</span><div>${post.actions.map((action, index) => {
+        const classes = `button button-small ${index === post.actions.length - 1 ? 'button-primary' : 'button-neutral'}`
+        if (action === 'ดูประวัติทีม' && post.team) {
+          return `<a class="${classes}" href="/pages/team-detail.html?team=${encodeURIComponent(post.team)}">${escapeHtml(action)}</a>`
+        }
+        return `<button class="${classes}" type="button">${escapeHtml(action)}</button>`
+      }).join('')}</div></div>
     </article>
   `
 }

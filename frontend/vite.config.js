@@ -13,6 +13,7 @@ export default defineConfig({
         register: resolve(import.meta.dirname, 'pages/register.html'),
         feed: resolve(import.meta.dirname, 'pages/feed.html'),
         findTeam: resolve(import.meta.dirname, 'pages/find-team.html'),
+        teamDetail: resolve(import.meta.dirname, 'pages/team-detail.html'),
       },
     },
   },
