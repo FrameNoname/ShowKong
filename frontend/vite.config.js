@@ -11,8 +11,9 @@ export default defineConfig({
         main: resolve(import.meta.dirname, 'index.html'),
         login: resolve(import.meta.dirname, 'pages/login.html'),
         register: resolve(import.meta.dirname, 'pages/register.html'),
+        feed: resolve(import.meta.dirname, 'pages/feed.html'),
+        findTeam: resolve(import.meta.dirname, 'pages/find-team.html'),
       },
     },
   },
 })
-
