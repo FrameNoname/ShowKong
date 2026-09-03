@@ -44,7 +44,6 @@ const stream = document.querySelector('#postStream')
 const postModal = document.querySelector('#postModal')
 const successModal = document.querySelector('#successModal')
 const postForm = document.querySelector('#postForm')
-const quickPost = document.querySelector('#quickPost')
 let activePostType = 'ไอเดียใหม่'
 
 function escapeHtml(value = '') {
@@ -80,9 +79,6 @@ function setModalOpen(isOpen) {
 
 document.querySelectorAll('.js-open-post').forEach((button) => {
   button.addEventListener('click', () => {
-    if (button.hasAttribute('data-use-quick-post') && quickPost.value.trim()) {
-      document.querySelector('#postDescription').value = quickPost.value.trim()
-    }
     setModalOpen(true)
   })
 })
@@ -90,7 +86,7 @@ document.querySelectorAll('.js-open-post').forEach((button) => {
 document.querySelectorAll('.js-close-post').forEach((button) => button.addEventListener('click', () => setModalOpen(false)))
 postModal.addEventListener('click', (event) => { if (event.target === postModal) setModalOpen(false) })
 
-document.querySelectorAll('[data-composer-types], [data-post-types], [data-feed-filters]').forEach((group) => {
+document.querySelectorAll('[data-post-types], [data-feed-filters]').forEach((group) => {
   group.addEventListener('click', (event) => {
     const button = event.target.closest('button')
     if (!button) return
@@ -135,7 +131,6 @@ postForm.addEventListener('submit', (event) => {
   postForm.reset()
   uploadPreview.hidden = true
   uploadPreview.innerHTML = ''
-  quickPost.value = ''
   setModalOpen(false)
   successModal.hidden = false
 })

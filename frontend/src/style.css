@@ -66,8 +66,9 @@ img { display: block; max-width: 100%; }
 .avatar { width: 32px; height: 32px; flex: 0 0 auto; display: inline-grid; place-items: center; border: 0; border-radius: 50%; color: white; background: #2c2941; font-size: 13px; font-style: normal; font-weight: 600; }
 .avatar-sm { width: 32px; height: 32px; }
 .avatar-lg { width: 48px; height: 48px; font-size: 16px; }
-.avatar-stack { display: flex; flex-direction: row-reverse; justify-content: flex-start; }
-.avatar-stack .avatar { margin-left: -8px; border: 2px solid white; }
+.avatar-stack { display: flex; justify-content: flex-start; }
+.avatar-stack .avatar { border: 2px solid white; }
+.avatar-stack .avatar + .avatar { margin-left: -8px; }
 
 .pill, .chip, .status-pill { display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; white-space: nowrap; }
 .pill { padding: 8px 14px; font-size: 14px; line-height: 20px; font-weight: 500; }
@@ -135,20 +136,12 @@ button.chip:hover, .chip.is-active { background: var(--brand-soft); color: #392c
 .footer-meta a:hover { color: var(--brand); }
 
 /* Feed */
-.feed-intro { min-height: 644px; padding-top: 48px; }
+.feed-intro { padding-block: 48px 40px; }
 .feed-intro > h1 { font-size: 36px; line-height: 48px; letter-spacing: -.6px; }
 .feed-intro > p { margin-top: 16px; color: var(--muted); line-height: 26px; }
-.composer-row { min-height: 338px; margin-top: 24px; display: flex; justify-content: center; }
-.composer-card { width: 680px; padding: 24px; background: white; border: 1px solid var(--border); border-radius: 16px; box-shadow: 0 5px 16px rgba(27,21,57,.04); }
-.composer-card h2 { font-size: 22px; line-height: 32px; }
-.composer-card > p { margin-top: 8px; color: var(--muted); line-height: 26px; }
-.composer-card .chip-row { margin-top: 16px; }
 textarea, input, select { border: 1px solid var(--border); border-radius: 10px; color: var(--text); background: white; }
 textarea { width: 100%; padding: 14px 16px; resize: vertical; line-height: 26px; }
-.composer-card textarea { min-height: 96px; margin-top: 16px; }
-.composer-actions { margin-top: 12px; justify-content: space-between; }
-.composer-actions > div { display: flex; gap: 8px; }
-.filter-title { margin-top: 24px; font-size: 16px; line-height: 24px; }
+.filter-title { margin-top: 32px; font-size: 16px; line-height: 24px; }
 .feed-filters { margin-top: 16px; }
 .feed-layout { padding-bottom: 80px; display: grid; grid-template-columns: 240px minmax(0, 680px) 240px; align-items: start; gap: 24px; }
 .feed-sidebar { display: flex; flex-direction: column; gap: 24px; }
