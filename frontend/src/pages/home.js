@@ -1,6 +1,7 @@
 import '../style.css'
 import { communityCta, siteFooter } from '../components/shared.js'
 import { supabase } from '../lib/supabase.js'
+import { openLoginModal } from '../components/login-modal.js'
 
 const ctaSlot = document.querySelector('[data-shared-cta]')
 const footerSlot = document.querySelector('[data-shared-footer]')
@@ -11,6 +12,13 @@ if (footerSlot) footerSlot.innerHTML = siteFooter()
 document.querySelectorAll('.js-open-post').forEach((button) => {
   button.addEventListener('click', () => {
     window.location.href = '/pages/register.html'
+  })
+})
+
+document.querySelectorAll('.js-open-login, [href="/pages/login.html"], [href="./pages/login.html"]').forEach((button) => {
+  button.addEventListener('click', (e) => {
+    e.preventDefault()
+    openLoginModal()
   })
 })
 
@@ -29,3 +37,8 @@ async function redirectSignedInUser() {
 }
 
 redirectSignedInUser()
+
+if (window.location.hash === '#login') {
+  openLoginModal()
+}
+

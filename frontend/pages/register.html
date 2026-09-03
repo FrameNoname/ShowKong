@@ -1,87 +1,325 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="th" class="h-full">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>สมัครสมาชิก - โชว์ของ</title>
+  <meta name="description" content="สร้างบัญชีและโปรไฟล์บน ShowKong เชื่อมต่อเพื่อนร่วมทีมและโอกาสใหม่" />
+  <title>สมัครสมาชิก — ShowKong</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center p-6">
-  
-  <div class="bg-white rounded-2xl shadow-xl w-full max-w-2xl p-8">
-    <div class="text-center mb-8">
-      <h1 class="text-3xl font-bold text-blue-600">โชว์ของ</h1>
-      <p class="text-gray-500 mt-2">สร้างโปรไฟล์ของคุณ เพื่อเชื่อมต่อกับ HR และเพื่อนร่วมโปรเจค</p>
-    </div>
+<body class="bg-[#120d2b] min-h-screen md:h-screen w-screen overflow-x-hidden md:overflow-hidden flex items-center justify-center p-2 sm:p-4 lg:p-6 font-['Anuphan',sans-serif] selection:bg-[#6d5dfb] selection:text-white relative">
 
-    <form id="registerForm" class="space-y-6">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Username</label>
-          <input type="text" id="username" required class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+  <!-- Ambient Glow Effects & Floating Background Blobs (ShowKong Brand Violet & Blue Glows) -->
+  <div class="absolute -top-32 -left-32 w-96 h-96 bg-[#6d5dfb]/25 rounded-full blur-3xl pointer-events-none animate-pulse"></div>
+  <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-[#251763]/50 rounded-full blur-3xl pointer-events-none animate-pulse" style="animation-delay: 1.5s;"></div>
+  <div class="absolute top-1/2 left-1/3 w-72 h-72 bg-[#b89eff]/15 rounded-full blur-3xl pointer-events-none"></div>
+
+  <!-- Container Box: Animated Entry Card with Backdrop Shadow -->
+  <main class="w-full max-w-6xl h-auto md:h-full md:max-h-[96vh] bg-white rounded-2xl sm:rounded-3xl shadow-2xl shadow-[#0c0820]/50 overflow-hidden grid grid-cols-1 lg:grid-cols-2 relative z-10 transition-all duration-700 ease-out transform opacity-0 translate-y-4 scale-[0.98] border border-[#e6e4ef]" id="mainCard">
+    
+    <!-- LEFT COLUMN: Registration Form -->
+    <section class="p-4 sm:p-6 lg:p-7 flex flex-col justify-between overflow-y-auto">
+      <div>
+        <!-- Top Bar: Brand & Back link -->
+        <div class="flex items-center justify-between mb-2">
+          <a href="/" class="group inline-flex items-center gap-2 text-[#17152b] font-bold text-lg transition">
+            <span class="w-7 h-7 rounded-lg bg-[#6d5dfb] text-white flex items-center justify-center font-bold text-xs shadow-sm group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">S</span>
+            <span class="group-hover:text-[#6d5dfb] transition-colors">ShowKong</span>
+          </a>
+          <a href="/" class="text-xs text-[#625f75] hover:text-[#6d5dfb] transition-all duration-200 flex items-center gap-1 hover:-translate-x-0.5">
+            ← กลับหน้าแรก
+          </a>
         </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Gmail</label>
-          <input type="email" id="email" required class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+
+        <!-- Heading Section -->
+        <div class="mb-2.5">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#f1eeff] text-[#6d5dfb] text-[11px] font-semibold tracking-wide border border-[#6d5dfb]/15">
+              ✨ สำหรับนักศึกษา
+            </span>
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-extrabold text-[#17152b] tracking-tight">Create an account</h1>
+          <p class="text-[#625f75] text-xs mt-0.5 leading-relaxed">
+            เริ่มต้นเปลี่ยนไอเดียในห้องเรียนให้กลายเป็นผลงานจริง ร่วมสร้างทีมกับเพื่อนต่างคณะ
+          </p>
         </div>
-        <div class="md:col-span-2">
-          <label class="block text-sm font-medium text-gray-700">Password</label>
-          <input type="password" id="password" required class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+
+        <!-- Google Sign-up Button (Hover elevation & active bounce) -->
+        <button 
+          type="button" 
+          id="googleSignUpBtn"
+          class="w-full flex items-center justify-center gap-2.5 py-2 px-3 border border-[#e6e4ef] rounded-xl text-xs font-semibold text-[#17152b] bg-white hover:bg-[#f7f8fc] hover:border-[#6d5dfb]/30 hover:shadow-sm hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99] transition-all duration-200 mb-2.5 cursor-pointer"
+        >
+          <svg class="w-4 h-4 transition-transform duration-200 group-hover:scale-110 shrink-0" viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+          </svg>
+          <span>Sign up with Google</span>
+        </button>
+
+        <!-- Divider -->
+        <div class="relative flex items-center justify-center mb-2.5">
+          <div class="border-t border-[#e6e4ef] w-full"></div>
+          <span class="bg-white px-2.5 text-[10px] font-medium text-[#625f75] uppercase tracking-wider shrink-0">หรือกรอกข้อมูลสมัคร</span>
+          <div class="border-t border-[#e6e4ef] w-full"></div>
         </div>
+
+        <!-- Form -->
+        <form id="registerForm" class="space-y-2.5">
+          
+          <!-- Row 1: Username & Email -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <div>
+              <label for="username" class="block text-[11px] font-semibold text-[#17152b] mb-0.5">Username <span class="text-rose-500">*</span></label>
+              <input 
+                type="text" 
+                id="username" 
+                required 
+                placeholder="เช่น somchai99"
+                autocomplete="username"
+                class="w-full rounded-lg bg-[#f7f8fc] border border-[#e6e4ef] px-3 py-1.5 text-xs text-[#17152b] placeholder:text-[#9996a8] focus:bg-white focus:border-[#6d5dfb] focus:ring-2 focus:ring-[#6d5dfb]/15 focus:outline-none transition-all duration-200" 
+              />
+            </div>
+
+            <div>
+              <label for="email" class="block text-[11px] font-semibold text-[#17152b] mb-0.5">Gmail / Email <span class="text-rose-500">*</span></label>
+              <input 
+                type="email" 
+                id="email" 
+                required 
+                placeholder="student@gmail.com"
+                autocomplete="email"
+                class="w-full rounded-lg bg-[#f7f8fc] border border-[#e6e4ef] px-3 py-1.5 text-xs text-[#17152b] placeholder:text-[#9996a8] focus:bg-white focus:border-[#6d5dfb] focus:ring-2 focus:ring-[#6d5dfb]/15 focus:outline-none transition-all duration-200" 
+              />
+            </div>
+          </div>
+
+          <!-- Row 2: Password & Full Name with Toggle Visibility -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <div>
+              <label for="password" class="block text-[11px] font-semibold text-[#17152b] mb-0.5">Password <span class="text-rose-500">*</span></label>
+              <div class="relative">
+                <input 
+                  type="password" 
+                  id="password" 
+                  required 
+                  minlength="6"
+                  placeholder="อย่างน้อย 6 ตัวอักษร"
+                  autocomplete="new-password"
+                  class="w-full rounded-lg bg-[#f7f8fc] border border-[#e6e4ef] px-3 py-1.5 pr-8 text-xs text-[#17152b] placeholder:text-[#9996a8] focus:bg-white focus:border-[#6d5dfb] focus:ring-2 focus:ring-[#6d5dfb]/15 focus:outline-none transition-all duration-200" 
+                />
+                <button 
+                  type="button" 
+                  id="togglePasswordBtn"
+                  aria-label="แสดงหรือซ่อนรหัสผ่าน"
+                  class="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#9996a8] hover:text-[#17152b] focus:outline-none transition p-0.5 cursor-pointer"
+                >
+                  <!-- Eye Off (Password is hidden by default) -->
+                  <svg id="eyeOffIcon" class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
+                  </svg>
+                  <!-- Eye (Password is revealed) -->
+                  <svg id="eyeOnIcon" class="w-4 h-4 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div>
+              <label for="fullName" class="block text-[11px] font-semibold text-[#17152b] mb-0.5">ชื่อ - นามสกุล <span class="text-rose-500">*</span></label>
+              <input 
+                type="text" 
+                id="fullName" 
+                required 
+                placeholder="สมชาย ใจดี"
+                class="w-full rounded-lg bg-[#f7f8fc] border border-[#e6e4ef] px-3 py-1.5 text-xs text-[#17152b] placeholder:text-[#9996a8] focus:bg-white focus:border-[#6d5dfb] focus:ring-2 focus:ring-[#6d5dfb]/15 focus:outline-none transition-all duration-200" 
+              />
+            </div>
+          </div>
+
+          <!-- Row 3: Age & University -->
+          <div class="grid grid-cols-3 gap-2.5">
+            <div>
+              <label for="age" class="block text-[11px] font-semibold text-[#17152b] mb-0.5">อายุ <span class="text-rose-500">*</span></label>
+              <input 
+                type="number" 
+                id="age" 
+                required 
+                min="15" 
+                max="99" 
+                placeholder="20"
+                class="w-full rounded-lg bg-[#f7f8fc] border border-[#e6e4ef] px-3 py-1.5 text-xs text-[#17152b] placeholder:text-[#9996a8] focus:bg-white focus:border-[#6d5dfb] focus:ring-2 focus:ring-[#6d5dfb]/15 focus:outline-none transition-all duration-200" 
+              />
+            </div>
+            <div class="col-span-2">
+              <label for="university" class="block text-[11px] font-semibold text-[#17152b] mb-0.5">มหาวิทยาลัย <span class="text-rose-500">*</span></label>
+              <input 
+                type="text" 
+                id="university" 
+                required 
+                placeholder="เช่น มหาวิทยาลัยแม่ฟ้าหลวง"
+                class="w-full rounded-lg bg-[#f7f8fc] border border-[#e6e4ef] px-3 py-1.5 text-xs text-[#17152b] placeholder:text-[#9996a8] focus:bg-white focus:border-[#6d5dfb] focus:ring-2 focus:ring-[#6d5dfb]/15 focus:outline-none transition-all duration-200" 
+              />
+            </div>
+          </div>
+
+          <!-- Row 4: Faculty & Year -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <div>
+              <label for="faculty" class="block text-[11px] font-semibold text-[#17152b] mb-0.5">คณะ / สาขา <span class="text-rose-500">*</span></label>
+              <input 
+                type="text" 
+                id="faculty" 
+                required 
+                placeholder="เช่น วิศวกรรมคอมพิวเตอร์"
+                class="w-full rounded-lg bg-[#f7f8fc] border border-[#e6e4ef] px-3 py-1.5 text-xs text-[#17152b] placeholder:text-[#9996a8] focus:bg-white focus:border-[#6d5dfb] focus:ring-2 focus:ring-[#6d5dfb]/15 focus:outline-none transition-all duration-200" 
+              />
+            </div>
+            <div>
+              <label for="year" class="block text-[11px] font-semibold text-[#17152b] mb-0.5">ชั้นปีที่เรียนอยู่</label>
+              <select 
+                id="year" 
+                class="w-full rounded-lg bg-[#f7f8fc] border border-[#e6e4ef] px-3 py-1.5 text-xs text-[#17152b] focus:bg-white focus:border-[#6d5dfb] focus:ring-2 focus:ring-[#6d5dfb]/15 focus:outline-none transition-all duration-200 cursor-pointer"
+              >
+                <option value="1">ปี 1</option>
+                <option value="2">ปี 2</option>
+                <option value="3">ปี 3</option>
+                <option value="4">ปี 4</option>
+                <option value="จบการศึกษาแล้ว">จบการศึกษาแล้ว</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Row 5: Profile Picture Upload with interactive hover effects -->
+          <div>
+            <label class="block text-[11px] font-semibold text-[#17152b] mb-1">รูปโปรไฟล์ (อัปโหลดรูปภาพ)</label>
+            <div class="flex items-center gap-3">
+              <!-- Avatar Preview Container with ring glow -->
+              <div id="avatarPreviewContainer" class="w-10 h-10 rounded-full bg-[#f1eeff] border-2 border-dashed border-[#6d5dfb]/40 flex items-center justify-center overflow-hidden shrink-0 transition-all duration-300 shadow-inner">
+                <img id="avatarPreviewImg" src="" alt="Avatar Preview" class="w-full h-full object-cover hidden transition-all duration-300" />
+                <span id="avatarPlaceholder" class="text-[#6d5dfb] text-xs transition-transform duration-200 hover:scale-125">📷</span>
+              </div>
+              
+              <!-- File Input Box with gradient hover border -->
+              <label class="group flex-1 flex items-center justify-between px-3 py-1.5 border border-dashed border-[#e6e4ef] hover:border-[#6d5dfb] rounded-lg bg-[#f7f8fc] hover:bg-[#f1eeff]/50 cursor-pointer transition-all duration-200 shadow-2xs">
+                <span id="avatarFileName" class="text-xs text-[#625f75] group-hover:text-[#6d5dfb] transition-colors truncate">เลือกรูปภาพของคุณ (PNG, JPG)</span>
+                <span class="text-[10px] font-semibold bg-white border border-[#e6e4ef] group-hover:border-[#6d5dfb] group-hover:text-[#6d5dfb] text-[#17152b] px-2 py-0.5 rounded shadow-2xs transition-all duration-200">Browse</span>
+                <input type="file" id="avatarFileInput" accept="image/png,image/jpeg,image/webp" class="hidden" />
+              </label>
+
+              <!-- Hidden inputs for compatibility -->
+              <input type="hidden" id="avatarUrl" value="" />
+              <input type="hidden" id="githubUrl" value="" />
+            </div>
+          </div>
+
+          <!-- Error message placeholder with smooth transition -->
+          <div id="errorMessage" class="text-rose-600 text-xs bg-rose-50 border border-rose-200 rounded-lg p-2.5 text-center hidden transition-all duration-200"></div>
+
+          <!-- Submit Button (ShowKong Brand Violet with Gleam sweep effect) -->
+          <button 
+            type="submit" 
+            id="registerSubmitBtn"
+            class="relative overflow-hidden group w-full bg-[#6d5dfb] hover:bg-[#5948ef] active:scale-[0.99] disabled:opacity-60 disabled:pointer-events-none text-white font-semibold py-2.5 px-4 rounded-xl shadow-md hover:shadow-xl hover:shadow-[#6d5dfb]/30 transition-all duration-300 flex items-center justify-center gap-2 mt-2 cursor-pointer"
+          >
+            <!-- Gleam sweep effect -->
+            <span class="absolute top-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-white/25 to-transparent group-hover:left-full transition-all duration-700 ease-out pointer-events-none"></span>
+            <span id="registerSubmitText" class="relative z-10">สมัครสมาชิกและสร้างโปรไฟล์</span>
+            <span id="registerSubmitArrow" class="relative z-10 group-hover:translate-x-1 transition-transform duration-200">→</span>
+          </button>
+
+          <!-- Switch to login -->
+          <div class="text-center text-xs text-[#625f75] pt-0.5">
+            มีบัญชีอยู่แล้ว? 
+            <a href="/pages/login.html" class="text-[#6d5dfb] font-semibold hover:text-[#251763] hover:underline transition-colors">
+              เข้าสู่ระบบที่นี่
+            </a>
+          </div>
+        </form>
       </div>
 
-      <hr class="border-gray-200">
+      <!-- Compact Footer -->
+      <footer class="text-[10px] text-[#625f75]/80 text-center pt-2 border-t border-[#e6e4ef] mt-2">
+        © 2026 ShowKong · พื้นที่เปิดกว้างสำหรับนักศึกษาทุกคน
+      </footer>
+    </section>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="md:col-span-2">
-          <label class="block text-sm font-medium text-gray-700">ชื่อ - นามสกุล</label>
-          <input type="text" id="fullName" required class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+    <!-- RIGHT COLUMN: Scenic Hero Panel (Styled with ShowKong Signature Indigo/Violet Gradient) -->
+    <section class="hidden lg:relative lg:flex flex-col justify-end p-8 xl:p-10 overflow-hidden group">
+      <!-- Background Image with smooth subtle zoom on hover -->
+      <div class="absolute inset-0 bg-cover bg-center transition-transform duration-1000 ease-out group-hover:scale-105" style="background-image: url('/register-hero.jpg');"></div>
+      
+      <!-- ShowKong Signature Gradient overlay (Dark Violet/Indigo matching home page hero) -->
+      <div class="absolute inset-0 bg-gradient-to-t from-[#130b36]/95 via-[#251763]/60 to-[#6d5dfb]/20 transition-opacity duration-500"></div>
+
+      <!-- Ambient glow circle -->
+      <div class="absolute -right-16 -top-16 w-80 h-80 rounded-full bg-radial from-white/20 to-transparent pointer-events-none"></div>
+
+      <!-- Content over image -->
+      <div class="relative z-10 text-white space-y-3 max-w-lg">
+        <!-- Social Proof Badge with ShowKong theme -->
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1b1248]/60 backdrop-blur-md border border-white/20 text-[11px] text-white/95 shadow-lg hover:border-white/35 transition-all duration-300">
+          <div class="flex -space-x-1.5 overflow-hidden">
+            <span class="inline-block h-4 w-4 rounded-full ring-1 ring-white/30 bg-[#6d5dfb] text-[9px] font-bold text-center leading-4 shadow-xs">P</span>
+            <span class="inline-block h-4 w-4 rounded-full ring-1 ring-white/30 bg-[#ff7a59] text-[9px] font-bold text-center leading-4 shadow-xs">M</span>
+            <span class="inline-block h-4 w-4 rounded-full ring-1 ring-white/30 bg-[#1eaa75] text-[9px] font-bold text-center leading-4 shadow-xs">K</span>
+            <span class="inline-block h-4 w-4 rounded-full ring-1 ring-white/30 bg-[#b89eff] text-[9px] font-bold text-center leading-4 shadow-xs">N</span>
+          </div>
+          <span class="tracking-tight">ร่วมเป็นส่วนหนึ่งกับนักศึกษาแล้วกว่า 1,200+ คน</span>
         </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700">อายุ</label>
-          <input type="number" id="age" required class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700">มหาวิทยาลัย</label>
-          <input type="text" id="university" placeholder="เช่น มหาวิทยาลัยแม่ฟ้าหลวง" required class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700">คณะ / สาขา</label>
-          <input type="text" id="faculty" required class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700">ชั้นปีที่เรียนอยู่</label>
-          <select id="year" class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500">
-            <option value="1">ปี 1</option>
-            <option value="2">ปี 2</option>
-            <option value="3">ปี 3</option>
-            <option value="4">ปี 4</option>
-            <option value="จบการศึกษาแล้ว">จบการศึกษาแล้ว</option>
-          </select>
+
+        <!-- Big Headline -->
+        <h2 class="text-2xl xl:text-3xl font-extrabold leading-tight tracking-tight text-white drop-shadow-md">
+          Find Your Next Team<br/>Build Real Things
+        </h2>
+
+        <!-- Description -->
+        <p class="text-white/85 text-xs leading-relaxed drop-shadow-sm">
+          พื้นที่กลางให้นักศึกษาหาทีม ทดลองไอเดีย และสร้างผลงานที่มีหลักฐานจริง นำเสนอต่อสังคมและนายจ้างในอนาคต
+        </p>
+
+        <!-- Feature chips with ShowKong colors -->
+        <div class="flex flex-wrap gap-1.5 pt-1 text-[11px] text-white/95">
+          <span class="px-2.5 py-0.5 rounded-md bg-white/10 backdrop-blur-sm border border-white/15 hover:bg-white/20 transition-colors duration-200 cursor-default">🎓 สำหรับนักศึกษาทุกคณะ</span>
+          <span class="px-2.5 py-0.5 rounded-md bg-white/10 backdrop-blur-sm border border-white/15 hover:bg-white/20 transition-colors duration-200 cursor-default">🤝 จับคู่ทักษะจริง</span>
+          <span class="px-2.5 py-0.5 rounded-md bg-white/10 backdrop-blur-sm border border-white/15 hover:bg-white/20 transition-colors duration-200 cursor-default">🚀 เริ่มฟรีทันที</span>
         </div>
       </div>
+    </section>
 
-      <hr class="border-gray-200">
+  </main>
 
-      <div class="grid grid-cols-1 gap-4">
-        <div>
-          <label class="block text-sm font-medium text-gray-700">รูปโปรไฟล์ (URL สำหรับทดสอบ หรือจะทำระบบอัปโหลดทีหลัง)</label>
-          <input type="url" id="avatarUrl" placeholder="https://..." class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700">GitHub Profile / Portfolio Link</label>
-          <input type="url" id="githubUrl" placeholder="เช่น https://github.com/FrameNoname" class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
-        </div>
-      </div>
+  <script>
+    // Smooth page entrance trigger
+    window.addEventListener('DOMContentLoaded', () => {
+      const card = document.getElementById('mainCard');
+      if (card) {
+        requestAnimationFrame(() => {
+          card.classList.remove('opacity-0', 'translate-y-4', 'scale-[0.98]');
+          card.classList.add('opacity-100', 'translate-y-0', 'scale-100');
+        });
+      }
 
-      <button type="submit" class="w-full bg-blue-600 text-white font-semibold py-3 px-4 rounded-md hover:bg-blue-700 transition duration-200">
-        สมัครสมาชิกและสร้างโปรไฟล์
-      </button>
-      <div class="text-center mt-4 text-sm text-gray-500">
-        มีบัญชีอยู่แล้ว? <a href="/pages/login.html" class="text-blue-600 hover:underline">เข้าสู่ระบบที่นี่</a>
-      </div>
-      <p id="errorMessage" class="text-red-500 text-sm text-center hidden"></p>
-    </form>
-  </div>
+      // Password visibility toggle (Standard eye / eye-slash icons)
+      const pwdInput = document.getElementById('password');
+      const toggleBtn = document.getElementById('togglePasswordBtn');
+      const eyeOffIcon = document.getElementById('eyeOffIcon');
+      const eyeOnIcon = document.getElementById('eyeOnIcon');
+      if (pwdInput && toggleBtn && eyeOffIcon && eyeOnIcon) {
+        toggleBtn.addEventListener('click', () => {
+          const isPassword = pwdInput.type === 'password';
+          pwdInput.type = isPassword ? 'text' : 'password';
+          eyeOffIcon.classList.toggle('hidden', isPassword);
+          eyeOnIcon.classList.toggle('hidden', !isPassword);
+        });
+      }
+    });
+  </script>
 
   <script type="module" src="/src/main.js"></script>
 </body>

@@ -9,6 +9,58 @@ function showError(message) {
   errorMessage.classList.remove('hidden')
 }
 
+// Avatar File Preview & DataURL conversion
+const avatarFileInput = document.querySelector('#avatarFileInput')
+const avatarPreviewImg = document.querySelector('#avatarPreviewImg')
+const avatarPlaceholder = document.querySelector('#avatarPlaceholder')
+const avatarFileName = document.querySelector('#avatarFileName')
+const avatarUrlHidden = document.querySelector('#avatarUrl')
+
+avatarFileInput?.addEventListener('change', () => {
+  const file = avatarFileInput.files?.[0]
+  if (!file) return
+
+  if (avatarFileName) {
+    avatarFileName.textContent = file.name
+  }
+
+  const reader = new FileReader()
+  reader.onload = (e) => {
+    const dataUrl = e.target?.result
+    if (avatarPreviewImg) {
+      avatarPreviewImg.src = dataUrl
+      avatarPreviewImg.classList.remove('hidden')
+    }
+    if (avatarPlaceholder) {
+      avatarPlaceholder.classList.add('hidden')
+    }
+    if (avatarUrlHidden) {
+      avatarUrlHidden.value = dataUrl
+    }
+  }
+  reader.readAsDataURL(file)
+})
+
+// Google Sign-up integration
+const googleSignUpBtn = document.querySelector('#googleSignUpBtn')
+googleSignUpBtn?.addEventListener('click', async () => {
+  if (!isSupabaseConfigured) {
+    showError('ยังไม่ได้ตั้งค่า Supabase ในไฟล์ .env จึงยังสมัครด้วย Google ไม่ได้')
+    return
+  }
+
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo: `${window.location.origin}/pages/feed.html`,
+    },
+  })
+
+  if (error) {
+    showError(error.message)
+  }
+})
+
 document.querySelector('#loginForm')?.addEventListener('submit', async (event) => {
   event.preventDefault()
   if (!isSupabaseConfigured) {
@@ -24,7 +76,11 @@ document.querySelector('#loginForm')?.addEventListener('submit', async (event) =
   else window.location.replace('/pages/feed.html')
 })
 
-document.querySelector('#registerForm')?.addEventListener('submit', async (event) => {
+const registerForm = document.querySelector('#registerForm')
+const registerSubmitBtn = document.querySelector('#registerSubmitBtn')
+const registerSubmitText = document.querySelector('#registerSubmitText')
+
+registerForm?.addEventListener('submit', async (event) => {
   event.preventDefault()
   if (!isSupabaseConfigured) {
     showError('ยังไม่ได้ตั้งค่า Supabase ในไฟล์ .env จึงยังสมัครสมาชิกไม่ได้')
@@ -40,17 +96,35 @@ document.querySelector('#registerForm')?.addEventListener('submit', async (event
     university: document.querySelector('#university').value.trim(),
     faculty: document.querySelector('#faculty').value.trim(),
     year: document.querySelector('#year').value,
-    avatar_url: document.querySelector('#avatarUrl').value.trim(),
-    github_url: document.querySelector('#githubUrl').value.trim(),
+    avatar_url: document.querySelector('#avatarUrl')?.value?.trim() || '',
+    github_url: document.querySelector('#githubUrl')?.value?.trim() || '',
   }
 
-  const { data, error } = await supabase.auth.signUp({
-    email,
-    password,
-    options: { data: profile },
-  })
+  if (registerSubmitBtn) {
+    registerSubmitBtn.disabled = true
+    if (registerSubmitText) registerSubmitText.textContent = 'กำลังสร้างบัญชี...'
+  }
 
-  if (error) showError(error.message)
-  else if (data.session) window.location.replace('/pages/feed.html')
-  else window.location.replace('/pages/login.html')
+  try {
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: { data: profile },
+    })
+
+    if (error) {
+      showError(error.message)
+    } else if (data.session) {
+      window.location.replace('/pages/feed.html')
+    } else {
+      window.location.replace('/pages/login.html')
+    }
+  } catch (err) {
+    showError(err.message || 'เกิดข้อผิดพลาดในการเชื่อมต่อ')
+  } finally {
+    if (registerSubmitBtn) {
+      registerSubmitBtn.disabled = false
+      if (registerSubmitText) registerSubmitText.textContent = 'สมัครสมาชิกและสร้างโปรไฟล์'
+    }
+  }
 })
