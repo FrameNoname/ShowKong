@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ค้นหาทีมและเพื่อนร่วมโปรเจกต์บน ShowKong">
+    <title>หาทีม — ShowKong</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600&display=swap" rel="stylesheet">
+  </head>
+  <body class="app-page find-team-page">
+    <div data-shared-header></div>
+    <main>
+      <section class="explore-intro">
+        <div class="page-container">
+          <p class="eyebrow">ทีมที่ดี เริ่มจากทักษะที่เติมเต็มกัน</p>
+          <h1>หาทีมที่ไปได้ไกลกว่าคนเดียว</h1>
+          <p>ค้นหาเพื่อนร่วมทีมต่างสาขา ดูทักษะและความสนใจที่ตรงกัน แล้วชวนกันเปลี่ยนไอเดียให้กลายเป็นผลงานจริง</p>
+          <div class="search-and-sort"><label class="search-field"><span class="sr-only">ค้นหาทีม</span><input id="teamSearch" type="search" placeholder="ค้นหาชื่อทีม หัวข้อ หรือทักษะที่ต้องการ"><span aria-hidden="true">⌕</span></label><select id="teamStatus" aria-label="สถานะทีม"><option value="เปิดรับสมาชิก">สถานะ: เปิดรับสมาชิก</option><option value="ทั้งหมด">สถานะ: ทั้งหมด</option></select></div>
+          <div class="chip-row quick-categories" data-skill-filters><button class="chip is-active" type="button" data-skill="ทั้งหมด">ทั้งหมด</button><button class="chip" type="button" data-skill="UX/UI">UX/UI</button><button class="chip" type="button" data-skill="Developer">Developer</button><button class="chip" type="button" data-skill="Marketing">Marketing</button><button class="chip" type="button" data-skill="Content">Content</button></div>
+        </div>
+      </section>
+
+      <section class="team-matches page-container" id="how-it-works">
+        <div class="section-heading-row team-heading"><h2>ทีมที่กำลังเปิดรับ</h2><p id="teamCount">พบ 4 ทีมที่เข้ากับคุณ</p></div>
+        <div class="topic-filter"><strong>กรองตามหัวข้อ</strong><div class="chip-row" data-topic-filters><button class="chip is-active" type="button" data-topic="ทั้งหมด">ทั้งหมด</button><button class="chip" type="button" data-topic="เทคโนโลยี">เทคโนโลยี</button><button class="chip" type="button" data-topic="การศึกษา">การศึกษา</button><button class="chip" type="button" data-topic="ชุมชน">ชุมชน</button><button class="chip" type="button" data-topic="สิ่งแวดล้อม">สิ่งแวดล้อม</button><button class="chip" type="button" data-topic="ธุรกิจ">ธุรกิจ</button></div></div>
+
+        <div class="team-content">
+          <aside class="match-profile">
+            <div class="profile-identity"><span class="avatar avatar-lg">P</span><div><strong>Pluem</strong><span>Computer Engineering · MFU</span></div></div>
+            <div class="readiness"><strong>โปรไฟล์พร้อมจับคู่ 72%</strong><div class="progress-track"><span></span></div><p>เพิ่มผลงานอีก 1 ชิ้น เพื่อให้ทีมรู้จักคุณมากขึ้น</p></div>
+            <div><h3>ทักษะของคุณ</h3><div class="chip-row"><span class="chip">UX/UI</span><span class="chip">Frontend</span><span class="chip">Research</span></div></div>
+            <div><h3>เวลาที่พร้อม</h3><p>เสาร์–อาทิตย์ · 6 ชม./สัปดาห์</p></div>
+            <button class="button button-neutral full-width" type="button">แก้ไขโปรไฟล์การจับคู่</button>
+          </aside>
+
+          <div class="open-teams">
+            <div class="chip-row team-tabs" data-team-tabs><button class="chip is-active" type="button">โปรเจกต์หาเพื่อน</button><button class="chip" type="button">คนกำลังหาทีม</button><button class="chip" type="button">ตรงกับคุณที่สุด</button></div>
+            <div class="team-grid" id="teamGrid" aria-live="polite"></div>
+            <button class="button button-neutral load-more" type="button">ดูทีมเพิ่มเติม</button>
+          </div>
+        </div>
+      </section>
+
+      <div data-shared-cta></div>
+    </main>
+    <div data-shared-footer></div>
+
+    <div class="modal-backdrop" id="joinModal" hidden>
+      <section class="join-modal" role="dialog" aria-modal="true" aria-labelledby="joinTitle">
+        <div class="modal-header"><div><h2 id="joinTitle">ขอเข้าร่วมทีม</h2><p>แนะนำตัวและบอกทีมว่าคุณช่วยอะไรได้บ้าง</p></div><button class="icon-button" id="closeJoin" type="button" aria-label="ปิด">×</button></div>
+        <div class="join-summary"><strong id="joinTeamName">ชื่อทีม</strong><span id="joinTeamRole">ตำแหน่งที่เปิดรับ</span></div>
+        <form id="joinForm"><label>แนะนำตัว<input required placeholder="ชื่อ ชั้นปี และสาขาของคุณ"></label><label>ทักษะที่เกี่ยวข้อง<input required placeholder="เช่น UX Research, Figma"></label><label>ข้อความถึงทีม<textarea required rows="4" placeholder="เล่าว่าทำไมคุณสนใจ และอยากช่วยทีมด้านไหน"></textarea></label><div class="modal-footer"><span></span><div><button class="button button-neutral" id="cancelJoin" type="button">ยกเลิก</button><button class="button button-primary" type="submit">ส่งคำขอ</button></div></div></form>
+      </section>
+    </div>
+    <div class="modal-backdrop" id="joinSuccess" hidden><section class="success-modal" role="dialog" aria-modal="true"><span class="success-check">✓</span><h2>ส่งคำขอแล้ว!</h2><p>ทีมจะได้รับโปรไฟล์และข้อความของคุณ สามารถติดตามสถานะได้จากรายการของฉัน</p><button class="button button-primary" id="closeJoinSuccess" type="button">กลับไปดูทีม</button></section></div>
+    <script type="module" src="/src/pages/find-team.js"></script>
+  </body>
+</html>

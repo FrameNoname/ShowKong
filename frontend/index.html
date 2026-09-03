@@ -1,26 +1,91 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="th">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>โชว์ของ - ShowKong</title>
-</head>
-<body class="bg-slate-900 text-white min-h-screen flex flex-col items-center justify-center p-6 text-center">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ShowKong พื้นที่กลางให้นักศึกษาหาทีม ทดลองไอเดีย และสร้างผลงานจริง">
+    <title>ShowKong — ไอเดียดี ๆ ไม่ควรหยุดอยู่แค่ในห้องเรียน</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600&display=swap" rel="stylesheet">
+  </head>
+  <body class="home-page">
+    <header class="site-header home-header">
+      <a class="brand" href="/" aria-label="ShowKong หน้าแรก"><span class="brand-mark">S</span><span>ShowKong</span></a>
+      <nav class="main-nav" aria-label="เมนูหลัก">
+        <a class="nav-link is-active" href="#home">หน้าแรก</a>
+        <a class="nav-link" href="#featured">สำรวจโปรเจกต์</a>
+        <a class="nav-link" href="#paths">โชว์ผลงาน</a>
+        <a class="nav-link" href="#about">เกี่ยวกับเรา</a>
+      </nav>
+      <div class="header-actions">
+        <a class="button button-neutral" href="/pages/login.html">เข้าสู่ระบบ</a>
+        <a class="button button-primary" href="/pages/register.html">สมัครสมาชิก</a>
+      </div>
+      <button class="mobile-menu-button" type="button" aria-label="เปิดเมนู" aria-expanded="false">เมนู</button>
+    </header>
 
-  <div class="max-w-md w-full bg-slate-800 border border-slate-700 rounded-2xl p-8 shadow-2xl space-y-6">
-    <h1 class="text-3xl font-bold text-blue-500">โชว์ของ (ShowKong)</h1>
-    <p class="text-slate-400 text-sm">พื้นที่เชื่อมต่อโปรเจกต์นักศึกษา กับ HR และเพื่อนร่วมทีม</p>
+    <main id="home">
+      <section class="home-hero page-container">
+        <div class="hero-copy">
+          <p class="pill pill-brand">สำหรับนักศึกษา&nbsp; • &nbsp;สร้างทีม&nbsp; • &nbsp;สร้างโอกาส</p>
+          <h1>ไอเดียดี ๆ<br>ไม่ควรหยุดอยู่แค่ในห้องเรียน</h1>
+          <p class="hero-description">พื้นที่กลางสำหรับนักศึกษาในการหาเพื่อนร่วมทีม ทดลองไอเดียกับผู้ใช้จริง และเปลี่ยนผลงานในห้องเรียนให้กลายเป็นโอกาสใหม่</p>
+          <label class="search-field home-search">
+            <span class="sr-only">ค้นหา</span>
+            <input type="search" placeholder="ค้นหาโปรเจกต์ ทักษะ หรือเพื่อนร่วมทีม">
+            <span aria-hidden="true">⌕</span>
+          </label>
+          <div class="button-row">
+            <a class="button button-primary" href="/pages/register.html">เริ่มสร้างโปรเจกต์</a>
+            <a class="button button-neutral" href="#featured">สำรวจผลงาน</a>
+          </div>
+        </div>
+        <div class="hero-visual" aria-label="ตัวอย่างโปรเจกต์ที่กำลังเปิดรับสมาชิก">
+          <span class="visual-glow"></span>
+          <article class="featured-project-card">
+            <span class="status-pill"><i></i>เปิดรับสมาชิกใหม่</span>
+            <h2>UniSwap — แลกของในมหาวิทยาลัย</h2>
+            <p>แพลตฟอร์มให้นักศึกษาแลก ซื้อ และส่งต่อของใช้ภายในมหาวิทยาลัยอย่างปลอดภัย</p>
+            <span class="skill-strip">Flutter&nbsp; • &nbsp;UX Research&nbsp; • &nbsp;Marketing</span>
+            <div class="project-members">
+              <span>กำลังหาอีก 3 คน</span>
+              <div class="avatar-stack" aria-label="สมาชิก A M และ P"><span class="avatar avatar-sm">A</span><span class="avatar avatar-sm">M</span><span class="avatar avatar-sm">P</span></div>
+            </div>
+          </article>
+          <span class="match-badge"><i></i>98% Match</span>
+          <span class="role-badge">ตำแหน่งที่เปิด<strong>Marketing · UX</strong></span>
+        </div>
+      </section>
 
-    <div class="flex flex-col gap-3">
-      <a href="/pages/login.html" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 px-4 rounded-lg transition">
-        เข้าสู่ระบบ (Login)
-      </a>
-      <a href="/pages/register.html" class="w-full bg-slate-700 hover:bg-slate-600 text-slate-200 font-semibold py-2.5 px-4 rounded-lg transition">
-        สมัครสมาชิก (Register)
-      </a>
-    </div>
-  </div>
+      <section class="discovery-section" id="paths">
+        <div class="page-container">
+          <p class="eyebrow">เริ่มจากสิ่งที่คุณมี</p>
+          <h2>หนึ่งพื้นที่ สามทางไปต่อ</h2>
+          <p class="section-description">ไม่ว่าคุณจะมีแค่ไอเดีย มีทีมแล้ว หรือมีผลงานที่พร้อมออกสู่โลกจริง ShowKong ช่วยให้ก้าวต่อไปง่ายขึ้น</p>
+          <div class="path-grid">
+            <article class="path-card"><span class="path-number">01</span><h3>หาเพื่อนร่วมทีม</h3><p>โพสต์ไอเดีย บอกทักษะที่ขาด และจับคู่กับคนต่างคณะที่พร้อมลงมือทำ</p></article>
+            <article class="path-card"><span class="path-number">02</span><h3>ทดลองไอเดียกับตลาด</h3><p>เปิดให้ผู้ใช้กลุ่มแรกเข้ามาทดลอง ให้ความคิดเห็น และช่วยยืนยันว่าปัญหานี้มีอยู่จริง</p></article>
+            <article class="path-card"><span class="path-number">03</span><h3>สร้าง Portfolio ที่มีหลักฐาน</h3><p>รวมบทบาท ผลลัพธ์ และเสียงตอบรับเป็นโปรไฟล์ที่บริษัทหรือผู้ร่วมทุนตรวจสอบได้</p></article>
+          </div>
+        </div>
+      </section>
 
-  <script type="module" src="/src/main.js"></script>
-</body>
+      <section class="featured-section page-container" id="featured">
+        <div class="section-heading-row">
+          <div><p class="eyebrow">กำลังเกิดขึ้นบน ShowKong</p><h2>โปรเจกต์ที่กำลังหาเพื่อน</h2><p class="section-description">เข้าร่วมตั้งแต่วันแรก เลือกจากปัญหาที่สนใจ และสร้างผลงานที่เล่าได้มากกว่าหนึ่งบรรทัดในเรซูเม่</p></div>
+          <a class="button button-neutral" href="/pages/register.html">ดูโปรเจกต์ทั้งหมด</a>
+        </div>
+        <div class="project-preview-grid">
+          <article class="preview-card"><span class="info-mark">i</span><h3>SheetQuest — เรียนให้เหมือนเล่นเกม</h3><p>เปลี่ยนบทเรียนและแบบฝึกหัดให้เป็นภารกิจที่สนุก มีเป้าหมาย และวัดความก้าวหน้าได้</p><span>Education · UX/UI · Frontend</span></article>
+          <article class="preview-card"><span class="info-mark">i</span><h3>GreenLoop — แยกขยะให้มีรางวัล</h3><p>ระบบสะสมแต้มจากการแยกขยะภายในมหาวิทยาลัย พร้อมรางวัลจากร้านค้ารอบชุมชน</p><span>Sustainability · Backend · Marketing</span></article>
+          <article class="preview-card"><span class="info-mark">i</span><h3>SafeWalk — กลับหออย่างมั่นใจ</h3><p>แอปแนะนำเส้นทางปลอดภัยสำหรับนักศึกษา โดยอ้างอิงข้อมูลจากผู้ใช้จริง</p><span>Community · Mobile Dev · Research</span></article>
+        </div>
+      </section>
+
+      <div data-shared-cta></div>
+    </main>
+    <div data-shared-footer></div>
+    <script type="module" src="/src/pages/home.js"></script>
+  </body>
 </html>

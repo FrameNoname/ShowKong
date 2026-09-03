@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Feed ชุมชนนักสร้างบน ShowKong">
+    <title>Feed — ShowKong</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600&display=swap" rel="stylesheet">
+  </head>
+  <body class="app-page feed-page">
+    <div data-shared-header></div>
+    <main>
+      <section class="feed-intro page-container-narrow">
+        <h1>Feed ของคุณ</h1>
+        <p>ไอเดีย ทีม และความคืบหน้าที่น่าสนใจ — เลือกดูตามสิ่งที่คุณอยากทำต่อได้เลย</p>
+
+        <h2 class="filter-title">เลือกดูตามสิ่งที่อยากทำ</h2>
+        <div class="chip-row feed-filters" data-feed-filters>
+          <button class="chip is-active" type="button" data-filter="ทั้งหมด">สำหรับคุณ</button>
+          <button class="chip" type="button" data-filter="ไอเดียใหม่">ไอเดียใหม่</button>
+          <button class="chip" type="button" data-filter="กำลังหาทีม">กำลังหาทีม</button>
+          <button class="chip" type="button" data-filter="ขอ Feedback">ขอ Feedback</button>
+          <button class="chip" type="button" data-filter="เปิดให้ทดลอง">เปิดให้ทดลอง</button>
+          <button class="chip" type="button" data-filter="ความคืบหน้า">ความคืบหน้า</button>
+        </div>
+      </section>
+
+      <section class="feed-layout page-container-narrow">
+        <aside class="feed-sidebar left-sidebar" aria-label="ข้อมูลของฉัน">
+          <article class="sidebar-card profile-card">
+            <div class="profile-identity"><span class="avatar avatar-lg">P</span><div><strong>Pluem</strong><span>Computer Engineering · MFU</span></div></div>
+            <p>กำลังมองหาทีมที่ได้ลองแก้ปัญหาจริงและสร้างผลงานที่วัดผลได้</p>
+            <div class="profile-stats"><span><strong>3</strong>โปรเจกต์</span><span><strong>2</strong>ทีม</span><span><strong>128</strong>ผู้ติดตาม</span></div>
+            <button class="button button-small button-neutral full-width" type="button">แก้ไขโปรไฟล์</button>
+          </article>
+          <article class="sidebar-card"><h3>หัวข้อที่ติดตาม</h3><div class="chip-row"><span class="chip">เทคโนโลยี</span><span class="chip">การศึกษา</span><span class="chip">ชุมชน</span><span class="chip">สิ่งแวดล้อม</span></div></article>
+          <article class="sidebar-card activity-card"><h3>รายการของฉัน</h3><a href="#">โพสต์ที่บันทึก <strong>8</strong></a><a href="#">ทีมที่สนใจ <strong>4</strong></a><a href="#">ร่างโพสต์ <strong>2</strong></a></article>
+        </aside>
+
+        <div class="post-stream" id="postStream" aria-live="polite"></div>
+
+        <aside class="feed-sidebar right-sidebar" aria-label="คำแนะนำ">
+          <article class="sidebar-card"><h3>ทีมที่น่าจะเข้ากับคุณ</h3><div class="recommended-team"><strong>SafeWalk</strong><span>หา User Researcher</span><em>92% Match</em><a class="button button-small button-neutral" href="/pages/find-team.html">ดูทีม</a></div><div class="recommended-team"><strong>SkillBridge</strong><span>หา UX/UI Designer</span><em>89% Match</em><a class="button button-small button-neutral" href="/pages/find-team.html">ดูทีม</a></div></article>
+          <article class="sidebar-card trending-card"><h3>หัวข้อกำลังมา</h3><p><span>#CampusTech</span><small>24 โพสต์</small></p><p><span>#Sustainability</span><small>18 โพสต์</small></p><p><span>#StudentStartup</span><small>13 โพสต์</small></p><p><span>#UXResearch</span><small>11 โพสต์</small></p></article>
+          <article class="sidebar-card challenge-card"><span class="sponsored">Sponsored Challenge</span><h3>ออกแบบเมนูใหม่ให้ร้านท้องถิ่น</h3><p>รวมทีม 3–4 คน แก้โจทย์จริงจาก LocalBiz Network</p><div class="reward"><span>ค่าตอบแทนรวม</span><strong>25,000 บาท</strong><small>รับสมัครถึง 18 ก.ย.</small></div><button class="button button-small button-neutral full-width" type="button">ดูโจทย์</button><small>ShowKong รับค่าธรรมเนียมเมื่อมีการจ้างงานสำเร็จ</small></article>
+        </aside>
+      </section>
+    </main>
+
+    <div class="modal-backdrop" id="postModal" hidden>
+      <section class="post-modal" role="dialog" aria-modal="true" aria-labelledby="postModalTitle">
+        <div class="modal-header"><div><h2 id="postModalTitle">สร้างโพสต์โปรเจกต์</h2><p>แชร์ไอเดีย หาทีม หรือขอความคิดเห็นจากชุมชน</p></div><button class="icon-button js-close-post" type="button" aria-label="ปิด">×</button></div>
+        <form id="postForm">
+          <fieldset><legend>ประเภทโพสต์</legend><div class="chip-row" data-post-types><button class="chip is-active" type="button" data-value="ไอเดียใหม่">ไอเดียใหม่</button><button class="chip" type="button" data-value="กำลังหาทีม">หาสมาชิก</button><button class="chip" type="button" data-value="ขอ Feedback">ขอ Feedback</button><button class="chip" type="button" data-value="ความคืบหน้า">ความคืบหน้า</button></div></fieldset>
+          <label>ชื่อโปรเจกต์<input id="postTitle" name="title" required placeholder="เช่น SafeWalk — แอปช่วยหาเส้นทางกลับหออย่างปลอดภัย"></label>
+          <label>เล่าเกี่ยวกับโปรเจกต์<textarea id="postDescription" name="description" required rows="4" placeholder="โปรเจกต์นี้แก้ปัญหาอะไร ตอนนี้ทำถึงไหนแล้ว และต้องการให้คนในชุมชนช่วยอะไร..."></textarea></label>
+          <div class="form-row"><label>หัวข้อ<select id="postTopic" name="topic"><option>เลือกหัวข้อ</option><option>เทคโนโลยี</option><option>การศึกษา</option><option>ชุมชน</option><option>สิ่งแวดล้อม</option></select></label><label>แท็กทักษะ<input id="postTags" name="tags" placeholder="เช่น #UX #Research"></label></div>
+          <div class="upload-section"><div><strong>รูปภาพประกอบ</strong><span>เพิ่มได้สูงสุด 4 รูป</span></div><label class="upload-drop"><input id="postImages" type="file" accept="image/png,image/jpeg" multiple><strong>เพิ่มรูปภาพ</strong><span>คลิกเพื่อเพิ่มรูป หรือลากไฟล์มาวาง</span><small>รองรับ PNG, JPG ไม่เกิน 10 MB ต่อรูป</small></label><div class="upload-preview" id="uploadPreview" hidden></div></div>
+          <div class="modal-footer"><span>บันทึกร่างให้อัตโนมัติ</span><div><button class="button button-neutral js-close-post" type="button">ยกเลิก</button><button class="button button-primary" type="submit">โพสต์โปรเจกต์</button></div></div>
+        </form>
+      </section>
+    </div>
+
+    <div class="modal-backdrop" id="successModal" hidden>
+      <section class="success-modal" role="dialog" aria-modal="true" aria-labelledby="successTitle"><span class="success-check">✓</span><h2 id="successTitle">โพสต์สำเร็จแล้ว!</h2><p>โปรเจกต์ของคุณปรากฏใน Feed และพร้อมให้คนที่สนใจเข้ามามีส่วนร่วมแล้ว</p><button class="button button-primary" id="closeSuccess" type="button">กลับไปดู Feed</button></section>
+    </div>
+    <script type="module" src="/src/pages/feed.js"></script>
+  </body>
+</html>
