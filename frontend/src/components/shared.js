@@ -3,7 +3,9 @@ const pagePaths = {
   feed: '/pages/feed.html',
   explore: '/pages/explore-projects.html',
   teams: '/pages/find-team.html',
-  showcase: '/pages/showcase.html',
+  showcase: '/pages/show-kong.html',
+  showKong: '/pages/show-kong.html',
+  post: '/pages/post.html',
 }
 
 export function authenticatedHeader(activePage = '') {
@@ -11,7 +13,7 @@ export function authenticatedHeader(activePage = '') {
     ['feed', 'Feed'],
     ['explore', 'สำรวจโปรเจกต์'],
     ['teams', 'หาทีม'],
-    ['showcase', 'โชว์ผลงาน'],
+    ['showKong', 'ShowKong'],
   ]
 
   return `
@@ -22,11 +24,11 @@ export function authenticatedHeader(activePage = '') {
       </a>
       <nav class="main-nav" aria-label="เมนูหลัก">
         ${navItems.map(([key, label]) => `
-          <a class="nav-link ${activePage === key ? 'is-active' : ''}" href="${pagePaths[key]}">${label}</a>
+          <a class="nav-link ${(activePage === key || (key === 'showKong' && (activePage === 'showcase' || activePage === 'showKong'))) ? 'is-active' : ''}" href="${pagePaths[key]}">${label}</a>
         `).join('')}
       </nav>
       <div class="header-actions">
-        <button class="button button-primary js-open-post" type="button">โพสต์โปรเจกต์</button>
+        <a class="button button-primary" href="${pagePaths.post}">โพสต์โปรเจกต์</a>
         <button class="avatar avatar-sm" type="button" aria-label="เปิดโปรไฟล์ของ Pluem">P</button>
       </div>
       <button class="mobile-menu-button" type="button" aria-label="เปิดเมนู" aria-expanded="false">เมนู</button>
@@ -45,7 +47,7 @@ export function siteFooter() {
         <nav aria-label="เมนูท้ายเว็บไซต์">
           <a href="${pagePaths.explore}">สำรวจโปรเจกต์</a>
           <a href="${pagePaths.teams}">หาทีม</a>
-          <a href="${pagePaths.showcase}">โชว์ผลงาน</a>
+          <a href="${pagePaths.showKong}">ShowKong (โชว์ผลงาน)</a>
           <a href="#about">เกี่ยวกับเรา</a>
         </nav>
         <p>© 2026 ShowKong — Built for student builders.</p>
