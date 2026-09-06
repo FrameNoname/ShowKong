@@ -37,13 +37,13 @@
 .refresh-page .hero-search input { flex: 1; min-width: 0; border: 0; padding: 0; outline: none; font-size: 14px; }
 .refresh-page .hero-search:focus-within { outline: 3px solid #c7baff; outline-offset: 3px; }
 .refresh-page .hero-search button { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 9px; background: #141224; }
-.refresh-page .hero-categories { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 12px; }
-.refresh-page .hero-categories a { border: 1px solid #ffffff6b; border-radius: 99px; padding: 7px 11px; font-size: 11px; background: #ffffff14; }
-.refresh-page .hero-categories a:hover { background: #ffffff30; }
 .refresh-page .start-project-link { padding: 10px 15px; font-size: 12px; border-radius: 9px; background: #ffffff1f; }
 .refresh-page .collaboration-visual { position: relative; width: 520px; height: 432px; margin-left: 0; opacity: .88; }
 .refresh-page .collaboration-background { position: absolute; top: 36px; left: 20px; width: 480px; height: 360px; overflow: hidden; border-radius: 32px; background: linear-gradient(100deg,#291a66,#8c6bff); }
-.refresh-page .visual-ambient { position: absolute; top: -90px; right: -60px; width: 260px; height: 260px; }
+.refresh-page .collaboration-background.has-image { isolation: isolate; background: #291a66; }
+.refresh-page .collaboration-background.has-image::after { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(100deg,#170c49b8,#6d4ff08c); }
+.refresh-page .collaboration-background-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.refresh-page .visual-ambient { position: absolute; z-index: 2; top: -90px; right: -60px; width: 260px; height: 260px; }
 .refresh-page .collaboration-card { position: absolute; top: 90px; left: 95px; width: 330px; padding: 22px; background: white; color: #171429; border-radius: 22px; display: flex; flex-direction: column; gap: 13px; box-shadow: 0 12px 24px #0d082e2e; }
 .refresh-page .collaboration-card h2 { font-size: 24px; }
 .refresh-page .collaboration-card p { font-size: 13px; line-height: 21px; color: #615c75; }
@@ -96,12 +96,17 @@
 .refresh-page .benefit-1 { background: #e7f7ff; }.refresh-page .benefit-2 { background: #e9fff2; }
 .refresh-page .benefit-card h3 { font-size: 19px; margin-bottom: 10px; }
 .refresh-page .benefit-card p,.refresh-page .step-card p { font-size: 13px; line-height: 23px; color: #666178; }
-.refresh-page .work-card { display: block; border: 1px solid #e0deed; border-radius: 18px; overflow: hidden; }
-.refresh-page .work-cover { min-height: 190px; padding: 28px; position: relative; overflow: hidden; color: white; }
+.refresh-page .work-card { display: block; border: 1px solid #e0deed; border-radius: 18px; overflow: hidden; transition: transform .2s ease,box-shadow .2s ease; }
+.refresh-page .work-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px #261a491c; }
+.refresh-page .work-cover { min-height: 190px; padding: 28px; position: relative; isolation: isolate; overflow: hidden; color: white; }
+.refresh-page .work-cover::after { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg,#140c3214 12%,#140c324d 52%,#140c32d9 100%); }
+.refresh-page .work-cover-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
+.refresh-page .work-card:hover .work-cover-image { transform: scale(1.045); }
+.refresh-page .work-category { position: relative; z-index: 2; display: inline-block; padding: 5px 10px; border-radius: 99px; background: #18102d8f; font-size: 11px; backdrop-filter: blur(8px); }
 .refresh-page .work-cover .cover-decoration { width: 230px; height: 230px; top: -90px; }
 .refresh-page .work-icon { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 18px; background: #ffffff2b; }
 .refresh-page .work-icon .design-icon { width: 36px; height: 36px; }
-.refresh-page .work-cover h3 { margin-top: 22px; font-size: 27px; }
+.refresh-page .work-cover h3 { position: absolute; z-index: 2; left: 28px; bottom: 24px; margin: 0; font-size: 27px; text-shadow: 0 2px 12px #12092599; }
 .refresh-page .work-copy { padding: 22px; }
 .refresh-page .work-copy > small { color: #634ff5; font-size: 11px; }
 .refresh-page .work-copy > p { min-height: 70px; font-size: 15px; line-height: 24px; margin-top: 12px; }
@@ -367,7 +372,7 @@
   .refresh-page .site-header { padding-inline: 16px; gap: 10px; }.refresh-page .brand { font-size: 17px; gap: 8px; }.refresh-page .brand-mark { width: 34px; height: 34px; border-radius: 11px; }.refresh-page .header-actions .button { padding-inline: 10px; font-size: 12px; min-height: 34px; }.refresh-page .header-actions .avatar { display: none; }.refresh-page .mobile-menu-button { padding: 7px 9px; font-size: 12px; }
   .refresh-page .page-container,.refresh-page .page-container-narrow { width: calc(100% - 32px); }
   .refresh-page .main-nav.is-open::after { content: none; }
-  .refresh-page .discovery-hero-copy h1 { font-size: 34px; }.refresh-page .discovery-hero-copy > p:not(.eyebrow) { font-size: 14px; }.refresh-page .hero-categories { gap: 6px; }
+  .refresh-page .discovery-hero-copy h1 { font-size: 34px; }.refresh-page .discovery-hero-copy > p:not(.eyebrow) { font-size: 14px; }
   .refresh-page .trending-section { padding: 24px 16px; }.refresh-page .discovery-panel { padding: 20px 16px; border-radius: 18px; }.refresh-page .section-heading-row { align-items: flex-start; gap: 12px; flex-wrap: wrap; }.refresh-page .section-heading-row h2,.refresh-page .discovery-panel .section-heading-row h2 { font-size: 24px; }.refresh-page .soft-link { padding: 8px 10px; font-size: 11px; }
   .refresh-page .discovery-grid { gap: 12px; }.refresh-page .project-cover { padding: 10px; }.refresh-page .project-cover > strong { font-size: 16px; }.refresh-page .cover-icon { width: 30px; height: 30px; top: 8px; right: 8px; }.refresh-page .cover-icon .design-icon { width: 18px; height: 18px; }.refresh-page .cover-category { font-size: 9px; padding: 3px 6px; max-width: calc(100% - 28px); }.refresh-page .discovery-card-copy { padding: 10px; font-size: 12px; min-height: 106px; }.refresh-page .discovery-card-copy small { font-size: 10px; }
   .refresh-page :is(.home-benefits,.home-works,.home-how) { padding: 40px 0; }.refresh-page :is(.home-benefits,.home-works,.home-how) h2 { font-size: 26px; }
