@@ -208,7 +208,11 @@
 .refresh-page .detail-project-cover { min-height: 150px; margin-top: 20px; border-radius: 16px; justify-content: center; padding: 24px; }
 .refresh-page .page-notice { position: fixed; z-index: 200; bottom: 24px; left: 50%; transform: translateX(-50%); width: max-content; max-width: calc(100% - 32px); padding: 16px 24px; background: #251763; color: white; font-size: 14px; line-height: 1.6; border-radius: 14px; box-shadow: 0 8px 30px #17152b33; }
 .refresh-page .challenge-hero { position: relative; overflow: hidden; background: linear-gradient(110deg,#1b1248,#583ad2 64%,#8e68ff); color: white; }
-.refresh-page .challenge-hero-inner { display: grid; grid-template-columns: minmax(0,1fr) 320px; align-items: center; gap: 64px; min-height: 430px; padding-block: 64px; }
+.refresh-page .challenge-hero-carousel,.refresh-page .challenge-hero-viewport { position: relative; overflow: hidden; }
+.refresh-page .challenge-hero-track { display: flex; transition: transform .62s cubic-bezier(.22,.78,.2,1); will-change: transform; }
+.refresh-page .challenge-hero-track.is-jumping { transition: none; }
+.refresh-page .challenge-hero-slide { flex: 0 0 100%; min-width: 0; }
+.refresh-page .challenge-hero-inner { display: grid; grid-template-columns: minmax(0,1fr) 320px; align-items: center; gap: 64px; min-height: 430px; padding-block: 64px 92px; }
 .refresh-page .sponsored-label { display: inline-block; padding: 7px 13px; border-radius: 99px; background: #ffffff26; font-size: 13px; }
 .refresh-page .challenge-hero h1 { font-size: 36px; line-height: 1.35; margin: 20px 0; }
 .refresh-page .challenge-hero p { color: #e3dcff; line-height: 26px; }
@@ -219,7 +223,13 @@
 .refresh-page .prize-card small { color: #6d5dfb; }
 .refresh-page .prize-card strong { display: block; margin-block: 8px; font-size: 36px; }
 .refresh-page .prize-card p { color: #191629; font-size: 14px; padding-bottom: 10px; }
-.refresh-page .prize-card p:last-child { border-top: 1px solid #e6e4ef; padding-top: 10px; font-size: 13px; }
+.refresh-page .prize-card .prize-deadline { border-top: 1px solid #e6e4ef; padding-top: 10px; font-size: 13px; }
+.refresh-page .challenge-hero-controls { position: absolute; z-index: 3; left: 50%; bottom: 24px; display: flex; align-items: center; gap: 12px; transform: translateX(-50%); }
+.refresh-page .challenge-hero-arrow { display: grid; place-items: center; width: 36px; height: 36px; padding: 0; border: 1px solid #ffffff4d; border-radius: 50%; background: #ffffff1f; color: white; font-size: 17px; backdrop-filter: blur(10px); }
+.refresh-page .challenge-hero-arrow:hover { background: #ffffff38; }
+.refresh-page .challenge-hero-dots { display: flex; align-items: center; gap: 7px; }
+.refresh-page .challenge-hero-dot { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 99px; background: #ffffff66; transition: width .25s ease,background .25s ease; }
+.refresh-page .challenge-hero-dot.is-active { width: 26px; background: white; }
 .refresh-page .challenge-list { padding-block: 56px 88px; }
 .refresh-page .challenge-list .section-heading-row h2 { font-size: 36px; }
 .refresh-page .challenge-filters { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 32px 0; }

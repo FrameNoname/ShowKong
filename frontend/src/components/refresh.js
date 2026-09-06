@@ -10,7 +10,6 @@ export function mountRefresh(activePage) {
   const nav = document.querySelector('.main-nav')
   if (nav) {
     nav.querySelector('a[href="/pages/show-kong.html"]').textContent = 'โชว์ผลงาน'
-    nav.insertAdjacentHTML('beforeend', `<a class="nav-link ${activePage === 'challenges' ? 'is-active' : ''}" href="/pages/sponsored-challenge.html">ชาเลนจ์</a>`)
     nav.insertAdjacentHTML('beforeend', `<a class="nav-link mobile-dashboard-link ${activePage === 'dashboard' ? 'is-active' : ''}" href="/pages/dashboard.html">Dashboard</a>`)
     nav.insertAdjacentHTML('beforeend', '<a class="nav-link mobile-dashboard-link" href="/pages/post.html">โพสต์โปรเจกต์</a>')
     nav.querySelector('.is-active')?.setAttribute('aria-current', 'page')
