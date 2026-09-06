@@ -2,23 +2,24 @@ import { designIcon } from './design-assets.js'
 import { escapeHtml, openDialog } from './refresh.js'
 
 export const projects = [
-  { name: 'SheetQuest', category: 'การศึกษา', subtitle: 'เรียนให้เหมือนเล่นเกม', role: 'UX Researcher', phase: 'Prototype', proof: 'ผู้ติดตาม 128 คน', score: 128, color: 'violet', tags: 'EdTech · AI', description: 'เปลี่ยนไฟล์เรียนให้เป็น Quiz และ Flashcards พร้อมระบบภารกิจและ EXP', metrics: ['1.2K', '186', '42 คน'] },
-  { name: 'GreenLoop', category: 'สิ่งแวดล้อม', subtitle: 'แยกขยะให้มีรางวัล', role: 'Marketing', phase: 'MVP', proof: 'ทดลองแล้ว 64 คน', score: 64, color: 'green', tags: 'Environment · IoT', description: 'ระบบแยกขยะสะสมแต้มที่เชื่อมร้านค้าและกิจกรรมนักศึกษาในมหาวิทยาลัย', metrics: ['980', '124', '3 จุด'] },
-  { name: 'SafeWalk', category: 'เทคโนโลยี', subtitle: 'กลับหออย่างมั่นใจ', role: 'Data Analyst', phase: 'Beta', proof: 'ผู้ติดตาม 96 คน', score: 96, color: 'blue', tags: 'Community · Mobile', description: 'แผนที่เส้นทางปลอดภัยพร้อมจุดแจ้งเหตุและระบบเดินทางร่วมกันช่วงกลางคืน', metrics: ['1.5K', '203', '75 คน'] },
-  { name: 'UniSwap', category: 'ธุรกิจ', subtitle: 'แลกของในมหาวิทยาลัย', role: 'UX Designer', phase: 'Prototype', proof: 'บันทึก 42 ครั้ง', score: 42, color: 'coral' },
-  { name: 'SkillBridge', category: 'การศึกษา', subtitle: 'พอร์ตทักษะที่ตรวจสอบได้', role: 'Backend Developer', phase: 'Idea', proof: 'ผู้สนใจ 88 คน', score: 88, color: 'plum' },
-  { name: 'MoodMate', category: 'สุขภาพและชุมชน', subtitle: 'เช็กอินใจของนักศึกษา', role: 'Content Designer', phase: 'Beta', proof: 'ทดลองแล้ว 120 คน', score: 120, color: 'pink' },
-  { name: 'CampusFix', category: 'เทคโนโลยี', subtitle: 'แจ้งปัญหาในมหาวิทยาลัย', role: 'Mobile Developer', phase: 'Prototype', proof: 'ผู้ติดตาม 74 คน', score: 74, color: 'cyan' },
-  { name: 'LocalLink', category: 'ธุรกิจ', subtitle: 'ร่วมงานกับธุรกิจท้องถิ่น', role: 'Sales & Marketing', phase: 'MVP', proof: 'ผู้สนใจ 56 คน', score: 56, color: 'orange' },
+  { name: 'SheetQuest', category: 'การศึกษา', subtitle: 'เรียนให้เหมือนเล่นเกม', role: 'UX Researcher', phase: 'Prototype', proof: 'ผู้ติดตาม 128 คน', score: 128, color: 'violet', image: '/projects/sheetquest.webp', tags: 'EdTech · AI', description: 'เปลี่ยนไฟล์เรียนให้เป็น Quiz และ Flashcards พร้อมระบบภารกิจและ EXP', metrics: ['1.2K', '186', '42 คน'] },
+  { name: 'GreenLoop', category: 'สิ่งแวดล้อม', subtitle: 'แยกขยะให้มีรางวัล', role: 'Marketing', phase: 'MVP', proof: 'ทดลองแล้ว 64 คน', score: 64, color: 'green', image: '/projects/greenloop.webp', tags: 'Environment · IoT', description: 'ระบบแยกขยะสะสมแต้มที่เชื่อมร้านค้าและกิจกรรมนักศึกษาในมหาวิทยาลัย', metrics: ['980', '124', '3 จุด'] },
+  { name: 'SafeWalk', category: 'เทคโนโลยี', subtitle: 'กลับหออย่างมั่นใจ', role: 'Data Analyst', phase: 'Beta', proof: 'ผู้ติดตาม 96 คน', score: 96, color: 'blue', image: '/projects/safewalk.webp', tags: 'Community · Mobile', description: 'แผนที่เส้นทางปลอดภัยพร้อมจุดแจ้งเหตุและระบบเดินทางร่วมกันช่วงกลางคืน', metrics: ['1.5K', '203', '75 คน'] },
+  { name: 'UniSwap', category: 'ธุรกิจ', subtitle: 'แลกของในมหาวิทยาลัย', role: 'UX Designer', phase: 'Prototype', proof: 'บันทึก 42 ครั้ง', score: 42, color: 'coral', image: '/projects/uniswap.webp' },
+  { name: 'SkillBridge', category: 'การศึกษา', subtitle: 'พอร์ตทักษะที่ตรวจสอบได้', role: 'Backend Developer', phase: 'Idea', proof: 'ผู้สนใจ 88 คน', score: 88, color: 'plum', image: '/projects/skillbridge.webp' },
+  { name: 'MoodMate', category: 'สุขภาพและชุมชน', subtitle: 'เช็กอินใจของนักศึกษา', role: 'Content Designer', phase: 'Beta', proof: 'ทดลองแล้ว 120 คน', score: 120, color: 'pink', image: '/projects/moodmate.webp' },
+  { name: 'CampusFix', category: 'เทคโนโลยี', subtitle: 'แจ้งปัญหาในมหาวิทยาลัย', role: 'Mobile Developer', phase: 'Prototype', proof: 'ผู้ติดตาม 74 คน', score: 74, color: 'cyan', image: '/projects/campusfix.webp' },
+  { name: 'LocalLink', category: 'ธุรกิจ', subtitle: 'ร่วมงานกับธุรกิจท้องถิ่น', role: 'Sales & Marketing', phase: 'MVP', proof: 'ผู้สนใจ 56 คน', score: 56, color: 'orange', image: '/projects/locallink.webp' },
 ]
 export const categories = ['ทั้งหมด', 'เทคโนโลยี', 'การศึกษา', 'สิ่งแวดล้อม', 'ธุรกิจ', 'สุขภาพและชุมชน']
 export function categoryChips(attribute = 'data-category') {
   return categories.map((name, i) => `<button class="chip ${i === 0 ? 'is-active' : ''}" ${attribute}="${name}" aria-pressed="${i === 0}" type="button">${name}</button>`).join('')
 }
-export function projectCard(project, recruitment = false) {
+export function projectCard(project, recruitment = false, showImage = false) {
   const i = projects.indexOf(project)
+  const imageCover = showImage && project.image
   return `<button class="discovery-card" type="button" data-project="${project.name}" aria-label="ดูโปรเจกต์ ${project.name}">
-    <span class="project-cover cover-${project.color}">${designIcon('home/imgThumbnailDecoration', 'cover-decoration')}<span class="cover-category">${project.category}</span><span class="cover-icon">${designIcon('home/imgProjectIconVector' + (i || ''))}</span><strong>${project.name}</strong></span>
+    <span class="project-cover cover-${project.color}${imageCover ? ' has-image' : ''}">${imageCover ? `<img class="project-cover-image" src="${project.image}" alt="" width="960" height="600">` : `${designIcon('home/imgThumbnailDecoration', 'cover-decoration')}<span class="cover-icon">${designIcon('home/imgProjectIconVector' + (i || ''))}</span>`}<span class="cover-category">${project.category}</span><strong>${project.name}</strong></span>
     <span class="discovery-card-copy"><span>${project.subtitle}</span><small>${recruitment ? 'เปิดรับ ' + project.role : project.phase + ' · ' + project.proof}</small></span>
   </button>`
 }

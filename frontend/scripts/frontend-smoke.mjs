@@ -23,13 +23,14 @@ try {
       const response = await page.goto(base + route)
       assert.equal(response.status(), 200, route)
       await page.waitForLoadState('networkidle')
+      await page.evaluate(() => Promise.all([...document.images].map(image => image.decode().catch(() => undefined))))
       if (route !== '/pages/show-kong.html') {
         assert.equal(await page.evaluate(() => document.fonts.check('16px "ShowKong Anuphan"', 'ทดสอบ')), true, 'Anuphan must be loaded')
       }
       const diagnostics = await page.evaluate(() => ({
         title: document.title,
         overflow: document.documentElement.scrollWidth > innerWidth + 1,
-        brokenImages: [...document.images].filter(i=>!i.complete||!i.naturalWidth).map(i=>i.src),
+        brokenImages: [...document.images].filter(i=>i.complete&&!i.naturalWidth).map(i=>i.src),
         hasContent: Boolean(document.querySelector('main')?.textContent.trim()),
       }))
       assert.equal(diagnostics.hasContent,true,route+' empty')

@@ -69,6 +69,10 @@
 .refresh-page .discovery-card { display: flex; flex-direction: column; width: 100%; min-width: 0; padding: 0; border: 1px solid #e3e0ed; border-radius: 14px; overflow: hidden; text-align: left; background: white; transition: transform .18s,box-shadow .18s; }
 .refresh-page .discovery-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px #29174718; }
 .refresh-page .project-cover { position: relative; display: flex; width: 100%; min-height: 92px; flex-direction: column; align-items: flex-start; justify-content: space-between; gap: 18px; padding: 12px; color: white; overflow: hidden; }
+.refresh-page .project-cover.has-image { min-height: 132px; isolation: isolate; background: #25175d; }
+.refresh-page .project-cover.has-image::after { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg,#140c3214 10%,#140c3266 58%,#140c32d9 100%); pointer-events: none; }
+.refresh-page .project-cover-image { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .35s ease; }
+.refresh-page .discovery-card:hover .project-cover-image { transform: scale(1.045); }
 .refresh-page .cover-violet { background: linear-gradient(110deg,#4932cf,#9778ff); }
 .refresh-page .cover-green { background: linear-gradient(110deg,#006750,#68cd88); }
 .refresh-page .cover-blue { background: linear-gradient(110deg,#0d458c,#2e9ee0); }
@@ -78,10 +82,10 @@
 .refresh-page .cover-cyan { background: linear-gradient(110deg,#087d95,#49c2dc); }
 .refresh-page .cover-orange { background: linear-gradient(110deg,#b6600d,#ffb133); }
 .refresh-page .cover-decoration { position: absolute; width: 155px; height: 155px; top: -70px; right: -42px; pointer-events: none; }
-.refresh-page .cover-category { border-radius: 99px; background: #ffffff26; padding: 4px 9px; font-size: 10px; }
+.refresh-page .cover-category { z-index: 2; border-radius: 99px; background: #18102d80; padding: 4px 9px; font-size: 10px; backdrop-filter: blur(8px); }
 .refresh-page .cover-icon { position: absolute; display: grid; place-items: center; width: 38px; height: 38px; right: 12px; top: 12px; border-radius: 12px; background: #ffffff25; }
 .refresh-page .cover-icon .design-icon { width: 22px; height: 22px; }
-.refresh-page .project-cover > strong { z-index: 1; font-size: 18px; }
+.refresh-page .project-cover > strong { z-index: 2; font-size: 18px; text-shadow: 0 2px 12px #12092599; }
 .refresh-page .discovery-card-copy { display: flex; flex-direction: column; gap: 5px; padding: 12px; min-height: 100px; font-size: 13px; }
 .refresh-page .discovery-card-copy small { font-size: 11px; color: #6d5dfb; }
 .refresh-page :is(.home-benefits,.home-works) { background: white; padding: 60px 0; }
