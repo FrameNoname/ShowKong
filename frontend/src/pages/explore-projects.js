@@ -6,15 +6,17 @@ mountRefresh('explore')
 
 function weeklyProjectSlide(project, index) {
   const description = project.description || `${project.subtitle} พร้อมเปิดรับคนที่อยากมาช่วยพัฒนาไอเดียและทดลองกับผู้ใช้จริง`
-  return `<article class="weekly-project" aria-roledescription="สไลด์" aria-label="${index + 1} จาก ${projects.length}">
-    <div class="weekly-project-copy">
-      <span class="weekly-label">● โปรเจกต์เด่นประจำสัปดาห์</span>
-      <h2>${project.name} — ${project.subtitle}</h2>
-      <p>${description}</p>
-      <p class="weekly-meta">${project.phase} · ${project.proof} · เปิดรับ ${project.role}</p>
-      <button class="button button-light" data-project="${project.name}" type="button">ดูโปรเจกต์ →</button>
+  return `<article class="weekly-slide" aria-roledescription="สไลด์" aria-label="${index + 1} จาก ${projects.length}">
+    <div class="page-container weekly-project">
+      <div class="weekly-project-copy">
+        <span class="weekly-label">● โปรเจกต์เด่นประจำสัปดาห์</span>
+        <h2>${project.name} — ${project.subtitle}</h2>
+        <p>${description}</p>
+        <p class="weekly-meta">${project.phase} · ${project.proof} · เปิดรับ ${project.role}</p>
+        <button class="button button-light" data-project="${project.name}" type="button">ดูโปรเจกต์ →</button>
+      </div>
+      <div class="weekly-card">${projectCard(project, false, true)}</div>
     </div>
-    <div class="weekly-card">${projectCard(project, false, true)}</div>
   </article>`
 }
 
@@ -31,14 +33,12 @@ function weeklyCarousel() {
       <button class="weekly-arrow" data-weekly-next type="button" aria-label="ดูโปรเจกต์ถัดไป">→</button>
       <span class="sr-only" data-weekly-status aria-live="polite"></span>
     </div>
-    <p class="weekly-autoplay-hint">เลื่อนอัตโนมัติทุก 5 วินาที · วางเมาส์หรือโฟกัสเพื่อหยุดชั่วคราว</p>
   </div>`
 }
 
 document.querySelector('main').innerHTML = `
-<section class="explore-intro"><div class="page-container"><p class="eyebrow">ค้นพบสิ่งที่นักศึกษากำลังสร้าง</p><h1>สำรวจโปรเจกต์</h1><p>ติดตามไอเดีย ทดลองใช้ Prototype และส่ง Feedback ให้โปรเจกต์ที่คุณสนใจ</p><div class="search-and-sort"><label class="search-field"><input id="projectSearch" type="search" aria-label="ค้นหาโปรเจกต์" placeholder="ค้นหาชื่อโปรเจกต์ ปัญหา หรือหมวดหมู่">${designIcon('challenge/imgIconSearch')}</label><select id="projectSort" aria-label="เรียงโปรเจกต์"><option value="featured">เรียงตาม: มาแรง</option><option value="popular">ผู้สนใจมากที่สุด</option><option value="name">ชื่อโปรเจกต์ A–Z</option></select></div></div></section>
-<section class="explore-featured"><div class="section-heading-row"><h2>โปรเจกต์เด่นประจำสัปดาห์</h2><p>คัดจากความสนใจและ Feedback ในชุมชน</p></div>${weeklyCarousel()}
-<div class="discovery-panel"><div class="section-heading-row"><div><h2>ค้นพบโปรเจกต์</h2><p>สำรวจไอเดีย Prototype และโปรเจกต์ที่กำลังทดลองกับผู้ใช้</p></div><span class="soft-link" id="projectCount" role="status">8 โปรเจกต์</span></div><div class="chip-row discovery-filters" data-category-group>${categoryChips()}</div><div class="discovery-grid" id="projectGrid" aria-live="polite"></div></div></section>`
+<section class="explore-hero">${weeklyCarousel()}</section>
+<section class="explore-featured"><div class="discovery-panel"><div class="section-heading-row"><div><p class="eyebrow">ค้นพบสิ่งที่นักศึกษากำลังสร้าง</p><h2>สำรวจโปรเจกต์</h2><p>ติดตามไอเดีย ทดลองใช้ Prototype และส่ง Feedback ให้โปรเจกต์ที่คุณสนใจ</p></div><span class="soft-link" id="projectCount" role="status">8 โปรเจกต์</span></div><div class="search-and-sort"><label class="search-field"><input id="projectSearch" type="search" aria-label="ค้นหาโปรเจกต์" placeholder="ค้นหาชื่อโปรเจกต์ ปัญหา หรือหมวดหมู่">${designIcon('challenge/imgIconSearch')}</label><select id="projectSort" aria-label="เรียงโปรเจกต์"><option value="featured">เรียงตาม: มาแรง</option><option value="popular">ผู้สนใจมากที่สุด</option><option value="name">ชื่อโปรเจกต์ A–Z</option></select></div><div class="chip-row discovery-filters" data-category-group>${categoryChips()}</div><div class="discovery-grid" id="projectGrid" aria-live="polite"></div></div></section>`
 
 function initWeeklyCarousel() {
   const carousel = document.querySelector('[data-weekly-carousel]')
