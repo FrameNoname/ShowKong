@@ -113,17 +113,30 @@
 .refresh-page .community-cta { margin-block: 80px; }
 .refresh-page.explore-page { background: #f1eeff; }
 .refresh-page .explore-featured { width: min(calc(100% - 48px),1312px); margin: 0 auto; padding: 52px 0 64px; }
-.refresh-page .weekly-project { display: grid; grid-template-columns: minmax(0,1fr) 396px; gap: 40px; align-items: center; padding: 38px 44px; border-radius: 24px; background: linear-gradient(115deg,#25175d,#5f3dff 70%,#a779ff); color: white; margin-top: 20px; margin-bottom: 32px; }
+.refresh-page .weekly-carousel { margin: 20px 0 32px; }
+.refresh-page .weekly-viewport { overflow: hidden; border-radius: 24px; box-shadow: 0 18px 45px #29156520; }
+.refresh-page .weekly-track { display: flex; transform: translate3d(-100%,0,0); transition: transform .62s cubic-bezier(.22,.78,.2,1); will-change: transform; }
+.refresh-page .weekly-track.is-jumping { transition: none; }
+.refresh-page .weekly-project { display: grid; grid-template-columns: minmax(0,1fr) 396px; flex: 0 0 100%; min-width: 0; gap: 40px; align-items: center; padding: 38px 44px; border-radius: 24px; background: linear-gradient(115deg,#25175d,#5f3dff 70%,#a779ff); color: white; }
+.refresh-page .weekly-project-copy { min-width: 0; }
 .refresh-page .weekly-project h2 { font-size: 36px; line-height: 1.4; margin: 16px 0 12px; }
 .refresh-page .weekly-project p { font-size: 16px; line-height: 26px; color: #e1dbff; }
 .refresh-page .weekly-project .weekly-meta { margin: 12px 0; font-size: 13px; }
 .refresh-page .weekly-label { display: inline-block; background: #ffffff26; font-size: 12px; border-radius: 99px; padding: 8px 12px; }
+.refresh-page .weekly-card { min-width: 0; }
 .refresh-page .weekly-card .project-cover { min-height: 120px; padding: 16px; }
 .refresh-page .weekly-card .project-cover > strong { font-size: 24px; }
 .refresh-page .weekly-card .discovery-card-copy { color: #191629; min-height: 132px; padding: 16px; font-size: 16px; }
 .refresh-page .weekly-card .discovery-card-copy small { font-size: 13px; }
 .refresh-page .weekly-card .cover-icon { width: 46px; height: 46px; }
 .refresh-page .weekly-card .cover-icon .design-icon { width: 28px; height: 28px; }
+.refresh-page .weekly-carousel-controls { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 16px; }
+.refresh-page .weekly-arrow { display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid #d9d3ec; border-radius: 50%; background: white; color: #33206f; font-size: 18px; box-shadow: 0 5px 14px #29156512; transition: transform .2s ease,border-color .2s ease,background .2s ease; }
+.refresh-page .weekly-arrow:hover { transform: translateY(-2px); border-color: #8b79ff; background: #f8f6ff; }
+.refresh-page .weekly-dots { display: flex; align-items: center; justify-content: center; gap: 7px; }
+.refresh-page .weekly-dot { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 99px; background: #bdb5d6; transition: width .25s ease,background .25s ease; }
+.refresh-page .weekly-dot.is-active { width: 26px; background: #6d5dfb; }
+.refresh-page .weekly-autoplay-hint { margin-top: 8px; color: #777287; font-size: 11px; text-align: center; }
 .refresh-page.find-team-page .team-content { display: block; }
 .refresh-page.find-team-page .team-grid { grid-template-columns: 1fr; gap: 16px; }
 .refresh-page.find-team-page .team-card { min-height: 154px; display: grid; grid-template-columns: minmax(0,1fr) 260px 230px; align-items: center; gap: 28px; padding: 24px 20px; }
