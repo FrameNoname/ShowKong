@@ -40,6 +40,26 @@ const posts = [
   },
 ]
 
+// Load persistent user posts created from post page
+try {
+  const savedUserPosts = JSON.parse(localStorage.getItem('showkong_user_posts')) || []
+  savedUserPosts.forEach((up) => {
+    posts.unshift({
+      type: up.type || 'ไอเดียใหม่',
+      author: up.author || 'คุณ (Pluem)',
+      initial: up.initial || 'P',
+      meta: up.meta || 'เมื่อสักครู่ · ทั่วไป',
+      title: up.title,
+      body: up.body,
+      detailTitle: up.roles?.length ? 'ตำแหน่งที่กำลังหา' : up.tags ? 'ทักษะที่เกี่ยวข้อง' : 'รายละเอียดเพิ่มเติม',
+      detail: up.roles?.length ? up.roles.join(' · ') : up.tags || 'เปิดรับความคิดเห็นและคนที่สนใจร่วมพัฒนาโปรเจกต์นี้',
+      stats: up.stats || '0 สนใจ · 0 ความคิดเห็น',
+      actions: ['บันทึก', 'ดูโพสต์'],
+      accent: up.accent || 'purple',
+    })
+  })
+} catch {}
+
 const stream = document.querySelector('#postStream')
 const postModal = document.querySelector('#postModal')
 const successModal = document.querySelector('#successModal')

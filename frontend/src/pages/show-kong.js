@@ -1,6 +1,7 @@
 import '../style.css'
 import { mountAuthenticatedShell } from '../components/shared.js'
 import { supabase } from '../lib/supabase.js'
+import { mountPrototype, mountDesignGallery } from '../components/prototype-sandbox.js'
 
 // Mount shared header & footer with 'showKong' as active
 mountAuthenticatedShell('showKong')
@@ -34,6 +35,39 @@ const projectsData = [
     upvotes: 184,
     views: 1420,
     createdAt: '2026-03-01',
+    prototypeType: 'campusMap',
+    protoHeadline: 'SafeWalk Live Campus Safety Map Simulator',
+    protoSubheadline: 'ทดสอบสลับระหว่างเส้นทางปกติและ SafeWalk Route พร้อมจำลองการกด SOS ฉุกเฉินและการแจ้งจุดเสี่ยง',
+    galleryImages: [
+      {
+        title: 'SafeWalk Mobile App — แผนที่นำทางเรียลไทม์',
+        tag: 'Mobile UI',
+        icon: '📱',
+        caption: 'หน้าจอแสดงเส้นทางปลอดภัย ไฟสว่าง และจุดกล้อง CCTV พร้อมระยะเวลาเดินจริงถึงหอพัก',
+        gradient: 'from-[#1e144f] via-[#4d3db2] to-[#ff7a59]',
+      },
+      {
+        title: 'One-Tap SOS & Emergency Dispatch Screen',
+        tag: 'Safety UX',
+        icon: '🚨',
+        caption: 'หน้าจอกดปุ่ม SOS ฉุกเฉิน นับถอยหลัง 3 วินาที พร้อมส่งพิกัด GPS อัตโนมัติไปยังศูนย์ รปภ. มฟล.',
+        gradient: 'from-rose-950 via-red-900 to-rose-700',
+      },
+      {
+        title: 'Community Hazard Heatmap — แผนที่จุดเสี่ยง มฟล.',
+        tag: 'Web Dashboard',
+        icon: '🗺️',
+        caption: 'แดชบอร์ดสรุปสถิติจุดไฟดับและบริเวณเปลี่ยวรอบมหาวิทยาลัยกว่า 120 จุดที่นักศึกษาร่วมแจ้ง',
+        gradient: 'from-purple-900 via-indigo-900 to-blue-900',
+      },
+      {
+        title: 'Virtual Companion Live GPS Sharing',
+        tag: 'Feature Flow',
+        icon: '🤝',
+        caption: 'ฟีเจอร์เดินเป็นเพื่อนผ่านระบบติดตามสด แชร์สถานะการเดินกลับหอกับเพื่อนสนิทแบบเรียลไทม์',
+        gradient: 'from-indigo-950 via-purple-900 to-pink-900',
+      },
+    ],
     story: 'พัฒนาขึ้นจากปัญหาจริงของนักศึกษาที่ต้องเดินกลับหอช่วงดึก โดยเฉพาะทางเปลี่ยวและจุดที่ไฟทางดับ ทีมได้ลงพื้นที่เก็บข้อมูลจุดเสี่ยงกว่า 120 จุดในมหาวิทยาลัย และเชื่อมต่อกับกล้องวงจรปิดเพื่อประเมินความปลอดภัยแบบเรียลไทม์',
     features: [
       'Safe Route Real-time — แนะนำเส้นทางเดินที่สว่างที่สุดและมีคนสัญจรพลุกพล่าน',
@@ -75,6 +109,39 @@ const projectsData = [
     upvotes: 215,
     views: 1980,
     createdAt: '2026-03-02',
+    prototypeType: 'leafScan',
+    protoHeadline: 'KasetSense AI Computer Vision Disease Scanner',
+    protoSubheadline: 'ทดสอบสแกนตัวอย่างใบพืช 4 ชนิดด้วยโมเดล AI ตรวจจับรอยโรคและแนะนำวิธีรักษาชีวภาพ',
+    galleryImages: [
+      {
+        title: 'KasetSense AI Scanner — วินิจฉัยโรคพืชจากใบไม้',
+        tag: 'Mobile App',
+        icon: '🍃',
+        caption: 'หน้าจอตรวจจับรอยโรคพืชแบบเรียลไทม์ด้วย YOLOv8 พร้อมค่าความแม่นยำ Confidence 96%',
+        gradient: 'from-[#0d3b2e] via-[#1eaa75] to-[#86efac]',
+      },
+      {
+        title: 'Treatment & Bio-Pesticide Recommendations',
+        tag: 'Agritech UI',
+        icon: '🧪',
+        caption: 'หน้าจอแสดงแนวทางรักษาด้วยสารชีวภัณฑ์ปลอดภัยและลดต้นทุนเคมีเกษตร 35%',
+        gradient: 'from-emerald-900 via-teal-900 to-cyan-900',
+      },
+      {
+        title: 'Farmer Community Disease Outbreak Map',
+        tag: 'Dashboard',
+        icon: '📊',
+        caption: 'แดชบอร์ดระบุพิกัดการระบาดของโรคพืชตามสภาพอากาศและแปลงเพาะปลูกในท้องถิ่น',
+        gradient: 'from-teal-950 via-emerald-950 to-green-900',
+      },
+      {
+        title: 'Field Testing with Local Farmers (แปลงเกษตรจริง)',
+        tag: 'Field Testing',
+        icon: '👨‍🌾',
+        caption: 'การทดสอบใช้งานจริงร่วมกับกลุ่มเกษตรกรวิสาหกิจชุมชนในพื้นที่ภาคเหนือ',
+        gradient: 'from-lime-950 via-emerald-900 to-teal-950',
+      },
+    ],
     story: 'ร่วมมือกับกลุ่มวิสาหกิจชุมชน รวบรวม Dataset ภาพถ่ายใบพืชกว่า 15,000 ภาพ โดยปรับแต่งโมเดล Lightweight ให้ประมวลผลได้รวดเร็วภายใน 1.5 วินาทีแม้บนสมาร์ตโฟนทั่วไปที่ความเร็วอินเทอร์เน็ตต่ำ',
     features: [
       'ตรวจจับโรคพืช 24 ชนิด ครอบคลุม ข้าว ข้าวโพด ทุเรียน มันสำปะหลัง',
@@ -116,6 +183,39 @@ const projectsData = [
     upvotes: 142,
     views: 1120,
     createdAt: '2026-03-03',
+    prototypeType: 'canteenQueue',
+    protoHeadline: 'QueueMai Digital Canteen Queue & Rescue Simulator',
+    protoSubheadline: 'ทดลองเลือกร้านค้า สั่งซื้อกล่องสุ่มลดขยะอาหาร และรับบัตรคิวดิจิทัลแบบเรียลไทม์',
+    galleryImages: [
+      {
+        title: 'QueueMai Canteen Ordering — สั่งอาหารล่วงหน้า',
+        tag: 'Student App',
+        icon: '🍜',
+        caption: 'หน้าจอเลือกสั่งเมนูอาหารล่วงหน้าเพื่อลดคิวช่วงพักเที่ยงในโรงอาหารมหาวิทยาลัย',
+        gradient: 'from-[#3a1c12] via-[#ff7a59] to-[#ffd493]',
+      },
+      {
+        title: 'Happy Hour Rescue Box — กู้ชีพอาหารลดขยะ 50%',
+        tag: 'Sustainability',
+        icon: '🎁',
+        caption: 'ฟีเจอร์กล่องสุ่มอาหารราคาประหยัดตอนเย็น ช่วยลด Food Waste ในมหาลัยได้มากกว่า 70%',
+        gradient: 'from-rose-950 via-orange-900 to-amber-800',
+      },
+      {
+        title: 'Digital Queue Ticket & Live Status Display',
+        tag: 'Queue System',
+        icon: '🎟️',
+        caption: 'บัตรคิวดิจิทัลแจ้งเตือนเวลารอแบบเรียลไทม์ พร้อมสแกน QR Code รับอาหารที่เคาน์เตอร์',
+        gradient: 'from-amber-950 via-orange-950 to-rose-900',
+      },
+      {
+        title: 'Merchant POS Tablet UI — แท็บเล็ตร้านค้าใช้งานง่าย',
+        tag: 'Merchant Portal',
+        icon: '📟',
+        caption: 'ระบบจัดการออเดอร์สำหรับคุณป้าร้านค้าด้วยปุ่มขนาดใหญ่และเสียงแจ้งเตือนออเดอร์',
+        gradient: 'from-orange-950 via-rose-900 to-pink-900',
+      },
+    ],
     story: 'โรงอาหารมหาวิทยาลัยมีปัญหาแถวยาวเหยียดจนนักศึกษาไม่มีเวลากินข้าว ขณะที่ตอนเย็นร้านค้ากลับมีอาหารเหลือทิ้งเฉลี่ย 15-20 จานต่อร้าน จึงทำแพลตฟอร์มที่เชื่อมสองจุดนี้เข้าด้วยกัน',
     features: [
       'Real-time Queue Status — สั่งล่วงหน้า เดินมารับอาหารตอนทำเสร็จพอดี',
@@ -155,6 +255,39 @@ const projectsData = [
     upvotes: 178,
     views: 1650,
     createdAt: '2026-02-24',
+    prototypeType: 'gamifiedPet',
+    protoHeadline: 'FinBuddy Virtual Pet & Budget Simulator',
+    protoSubheadline: 'ทดสอบบันทึกค่าชานมไข่มุก เงินออม หรือหารบิลกับเพื่อน แล้วดูปฏิกิริยาสุดน่ารักของน้องมังกร',
+    galleryImages: [
+      {
+        title: 'FinBuddy Home — เลี้ยงสัตว์ตามวินัยการเงิน',
+        tag: 'Gamification UI',
+        icon: '🐲',
+        caption: 'หน้าหลัก FinBuddy ที่แสดงสัตว์เลี้ยงคู่ใจเติบโตตามวินัยการออมและการคุมงบของนักศึกษา',
+        gradient: 'from-[#112440] via-[#26649c] to-[#99d5ff]',
+      },
+      {
+        title: 'Instant Bill Split & Receipt Scan — หารบิลกับเพื่อน',
+        tag: 'Fintech Feature',
+        icon: '🧾',
+        caption: 'สแกนสลิปโอนเงินพร้อมคำนวณหารค่าห้อง ค่าอาหาร และค่าทริปท่องเที่ยวกับเพื่อนอัตโนมัติ',
+        gradient: 'from-indigo-950 via-blue-900 to-cyan-800',
+      },
+      {
+        title: 'Savings Quest & Group Challenge — ภารกิจเก็บเงิน',
+        tag: 'Social Quest',
+        icon: '🏆',
+        caption: 'แข่งเก็บเงินไปคอนเสิร์ตหรือทริปปิดเทอมร่วมกับแก๊งเพื่อน ปลดล็อกไอเทมแต่งตัวสัตว์เลี้ยง',
+        gradient: 'from-blue-950 via-indigo-950 to-purple-900',
+      },
+      {
+        title: 'Micro-budget Category Insights — กราฟคุมงบชานม',
+        tag: 'Analytics',
+        icon: '📊',
+        caption: 'การวิเคราะห์รายจ่ายย่อย เตือนเมื่อค่ากาแฟและของหวานเริ่มแตะเพดานงบประมาณประจำเดือน',
+        gradient: 'from-cyan-950 via-blue-900 to-indigo-950',
+      },
+    ],
     story: 'จากการวิจัยพฤติกรรมทางการเงินของเด็ก Gen Z พบว่า 82% เลิกจดบันทึกรายรับรายจ่ายหลังสัปดาห์แรกเพราะรู้สึกน่าเบื่อและเครียด FinBuddy จึงใช้จิตวิทยาเกมและ Social Accountability เข้ามาช่วยให้การออมกลายเป็นเรื่องสนุก',
     features: [
       'Virtual Pet Buddy — สัตว์เลี้ยงคู่ใจที่เติบโตและแสดงอารมณ์ตามวินัยการเงิน',
@@ -194,6 +327,39 @@ const projectsData = [
     upvotes: 264,
     views: 2450,
     createdAt: '2026-03-04',
+    prototypeType: 'speechToText',
+    protoHeadline: 'EchoLearn AI Audio Transcription & Flashcard Playground',
+    protoSubheadline: 'ใส่ไฟล์เสียงจริง หรือเลือกคลิปเสียงเลคเชอร์ตัวอย่าง เพื่อทดสอบถอดข้อความภาษาไทย สร้างชีทสรุป และพลิกการ์ด Flashcard ทบทวน',
+    galleryImages: [
+      {
+        title: 'EchoLearn Audio Recorder & Live Waveform',
+        tag: 'Audio AI UI',
+        icon: '🎙️',
+        caption: 'หน้าจอบันทึกเสียงในห้องเลคเชอร์ พร้อมอัลกอริทึมตัดเสียงก้องและเสียงรบกวนรอบข้าง',
+        gradient: 'from-[#2e0854] via-[#7e22ce] to-[#f472b6]',
+      },
+      {
+        title: 'Thai Speech-to-Text with Timestamps',
+        tag: 'Transcription',
+        icon: '📝',
+        caption: 'ถอดคำบรรยายภาษาไทยแบบแม่นยำสูง รองรับศัพท์เฉพาะทางแพทย์ กฎหมาย และวิศวกรรม',
+        gradient: 'from-purple-950 via-indigo-900 to-pink-900',
+      },
+      {
+        title: 'Auto-Generated AI Lecture Note & Mindmap',
+        tag: 'AI Summary',
+        icon: '📑',
+        caption: 'ชีทสรุปเลคเชอร์ที่จัดโครงสร้างหัวข้อ ไฮไลต์จุดออกสอบ และส่งออกเป็น Notion หรือ PDF ได้',
+        gradient: 'from-indigo-950 via-purple-900 to-rose-900',
+      },
+      {
+        title: 'Interactive 3D Flashcards Review Mode',
+        tag: 'Study Tool',
+        icon: '📇',
+        caption: 'โหมดทบทวนข้อสอบด้วยระบบ Spaced Repetition Flashcards คลิกพลิกดูเฉลยเพื่อประเมินความจำ',
+        gradient: 'from-pink-950 via-purple-950 to-indigo-950',
+      },
+    ],
     story: 'เกิดจากปัญหาที่ห้องเลคเชอร์ 300 คน พูดเร็วและมีคำศัพท์เฉพาะทางภาษาไทยปนอังกฤษ ทำให้จดเลคเชอร์ไม่ทัน เราจึงปรับแต่งโมเดล Whisper ให้เข้าใจสำเนียงไทยและคำศัพท์เฉพาะวิชาการได้แม่นยำขึ้นกว่า 90%',
     features: [
       'Speech-to-Text ภาษาไทยที่มีความแม่นยำสูง แม้มีเสียงก้องในห้องบรรยายขนาดใหญ่',
@@ -234,6 +400,39 @@ const projectsData = [
     upvotes: 195,
     views: 1890,
     createdAt: '2026-02-18',
+    prototypeType: 'peerChat',
+    protoHeadline: 'MindSpace Anonymous Peer Listener Chat Simulator',
+    protoSubheadline: 'ทดลองสนทนาในห้องแชตนิรนาม 100% พร้อมทดสอบการตอบสนองเชิงจิตวิทยาที่เข้าอกเข้าใจ',
+    galleryImages: [
+      {
+        title: 'MindSpace Anonymous Safe Zone — แชตพื้นที่ปลอดภัย',
+        tag: 'Safe Community',
+        icon: '🌿',
+        caption: 'ห้องแชตพูดคุยระบายความเครียดแบบนิรนาม 100% ไม่มีการเก็บข้อมูลตัวตนและประวัติส่วนตัว',
+        gradient: 'from-[#062c24] via-[#059669] to-[#a7f3d0]',
+      },
+      {
+        title: 'Certified Peer Listener Matching & 1:1 Room',
+        tag: 'Peer Listener',
+        icon: '👂',
+        caption: 'ระบบนัดหมายพูดคุย 1:1 กับเพื่อนผู้รับฟังที่ผ่านการอบรมการรับฟังอย่างเข้าอกเข้าใจ (Active Listening)',
+        gradient: 'from-emerald-950 via-teal-900 to-green-900',
+      },
+      {
+        title: 'Daily Mood Journal & Emotional Trends',
+        tag: 'Mental Health',
+        icon: '📈',
+        caption: 'ไดอารี่บันทึกอารมณ์และระดับพลังงานรายวัน พร้อมกราฟวิเคราะห์แนวโน้มสุขภาพจิต',
+        gradient: 'from-teal-950 via-emerald-950 to-cyan-950',
+      },
+      {
+        title: '24/7 Crisis Hotline Directory — ศูนย์ช่วยเหลือฉุกเฉิน',
+        tag: 'Crisis Support',
+        icon: '📞',
+        caption: 'รวบรวมเบอร์สายด่วนสุขภาพจิต 1323 และช่องทางประสานงานจิตแพทย์ทันท่วงทีตลอด 24 ชม.',
+        gradient: 'from-cyan-950 via-teal-900 to-emerald-950',
+      },
+    ],
     story: 'สถิตินักศึกษากว่า 40% เผชิญภาวะหมดไฟและความเครียดสูง แต่ไม่กล้าเข้าพบอาจารย์หรือไปโรงพยาบาลเพราะกังวลเรื่องความเป็นส่วนตัว MindSpace ถูกออกแบบให้เป็น First-line Safe Space ที่รักษาความลับและความเป็นนิรนาม 100%',
     features: [
       'Anonymous Room — พื้นที่พูดคุยแลกเปลี่ยนแบบนิรนาม ไม่มีการจัดเก็บข้อมูลส่วนตัว',
@@ -304,6 +503,25 @@ const commentCount = document.querySelector('#commentCount')
 const commentForm = document.querySelector('#commentForm')
 const commentInput = document.querySelector('#commentInput')
 
+// Modal Tabs & Panels
+const modalTabPrototype = document.querySelector('#modalTabPrototype')
+const modalTabGallery = document.querySelector('#modalTabGallery')
+const modalTabStory = document.querySelector('#modalTabStory')
+const modalPanelPrototype = document.querySelector('#modalPanelPrototype')
+const modalPanelGallery = document.querySelector('#modalPanelGallery')
+const modalPanelStory = document.querySelector('#modalPanelStory')
+const prototypeHeadline = document.querySelector('#prototypeHeadline')
+const prototypeSubheadline = document.querySelector('#prototypeSubheadline')
+const prototypeCanvas = document.querySelector('#prototypeCanvas')
+const resetPrototypeBtn = document.querySelector('#resetPrototypeBtn')
+const modalSwitchToProtoBtn = document.querySelector('#modalSwitchToProtoBtn')
+const galleryGrid = document.querySelector('#galleryGrid')
+const modalGalleryCount = document.querySelector('#modalGalleryCount')
+const galleryLightbox = document.querySelector('#galleryLightbox')
+const lightboxImg = document.querySelector('#lightboxImg')
+const lightboxCaption = document.querySelector('#lightboxCaption')
+const closeLightboxBtn = document.querySelector('#closeLightboxBtn')
+
 // Toast element
 const toastNotification = document.querySelector('#toastNotification')
 const toastMessage = document.querySelector('#toastMessage')
@@ -313,6 +531,7 @@ let activeCategory = 'ทั้งหมด'
 let activeTag = null
 let activeSearchQuery = ''
 let currentSelectedProject = null
+let activeModalTab = 'prototype'
 
 // ─── Rendering Helpers ───
 
@@ -401,15 +620,20 @@ function createProjectCardHtml(project) {
       data-project-id="${project.id}"
     >
       <!-- Card Banner / Preview -->
-      <div class="relative h-44 bg-gradient-to-br ${project.bannerGradient} p-5 flex flex-col justify-between overflow-hidden">
+      <div class="relative h-48 bg-gradient-to-br ${project.bannerGradient} p-5 flex flex-col justify-between overflow-hidden">
         <div class="flex items-start justify-between gap-2 z-10">
           <span class="inline-block px-3 py-1 rounded-full text-[11px] font-bold tracking-wide ${project.badgeClass}">
             ${project.badge}
           </span>
-          <span class="inline-flex items-center gap-1 text-[11px] font-medium text-white/80 bg-black/30 backdrop-blur-md px-2.5 py-1 rounded-full">
-            <svg class="w-3 h-3 text-amber-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/></svg>
-            ${project.views.toLocaleString()}
-          </span>
+          <button 
+            type="button" 
+            class="js-play-prototype inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/25 hover:bg-white text-white hover:text-gray-900 text-[11px] font-extrabold backdrop-blur-md transition-all hover:scale-105 border border-white/40 shadow-xs"
+            data-id="${project.id}"
+            title="คลิกเพื่อทดลองเล่น Prototype ระบบนี้"
+          >
+            <span>🎮</span>
+            <span>เล่น Prototype</span>
+          </button>
         </div>
 
         <div class="z-10">
@@ -420,7 +644,7 @@ function createProjectCardHtml(project) {
         </div>
 
         <!-- Subtle ambient radial pattern inside banner -->
-        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent opacity-85"></div>
         <div class="absolute -right-8 -bottom-8 w-28 h-28 rounded-full bg-white/10 blur-xl group-hover:scale-125 transition-transform duration-300"></div>
       </div>
 
@@ -478,10 +702,18 @@ function createProjectCardHtml(project) {
           <div class="flex items-center gap-2">
             <button 
               type="button" 
-              class="js-open-detail text-xs font-bold text-[#6d5dfb] hover:text-[#5b4be0] px-2.5 py-1.5 rounded-lg hover:bg-purple-50 transition-colors"
+              class="js-play-prototype inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-[#6d5dfb] to-[#8c7bff] hover:from-[#5b4be0] hover:to-[#7763f0] text-white text-xs font-bold transition-all shadow-xs hover:shadow hover:scale-102"
               data-id="${project.id}"
             >
-              ดูเรื่องราว →
+              <span>🎮</span>
+              <span>เล่น Prototype</span>
+            </button>
+            <button 
+              type="button" 
+              class="js-open-detail text-xs font-bold text-gray-500 hover:text-[#6d5dfb] px-2 py-1.5 rounded-lg hover:bg-purple-50 transition-colors"
+              data-id="${project.id}"
+            >
+              เรื่องราว →
             </button>
           </div>
         </div>
@@ -500,12 +732,22 @@ function attachCardEvents() {
     })
   })
 
+  // Play Prototype button handler
+  document.querySelectorAll('.js-play-prototype').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation()
+      const projectId = btn.getAttribute('data-id')
+      const project = projectsData.find((p) => p.id === projectId)
+      if (project) openDetailModal(project, 'prototype')
+    })
+  })
+
   // Open detail on card click
   document.querySelectorAll('[data-project-id]').forEach((card) => {
     card.addEventListener('click', () => {
       const projectId = card.getAttribute('data-project-id')
       const project = projectsData.find((p) => p.id === projectId)
-      if (project) openDetailModal(project)
+      if (project) openDetailModal(project, 'prototype')
     })
   })
 
@@ -515,7 +757,7 @@ function attachCardEvents() {
       e.stopPropagation()
       const projectId = btn.getAttribute('data-id')
       const project = projectsData.find((p) => p.id === projectId)
-      if (project) openDetailModal(project)
+      if (project) openDetailModal(project, 'story')
     })
   })
 }
@@ -555,16 +797,43 @@ function updateModalUpvoteState(project) {
   }
 }
 
+// ─── Tab Switching Logic ───
+function switchModalTab(tabName) {
+  activeModalTab = tabName
+
+  const tabs = [
+    { name: 'prototype', btn: modalTabPrototype, panel: modalPanelPrototype },
+    { name: 'gallery', btn: modalTabGallery, panel: modalPanelGallery },
+    { name: 'story', btn: modalTabStory, panel: modalPanelStory },
+  ]
+
+  tabs.forEach((t) => {
+    if (t.name === tabName) {
+      t.btn.className =
+        'modal-tab-btn inline-flex items-center gap-2 py-3 px-3 sm:px-4 border-b-2 font-bold text-xs sm:text-sm transition-all border-[#6d5dfb] text-[#6d5dfb] bg-white rounded-t-xl shadow-xs'
+      t.panel.classList.remove('hidden')
+    } else {
+      t.btn.className =
+        'modal-tab-btn inline-flex items-center gap-2 py-3 px-3 sm:px-4 border-b-2 font-bold text-xs sm:text-sm transition-all border-transparent text-gray-500 hover:text-gray-800'
+      t.panel.classList.add('hidden')
+    }
+  })
+}
+
 // ─── Detail Modal Logic ───
-function openDetailModal(project) {
+function openDetailModal(project, initialTab = 'prototype') {
   currentSelectedProject = project
 
   // Set banner & badge
-  modalBanner.className = `relative h-48 sm:h-56 p-6 flex flex-col justify-between text-white bg-gradient-to-br ${project.bannerGradient}`
+  modalBanner.className = `relative h-44 sm:h-52 p-6 flex flex-col justify-between text-white bg-gradient-to-br ${project.bannerGradient} shrink-0`
   modalBadge.textContent = project.badge
   modalBadge.className = `px-3 py-1 rounded-full text-xs font-bold tracking-wide backdrop-blur-md ${project.badgeClass}`
   modalTitle.textContent = project.title
   modalCreator.textContent = `สร้างโดย ${project.creator.name} · ${project.creator.faculty} · ${project.creator.uni}`
+
+  // Prototype headlines
+  if (prototypeHeadline) prototypeHeadline.textContent = project.protoHeadline || 'Interactive Sandbox Playground'
+  if (prototypeSubheadline) prototypeSubheadline.textContent = project.protoSubheadline || 'ทดลองเล่นระบบจำลองที่ทำงานได้จริง'
 
   // Links
   modalLiveBtn.href = project.liveUrl
@@ -619,9 +888,35 @@ function openDetailModal(project) {
   // Comments
   renderCommentsList(project)
 
+  // Mount Interactive Prototype
+  mountPrototype(project, prototypeCanvas, showToast)
+
+  // Mount Design Gallery
+  if (modalGalleryCount) {
+    modalGalleryCount.textContent = `(${project.galleryImages?.length || 0} ภาพ)`
+  }
+  mountDesignGallery(project, galleryGrid, openLightbox)
+
+  // Switch to initial tab
+  switchModalTab(initialTab)
+
   // Show modal
   projectDetailModal.hidden = false
   document.body.style.overflow = 'hidden'
+}
+
+function openLightbox(item) {
+  if (!galleryLightbox) return
+  lightboxImg.src = item.imgUrl || ''
+  lightboxCaption.textContent = `${item.title} — ${item.caption}`
+  galleryLightbox.classList.remove('hidden')
+  galleryLightbox.classList.add('flex')
+}
+
+function closeLightbox() {
+  if (!galleryLightbox) return
+  galleryLightbox.classList.add('hidden')
+  galleryLightbox.classList.remove('flex')
 }
 
 function renderCommentsList(project) {
@@ -645,6 +940,7 @@ function closeDetailModalDialog() {
   projectDetailModal.hidden = true
   document.body.style.overflow = ''
   currentSelectedProject = null
+  closeLightbox()
 }
 
 // ─── Toast System ───
@@ -662,6 +958,26 @@ function showToast(msg) {
 }
 
 // ─── Event Listeners Setup ───
+
+// Tab switching listeners
+modalTabPrototype?.addEventListener('click', () => switchModalTab('prototype'))
+modalTabGallery?.addEventListener('click', () => switchModalTab('gallery'))
+modalTabStory?.addEventListener('click', () => switchModalTab('story'))
+modalSwitchToProtoBtn?.addEventListener('click', () => switchModalTab('prototype'))
+
+// Reset prototype button
+resetPrototypeBtn?.addEventListener('click', () => {
+  if (currentSelectedProject) {
+    mountPrototype(currentSelectedProject, prototypeCanvas, showToast)
+    showToast('รีเซ็ตระบบ Prototype เรียบร้อยแล้ว 🔄')
+  }
+})
+
+// Lightbox close listeners
+closeLightboxBtn?.addEventListener('click', closeLightbox)
+galleryLightbox?.addEventListener('click', (e) => {
+  if (e.target === galleryLightbox) closeLightbox()
+})
 
 // Search input
 searchInput?.addEventListener('input', (e) => {
@@ -746,8 +1062,12 @@ projectDetailModal?.addEventListener('click', (e) => {
 })
 
 window.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && !projectDetailModal.hidden) {
-    closeDetailModalDialog()
+  if (e.key === 'Escape') {
+    if (galleryLightbox && !galleryLightbox.classList.contains('hidden')) {
+      closeLightbox()
+    } else if (!projectDetailModal.hidden) {
+      closeDetailModalDialog()
+    }
   }
 })
 
@@ -788,13 +1108,13 @@ commentForm?.addEventListener('submit', (e) => {
   showToast('ส่งความคิดเห็นเรียบร้อยแล้ว ✨')
 })
 
-// Check URL Hash on load (e.g. /pages/show-kong.html#safewalk-mfu)
+// Check URL Hash on load (e.g. /pages/show-kong.html#echolearn)
 function checkInitialHash() {
   const hash = window.location.hash.replace('#', '')
   if (hash) {
     const project = projectsData.find((p) => p.id === hash)
     if (project) {
-      setTimeout(() => openDetailModal(project), 300)
+      setTimeout(() => openDetailModal(project, 'prototype'), 300)
     }
   }
 }

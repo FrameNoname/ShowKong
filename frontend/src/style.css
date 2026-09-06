@@ -372,3 +372,44 @@ form label > textarea { min-height: 112px; }
   .team-card-actions .button, .post-footer .button { width: 100%; }
 }
 
+/* ─── ShowKong Interactive Prototype & Showcase Styles ─── */
+.wave-bar {
+  animation: wavePulse 1.2s ease-in-out infinite alternate;
+}
+@keyframes wavePulse {
+  0% { height: 6px; }
+  50% { height: 28px; }
+  100% { height: 12px; }
+}
+
+.flashcard-inner {
+  transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transform-style: preserve-3d;
+}
+.flashcard-inner.is-flipped {
+  transform: rotateY(180deg);
+}
+.flashcard-front, .flashcard-back {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.flashcard-back {
+  transform: rotateY(180deg);
+}
+
+.laser-scan-line {
+  animation: laserScan 2s ease-in-out infinite;
+}
+@keyframes laserScan {
+  0% { top: 5%; opacity: 0.3; }
+  50% { top: 90%; opacity: 1; }
+  100% { top: 5%; opacity: 0.3; }
+}
+
+@keyframes mapRadar {
+  0% { transform: scale(0.8); opacity: 0.9; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+.map-radar-pulse {
+  animation: mapRadar 2s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
