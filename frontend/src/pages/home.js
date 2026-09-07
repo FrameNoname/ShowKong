@@ -1,6 +1,8 @@
 import '../style.css'
 import '../refresh.css'
-import { communityCta, siteFooter } from '../components/shared.js'
+import '../home-cta.css'
+import '../home-journey.css'
+import { siteFooter } from '../components/shared.js'
 import { openLoginModal } from '../components/login-modal.js'
 import { supabase } from '../lib/supabase.js'
 import { designIcon } from '../components/design-assets.js'
@@ -33,19 +35,58 @@ document.querySelector('main').innerHTML = `
   </div>
 </section>
 <section class="trending-section" id="featured"><div class="discovery-panel"><div class="section-heading-row"><div><h2>โปรเจกต์มาแรง</h2><p>ค้นหาไอเดียที่น่าสนใจ แล้วเข้าไปดูทีมที่กำลังเปิดรับสมาชิก</p></div><a class="soft-link" href="/pages/explore-projects.html">ดูโปรเจกต์ทั้งหมด →</a></div><div class="chip-row discovery-filters">${categoryChips()}</div><div class="discovery-grid" id="homeProjects" aria-live="polite">${projects.map(p=>projectCard(p,true,true)).join('')}</div></div></section>
-<section class="home-benefits"><div class="page-container"><p class="eyebrow">ทำไมต้อง ShowKong</p><h2>เริ่มจากไอเดีย ไปได้ไกลกว่าห้องเรียน</h2><div class="benefit-grid">${[
-['หาเพื่อนร่วมทีมที่ใช่','ค้นหาคนต่างคณะที่มีทักษะตรงกับสิ่งที่โปรเจกต์ยังขาด'],
-['ทดลองกับผู้ใช้จริง','นำไอเดียไปให้คนในชุมชนทดลอง รับความคิดเห็น และพัฒนาต่อ'],
-['มี Portfolio ที่พิสูจน์ได้','เก็บบทบาท ผลลัพธ์ และเสียงตอบรับเป็นหลักฐานการทำงานจริง'],
-].map(([title,body],i)=>`<article class="benefit-card"><span class="benefit-icon benefit-${i}">${designIcon('home/imgBenefitIconVector'+(i||''))}</span><h3>${title}</h3><p>${body}</p></article>`).join('')}</div></div></section>
 <section class="home-works" id="works"><div class="page-container"><div class="section-heading-row"><div><p class="eyebrow">ผลงานเด่นประจำสัปดาห์</p><h2>ผลงานมาแรง</h2></div><a class="soft-link" href="/pages/show-kong.html">ดูผลงานทั้งหมด →</a></div><div class="work-grid">${projects.slice(0,3).map((p,i)=>`<a class="work-card" href="/pages/show-kong.html"><div class="work-cover cover-${p.color}"><img class="work-cover-image" src="${p.image}" alt="" width="960" height="600"><span class="work-category">${p.category}</span><h3>${p.name}</h3></div><div class="work-copy"><small>${p.tags}</small><p>${p.description}</p><div class="work-metrics">${p.metrics.map((m,j)=>`<div><strong>${designIcon('home/imgMetricIcon'+(j||''))}${m}</strong><small>${['เข้าชม','ถูกใจ',i===1?'ใช้งานจริง':'ผู้ทดลอง'][j]}</small></div>`).join('')}</div></div></a>`).join('')}</div></div></section>
-<section class="home-how" id="how-it-works"><div class="page-container"><p class="eyebrow">เริ่มต้นง่าย ๆ</p><h2>เปลี่ยนไอเดียให้เป็นผลงานใน 4 ขั้นตอน</h2><div class="steps-grid">${[
-['โพสต์ไอเดีย','บอกปัญหา สิ่งที่อยากสร้าง และทักษะที่ทีมยังขาด'],
-['หาเพื่อนร่วมทีม','ค้นหาคนต่างคณะ แล้วส่งคำขอเข้าร่วมทีมที่สนใจ'],
-['ทดลองและอัปเดต','แชร์ Demo รับ Feedback และบันทึกความคืบหน้าของโปรเจกต์'],
-['เก็บเป็น Portfolio','สรุปบทบาท ผลลัพธ์ และหลักฐานให้คนอื่นตรวจสอบได้']
-].map(([title,body],i)=>`<article class="step-card"><span>0${i+1}</span><h3>${title}</h3><p>${body}</p></article>`).join('')}</div></div></section>
-${communityCta()}`
+<section class="home-journey" id="how-it-works" aria-labelledby="journey-title">
+  <div class="page-container">
+    <div class="journey-heading">
+      <div><p class="journey-eyebrow"><span aria-hidden="true">✦</span> เล็ก ๆ วันนี้ เป็นผลงานจริงวันหน้า</p><h2 id="journey-title">จาก “อยากลองทำ”<br>สู่ <span>“เราทำได้แล้ว”</span></h2></div>
+      <p class="journey-intro">ShowKong ช่วยให้ทุกก้าวมีความหมาย<br>ตั้งแต่ไอเดียแรก เพื่อนร่วมทีม ไปจนถึงผลงานที่ภูมิใจ</p>
+    </div>
+    <ol class="journey-steps" role="list">
+      <li class="journey-step journey-idea">
+        <div class="journey-marker"><span>01</span><small>เริ่มจากคุณ</small></div>
+        <div class="journey-art" aria-hidden="true"><div class="journey-note"><span class="journey-note-label">MY NEXT IDEA <span>✦</span></span><strong>ถ้ามีแอปที่ช่วยให้<br>การเรียนสนุกขึ้นล่ะ?</strong><div class="journey-note-lines"><i></i><i></i></div><span class="journey-note-tag">Education</span></div><span class="journey-spark">✧</span></div>
+        <div class="journey-copy"><h3>เล่าไอเดียที่อยากทำ</h3><p>บอกสิ่งที่อยากสร้าง ปัญหาที่อยากแก้ และทักษะที่ยังขาด ให้คนที่สนใจได้มาเห็น</p><span class="journey-outcome">ไอเดียได้ก้าวแรก</span></div>
+      </li>
+      <li class="journey-step journey-team">
+        <div class="journey-marker"><span>02</span><small>เจอคนที่ใช่</small></div>
+        <div class="journey-art" aria-hidden="true"><div class="journey-team-stack"><div><span class="journey-person person-design">D</span><span><strong>Designer</strong><small>เติมมุมมองใหม่</small></span><b>＋</b></div><div><span class="journey-person person-dev">&lt;/&gt;</span><span><strong>Developer</strong><small>ช่วยให้ไอเดียเป็นจริง</small></span><b>＋</b></div></div><span class="journey-match">✦ ต่างทักษะ เป้าหมายเดียวกัน</span></div>
+        <div class="journey-copy"><h3>เติมทีมให้ครบมุม</h3><p>เจอเพื่อนต่างคณะที่สนใจเรื่องเดียวกัน นำความถนัดของแต่ละคนมาสร้างไปด้วยกัน</p><span class="journey-outcome">มีเพื่อนร่วมทาง</span></div>
+      </li>
+      <li class="journey-step journey-test">
+        <div class="journey-marker"><span>03</span><small>ลองแล้วเรียนรู้</small></div>
+        <div class="journey-art" aria-hidden="true"><div class="journey-demo"><span><i></i><i></i><i></i><small>Demo / version 01</small></span><div class="journey-demo-content"><span>▷</span><div><strong>ลองใช้ไอเดียของเรา</strong><small>พร้อมรับมุมมองใหม่ ๆ</small></div></div></div><div class="journey-feedback"><span>“</span><p>ลองแล้ว! ถ้าเพิ่มตรงนี้<br>จะใช้ง่ายขึ้นอีกนะ</p><b>↗</b></div></div>
+        <div class="journey-copy"><h3>ลองจริง แล้วไปต่อ</h3><p>แชร์ Demo ให้ชุมชนทดลอง รับ Feedback และพัฒนาไอเดียจากเสียงของผู้ใช้จริง</p><span class="journey-outcome">ได้เรียนรู้จากการลงมือ</span></div>
+      </li>
+      <li class="journey-step journey-work">
+        <div class="journey-marker"><span>04</span><small>ภูมิใจกับสิ่งที่สร้าง</small></div>
+        <div class="journey-art" aria-hidden="true"><div class="journey-portfolio"><img src="/projects/sheetquest.webp" alt="" width="960" height="600" loading="lazy"><div><small>BUILT TOGETHER</small><strong>จากไอเดีย สู่ผลงานจริง</strong><span>Design · Development</span></div></div><span class="journey-finish">✓ ผลงานที่เล่าเรื่องของคุณ</span></div>
+        <div class="journey-copy"><h3>เปลี่ยนเป็นพอร์ตของคุณ</h3><p>เก็บบทบาท สิ่งที่ได้ลงมือทำ และผลลัพธ์ เป็นผลงานที่บอกได้ว่าคุณทำอะไรเป็น</p><span class="journey-outcome">มีผลงานให้โอกาสต่อไป</span></div>
+      </li>
+    </ol>
+  </div>
+</section>
+<section class="home-create page-container" aria-labelledby="home-create-title">
+  <div class="home-create-copy">
+    <p class="home-create-eyebrow"><span aria-hidden="true">✦</span> พื้นที่เล็ก ๆ สำหรับไอเดียใหญ่ ๆ</p>
+    <h2 id="home-create-title">มีไอเดียแล้ว?<br><span>มาเริ่มไปด้วยกัน</span></h2>
+    <p class="home-create-description">ไม่ต้องเก่งทุกอย่าง ก็เริ่มสร้างได้<br>แชร์สิ่งที่อยากทำ แล้วหาเพื่อนมาช่วยเติมทักษะที่ขาด</p>
+    <div class="home-create-actions">
+      <a class="button home-create-primary" href="/pages/post.html">เริ่มสร้างโปรเจกต์ <span aria-hidden="true">↗</span></a>
+      <a class="home-create-guide" href="#how-it-works">ดูวิธีเริ่มต้น <span aria-hidden="true">→</span></a>
+    </div>
+    <p class="home-create-note">เริ่มจากไอเดียสั้น ๆ แล้วค่อยต่อยอดไปด้วยกัน</p>
+  </div>
+  <div class="home-create-visual" aria-hidden="true">
+    <div class="home-create-orbit"></div>
+    <div class="home-create-sticker">ไอเดีย + คนที่ใช่ = เป็นไปได้ <span>✦</span></div>
+    <div class="home-create-preview">
+      <div class="home-create-cover"><img src="/projects/greenloop.webp" alt="" width="960" height="600" loading="lazy"><span>จุดเริ่มต้นของสิ่งใหม่</span></div>
+      <div class="home-create-preview-copy"><small>YOUR NEXT PROJECT</small><h3>โปรเจกต์ใหม่ของคุณ</h3><p>หนึ่งไอเดีย หลายทักษะ ความเป็นไปได้อีกเพียบ</p><div class="home-create-skills"><span>Design</span><span>Development</span><span>Marketing</span></div><div class="home-create-team"><div class="home-create-avatars"><span>คุณ</span><span>✦</span><span>＋</span></div><span>เติมทีมให้ไอเดียของคุณ</span></div></div>
+    </div>
+    <div class="home-create-caption"><span>↳</span> ชิ้นต่อไปในพอร์ต อาจเริ่มจากตรงนี้</div>
+  </div>
+</section>`
 document.querySelector('[data-shared-footer]').innerHTML = siteFooter()
 document.querySelector('.discovery-filters').addEventListener('click', e=>{
   const button=e.target.closest('[data-category]')
@@ -59,12 +100,11 @@ document.querySelector('.mobile-menu-button').addEventListener('click', e=>{
   e.currentTarget.setAttribute('aria-expanded',String(open))
 })
 document.querySelector('.js-open-login').addEventListener('click',()=>openLoginModal())
-document.querySelectorAll('.js-open-post').forEach(b=>b.addEventListener('click',()=>{location.href='/pages/post.html'}))
 if(location.hash==='#login')openLoginModal()
 bindProjectDetails()
 
 document.addEventListener('click',async event=>{
-  const link=event.target.closest('.main-nav a[href="/pages/post.html"],.start-project-link,.trending-section .soft-link,.home-works a[href],.refresh-dialog a[href^="/pages/team-detail"],.refresh-dialog a[href="/pages/find-team.html"]')
+  const link=event.target.closest('.main-nav a[href="/pages/post.html"],.start-project-link,.home-create-primary,.trending-section .soft-link,.home-works a[href],.refresh-dialog a[href^="/pages/team-detail"],.refresh-dialog a[href="/pages/find-team.html"]')
   if(!link)return
   event.preventDefault()
   const destination=new URL(link.href,location.origin)
