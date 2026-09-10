@@ -1,12 +1,13 @@
 import '../style.css'
 import '../refresh.css'
-import '../home-cta.css'
 import '../home-journey.css'
+import '../home-develop-sections.css'
 import { siteFooter } from '../components/shared.js'
 import { openLoginModal } from '../components/login-modal.js'
 import { supabase } from '../lib/supabase.js'
 import { designIcon } from '../components/design-assets.js'
 import { projects, categoryChips, projectCard, bindProjectDetails } from '../components/projects.js'
+import { setupHomeSpotlight } from '../components/home-spotlight.js'
 
 document.querySelector('[data-shared-header]').innerHTML = `
 <header class="site-header">
@@ -66,25 +67,44 @@ document.querySelector('main').innerHTML = `
     </ol>
   </div>
 </section>
-<section class="home-create page-container" aria-labelledby="home-create-title">
-  <div class="home-create-copy">
-    <p class="home-create-eyebrow"><span aria-hidden="true">✦</span> พื้นที่เล็ก ๆ สำหรับไอเดียใหญ่ ๆ</p>
-    <h2 id="home-create-title">มีไอเดียแล้ว?<br><span>มาเริ่มไปด้วยกัน</span></h2>
-    <p class="home-create-description">ไม่ต้องเก่งทุกอย่าง ก็เริ่มสร้างได้<br>แชร์สิ่งที่อยากทำ แล้วหาเพื่อนมาช่วยเติมทักษะที่ขาด</p>
-    <div class="home-create-actions">
-      <a class="button home-create-primary" href="/pages/post.html">เริ่มสร้างโปรเจกต์ <span aria-hidden="true">↗</span></a>
-      <a class="home-create-guide" href="#how-it-works">ดูวิธีเริ่มต้น <span aria-hidden="true">→</span></a>
+<section class="develop-home-featured page-container" id="spotlight" aria-labelledby="spotlight-title">
+  <div class="develop-section-heading">
+    <div>
+      <p class="eyebrow">กำลังเกิดขึ้นบน ShowKong</p>
+      <h2 id="spotlight-title">โปรเจกต์ที่กำลังหาเพื่อน</h2>
+      <p>เข้าร่วมตั้งแต่วันแรก เลือกจากปัญหาที่สนใจ และสร้างผลงานที่เล่าได้มากกว่าหนึ่งบรรทัดในเรซูเม่</p>
     </div>
-    <p class="home-create-note">เริ่มจากไอเดียสั้น ๆ แล้วค่อยต่อยอดไปด้วยกัน</p>
+    <a class="button button-neutral spotlight-login-link" href="/pages/explore-projects.html">ดูโปรเจกต์ทั้งหมด</a>
   </div>
-  <div class="home-create-visual" aria-hidden="true">
-    <div class="home-create-orbit"></div>
-    <div class="home-create-sticker">ไอเดีย + คนที่ใช่ = เป็นไปได้ <span>✦</span></div>
-    <div class="home-create-preview">
-      <div class="home-create-cover"><img src="/projects/greenloop.webp" alt="" width="960" height="600" loading="lazy"><span>จุดเริ่มต้นของสิ่งใหม่</span></div>
-      <div class="home-create-preview-copy"><small>YOUR NEXT PROJECT</small><h3>โปรเจกต์ใหม่ของคุณ</h3><p>หนึ่งไอเดีย หลายทักษะ ความเป็นไปได้อีกเพียบ</p><div class="home-create-skills"><span>Design</span><span>Development</span><span>Marketing</span></div><div class="home-create-team"><div class="home-create-avatars"><span>คุณ</span><span>✦</span><span>＋</span></div><span>เติมทีมให้ไอเดียของคุณ</span></div></div>
+  <div class="spotlight-carousel" data-project-carousel aria-label="โปรเจกต์แนะนำ" aria-roledescription="carousel" tabindex="0">
+    <p class="sr-only" data-carousel-status aria-live="polite">โปรเจกต์ที่ 1 จาก 3: SheetQuest</p>
+    <article class="spotlight-card" data-spotlight-card data-theme="purple">
+      <div class="spotlight-media"><span class="spotlight-media-glow" aria-hidden="true"></span><img data-spotlight-image src="/images/projects/sheetquest-preview.webp" alt="หน้าจอแดชบอร์ดภารกิจการเรียนของ SheetQuest" width="1376" height="768" loading="lazy"></div>
+      <div class="spotlight-content">
+        <button class="spotlight-save" type="button" data-spotlight-save aria-label="บันทึกโปรเจกต์ SheetQuest" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.6 4.4 13A5.2 5.2 0 0 1 11.8 5.6l.2.2.2-.2A5.2 5.2 0 0 1 19.6 13L12 20.6Z"/></svg></button>
+        <p class="spotlight-badge" data-spotlight-badge><i></i>ShowKong Spotlight · กำลังมาแรง</p>
+        <h3 data-spotlight-title>SheetQuest — เรียนให้เหมือนเล่นเกม</h3>
+        <p class="spotlight-hook" data-spotlight-hook>เปลี่ยนบทเรียนธรรมดา ให้กลายเป็นภารกิจที่นักเรียนอยากทำ</p>
+        <p class="spotlight-summary" data-spotlight-summary>เปลี่ยนบทเรียนและแบบฝึกหัดให้เป็นภารกิจที่สนุก มีเป้าหมาย และวัดความก้าวหน้าได้</p>
+        <div class="spotlight-tags" data-spotlight-tags aria-label="ทักษะที่เกี่ยวข้อง"><span>Education</span><span>UX/UI</span><span>Frontend</span></div>
+        <div class="spotlight-proof" data-spotlight-proof aria-label="ความสนใจและจำนวนสมาชิก"><span><strong>1.2K</strong> Views</span><span><strong>94</strong> Likes</span><span><strong>3/5</strong> คนในทีม</span></div>
+        <div class="spotlight-role"><span data-spotlight-role-label>เหลือ 1 ตำแหน่ง</span><strong data-spotlight-role>กำลังหา Marketing 1 คน</strong></div>
+        <div class="spotlight-actions"><a class="button button-primary spotlight-login-link" data-spotlight-detail href="/pages/explore-projects.html?project=sheetquest">ดูโปรเจกต์</a><a class="button button-neutral spotlight-login-link" data-spotlight-join href="/pages/team-detail.html?team=sheetquest">ขอเข้าร่วมทีม</a></div>
+      </div>
+    </article>
+    <div class="spotlight-controls">
+      <button class="spotlight-arrow" type="button" data-carousel-prev aria-label="ดูโปรเจกต์ก่อนหน้า"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+      <div class="spotlight-dots" role="group" aria-label="เลือกโปรเจกต์"><button class="is-active" type="button" data-carousel-dot="0" aria-label="ดู SheetQuest" aria-current="true"></button><button type="button" data-carousel-dot="1" aria-label="ดู GreenLoop"></button><button type="button" data-carousel-dot="2" aria-label="ดู SafeWalk"></button></div>
+      <button class="spotlight-arrow" type="button" data-carousel-next aria-label="ดูโปรเจกต์ถัดไป"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
     </div>
-    <div class="home-create-caption"><span>↳</span> ชิ้นต่อไปในพอร์ต อาจเริ่มจากตรงนี้</div>
+  </div>
+</section>
+<section class="home-project-cta page-container" aria-labelledby="home-project-cta-title">
+  <div class="home-project-cta-content">
+    <p class="home-project-cta-eyebrow">ถึงตาของไอเดียคุณแล้ว</p>
+    <h2 id="home-project-cta-title"><span>ไอเดียของคุณ อาจเป็นโปรเจกต์ต่อไป</span><span>บน ShowKong</span></h2>
+    <p class="home-project-cta-description">สร้างโปรเจกต์ บอกทักษะที่กำลังหา และพบเพื่อนร่วมทีมที่พร้อมเปลี่ยนไอเดียให้เป็นผลงานจริง</p>
+    <div class="home-project-cta-actions"><a class="button home-project-cta-primary" href="/pages/post.html">สร้างโปรเจกต์ของฉัน</a><a class="button home-project-cta-secondary" href="#how-it-works">ดูวิธีเริ่มต้น</a></div>
   </div>
 </section>`
 document.querySelector('[data-shared-footer]').innerHTML = siteFooter()
@@ -102,9 +122,10 @@ document.querySelector('.mobile-menu-button').addEventListener('click', e=>{
 document.querySelector('.js-open-login').addEventListener('click',()=>openLoginModal())
 if(location.hash==='#login')openLoginModal()
 bindProjectDetails()
+setupHomeSpotlight()
 
 document.addEventListener('click',async event=>{
-  const link=event.target.closest('.main-nav a[href="/pages/post.html"],.start-project-link,.home-create-primary,.trending-section .soft-link,.home-works a[href],.refresh-dialog a[href^="/pages/team-detail"],.refresh-dialog a[href="/pages/find-team.html"]')
+  const link=event.target.closest('.main-nav a[href="/pages/post.html"],.start-project-link,.home-project-cta-primary,.spotlight-login-link,.trending-section .soft-link,.home-works a[href],.refresh-dialog a[href^="/pages/team-detail"],.refresh-dialog a[href="/pages/find-team.html"]')
   if(!link)return
   event.preventDefault()
   const destination=new URL(link.href,location.origin)
