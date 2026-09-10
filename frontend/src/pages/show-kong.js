@@ -1,4 +1,3 @@
-import '../style.css'
 import { mountAuthenticatedShell } from '../components/shared.js'
 import { supabase } from '../lib/supabase.js'
 import { mountPrototype, mountDesignGallery } from '../components/prototype-sandbox.js'
