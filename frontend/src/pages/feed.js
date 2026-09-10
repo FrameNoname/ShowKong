@@ -15,37 +15,14 @@ const posts = [
   {id:'micro',type:'ไอเดียใหม่',author:'Pluem',initial:'P',meta:'เมื่อวาน · ธุรกิจและชุมชน',title:'ถ้านักศึกษาได้ทำ Micro-project ให้ร้านค้าใกล้มหาวิทยาลัยล่ะ?',body:'อยากทำพื้นที่ที่ร้านค้าลงโจทย์สั้น ๆ แบบออกแบบเมนู ทำคอนเทนต์ หรือวิจัยลูกค้า แล้วนักศึกษารวมทีมรับงานจริงได้',detailTitle:'กำลังมองหา',detail:'คนสาย Business 1 คน และ Developer 1 คน มาช่วย validate โมเดลรายได้',stats:'41 ถูกใจ · 15 ความคิดเห็น',tags:['MicroProject','LocalBusiness','Student'],actions:['สนใจไอเดียนี้','ชวนคุย']},
   {id:'sheetquest',type:'ความคืบหน้า',author:'SheetQuest',initial:'S',meta:'2 วันที่แล้ว · การศึกษา',title:'Milestone แรก: มีนักศึกษาทดลองใช้ครบ 186 คนแล้ว',body:'หลังปรับ onboarding เวอร์ชันล่าสุด อัตราทำแบบฝึกหัดแรกสำเร็จเพิ่มจาก 48% เป็น 71% ขอบคุณทุก Feedback จากชุมชน ShowKong',detailTitle:'หลักฐานความคืบหน้า',detail:'186 testers · Completion +23% · เตรียมเปิด Case Study ฉบับเต็ม',stats:'76 ถูกใจ · 9 ความคิดเห็น',tags:['EdTech','Milestone','CaseStudy'],actions:['ดู Case Study','ติดตาม']},
 ]
-
-// Load persistent user posts created from post page
-try {
-  const savedUserPosts = JSON.parse(localStorage.getItem('showkong_user_posts')) || []
-  savedUserPosts.forEach((up) => {
-    posts.unshift({
-      type: up.type || 'ไอเดียใหม่',
-      author: up.author || 'คุณ (Pluem)',
-      initial: up.initial || 'P',
-      meta: up.meta || 'เมื่อสักครู่ · ทั่วไป',
-      title: up.title,
-      body: up.body,
-      detailTitle: up.roles?.length ? 'ตำแหน่งที่กำลังหา' : up.tags ? 'ทักษะที่เกี่ยวข้อง' : 'รายละเอียดเพิ่มเติม',
-      detail: up.roles?.length ? up.roles.join(' · ') : up.tags || 'เปิดรับความคิดเห็นและคนที่สนใจร่วมพัฒนาโปรเจกต์นี้',
-      stats: up.stats || '0 สนใจ · 0 ความคิดเห็น',
-      actions: ['บันทึก', 'ดูโพสต์'],
-      accent: up.accent || 'purple',
-    })
-  })
-} catch {}
-
-const stream = document.querySelector('#postStream')
-const postModal = document.querySelector('#postModal')
-const successModal = document.querySelector('#successModal')
-const postForm = document.querySelector('#postForm')
-let activePostType = 'ไอเดียใหม่'
-
-function escapeHtml(value = '') {
-  return String(value).replace(/[&<>'"]/g, (character) => ({
-    '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;',
-  })[character])
+let filter='ทั้งหมด'
+let localPosts=readLocal(POSTS_KEY,[])
+let toggles=readLocal('showkong.feed-actions',{})
+document.querySelector('main').innerHTML=`
+<div class="feed-canvas"><section class="feed-toolbar"><h1>เลือกดูตามสิ่งที่อยากทำ</h1><div class="chip-row feed-filters" data-feed-filters>${[['ทั้งหมด','สำหรับคุณ'],['ไอเดียใหม่','ไอเดียใหม่'],['กำลังหาทีม','กำลังหาทีม'],['ขอ Feedback','ขอ Feedback'],['เปิดให้ทดลอง','เปิดให้ทดลอง'],['ความคืบหน้า','ความคืบหน้า']].map(([key,label],i)=>`<button class="chip ${i===0?'is-active':''}" type="button" data-filter="${key}" aria-pressed="${i===0}">${label}</button>`).join('')}</div></section>
+<div class="feed-columns"><div class="post-stream" id="postStream" aria-live="polite"></div><aside class="feed-sidebar"><article class="sidebar-card trending-card"><h3>หัวข้อกำลังมาแรง</h3>${[['EdTech',24],['LocalBusiness',18],['GreenTech',13],['UserResearch',11]].map(([tag,n])=>`<p><span>#${tag}</span><small>${n} โพสต์</small></p>`).join('')}</article></aside></div></div>`
+function allPosts(){
+  return [...localPosts.map(p=>({...p,author:'คุณ',initial:'P',meta:'โพสต์บนอุปกรณ์นี้ · '+(p.topic||'โปรเจกต์ใหม่'),body:p.description,detailTitle:'อัปเดตจากเจ้าของโปรเจกต์',detail:'เปิดรับความคิดเห็นและคนที่สนใจร่วมพัฒนาโปรเจกต์นี้',stats:'บันทึกบนอุปกรณ์นี้',tags:p.tags.split(/[,\s]+/).filter(Boolean).map(t=>t.replace(/^#/,'')),actions:['ดูโพสต์']})),...posts]
 }
 function postCard(p){
   return `<article class="feed-post" data-type="${escapeHtml(p.type)}"><div class="post-author"><span class="avatar">${p.initial}</span><div><strong>${escapeHtml(p.author)}</strong><span>${escapeHtml(p.meta)}</span></div><span class="post-type">${escapeHtml(p.type)}</span></div><h2>${escapeHtml(p.title)}</h2><p>${escapeHtml(p.body)}</p>${p.images?.length?`<div class="post-images">${p.images.map(img=>`<img src="${escapeHtml(img.data)}" alt="${escapeHtml(img.name)}">`).join('')}</div>`:''}<div class="post-detail"><strong>${escapeHtml(p.detailTitle)}</strong><span>${escapeHtml(p.detail)}</span></div><div class="post-tags">${p.tags.map(t=>`<span>#${escapeHtml(t)}</span>`).join('')}</div><div class="post-footer"><span>${escapeHtml(p.stats)}</span><div>${p.actions.map((action,i)=>{
