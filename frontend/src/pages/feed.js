@@ -22,10 +22,11 @@ document.querySelector('main').innerHTML=`
 <div class="feed-canvas"><section class="feed-toolbar"><h1>เลือกดูตามสิ่งที่อยากทำ</h1><div class="chip-row feed-filters" data-feed-filters>${[['ทั้งหมด','สำหรับคุณ'],['ไอเดียใหม่','ไอเดียใหม่'],['กำลังหาทีม','กำลังหาทีม'],['ขอ Feedback','ขอ Feedback'],['เปิดให้ทดลอง','เปิดให้ทดลอง'],['ความคืบหน้า','ความคืบหน้า']].map(([key,label],i)=>`<button class="chip ${i===0?'is-active':''}" type="button" data-filter="${key}" aria-pressed="${i===0}">${label}</button>`).join('')}</div></section>
 <div class="feed-columns"><div class="post-stream" id="postStream" aria-live="polite"></div><aside class="feed-sidebar"><article class="sidebar-card trending-card"><h3>หัวข้อกำลังมาแรง</h3>${[['EdTech',24],['LocalBusiness',18],['GreenTech',13],['UserResearch',11]].map(([tag,n])=>`<p><span>#${tag}</span><small>${n} โพสต์</small></p>`).join('')}</article></aside></div></div>`
 function allPosts(){
-  return [...localPosts.map(p=>({...p,author:'คุณ',initial:'P',meta:'โพสต์บนอุปกรณ์นี้ · '+(p.topic||'โปรเจกต์ใหม่'),body:p.description,detailTitle:'อัปเดตจากเจ้าของโปรเจกต์',detail:'เปิดรับความคิดเห็นและคนที่สนใจร่วมพัฒนาโปรเจกต์นี้',stats:'บันทึกบนอุปกรณ์นี้',tags:p.tags.split(/[,\s]+/).filter(Boolean).map(t=>t.replace(/^#/,'')),actions:['ดูโพสต์']})),...posts]
+  return [...localPosts.map(p=>({...p,isOwner:true,author:'คุณ',initial:'P',meta:'โพสต์บนอุปกรณ์นี้ · '+(p.topic||'โปรเจกต์ใหม่'),body:p.description,detailTitle:'อัปเดตจากเจ้าของโปรเจกต์',detail:'เปิดรับความคิดเห็นและคนที่สนใจร่วมพัฒนาโปรเจกต์นี้',stats:'บันทึกบนอุปกรณ์นี้',tags:p.tags.split(/[,\s]+/).filter(Boolean).map(t=>t.replace(/^#/,'')),actions:['ดูโพสต์']})),...posts]
 }
 function postCard(p){
-  return `<article class="feed-post" data-type="${escapeHtml(p.type)}"><div class="post-author"><span class="avatar">${p.initial}</span><div><strong>${escapeHtml(p.author)}</strong><span>${escapeHtml(p.meta)}</span></div><span class="post-type">${escapeHtml(p.type)}</span></div><h2>${escapeHtml(p.title)}</h2><p>${escapeHtml(p.body)}</p>${p.images?.length?`<div class="post-images">${p.images.map(img=>`<img src="${escapeHtml(img.data)}" alt="${escapeHtml(img.name)}">`).join('')}</div>`:''}<div class="post-detail"><strong>${escapeHtml(p.detailTitle)}</strong><span>${escapeHtml(p.detail)}</span></div><div class="post-tags">${p.tags.map(t=>`<span>#${escapeHtml(t)}</span>`).join('')}</div><div class="post-footer"><span>${escapeHtml(p.stats)}</span><div>${p.actions.map((action,i)=>{
+  const ownerActions=p.isOwner?`<div class="ml-1 flex gap-1.5"><button class="rounded-lg border-0 bg-[#f4f2fa] px-[9px] py-1.5 text-xs font-semibold text-[#625f75] transition-colors hover:bg-[#ece8ff] hover:text-[#5948ef]" type="button" data-owner-action="edit" data-post="${escapeHtml(p.id)}" aria-label="แก้ไขโพสต์ ${escapeHtml(p.title)}">แก้ไข</button><button class="rounded-lg border-0 bg-[#f4f2fa] px-[9px] py-1.5 text-xs font-semibold text-[#625f75] transition-colors hover:bg-[#fff0ee] hover:text-[#b42318]" type="button" data-owner-action="delete" data-post="${escapeHtml(p.id)}" aria-label="ลบโพสต์ ${escapeHtml(p.title)}">ลบ</button></div>`:''
+  return `<article class="feed-post" id="post-${encodeURIComponent(p.id)}" data-type="${escapeHtml(p.type)}"><div class="post-author"><span class="avatar">${p.initial}</span><div><strong>${escapeHtml(p.author)}</strong><span>${escapeHtml(p.meta)}</span></div><span class="post-type">${escapeHtml(p.type)}</span>${ownerActions}</div><h2>${escapeHtml(p.title)}</h2><p>${escapeHtml(p.body)}</p>${p.images?.length?`<div class="post-images">${p.images.map(img=>`<img src="${escapeHtml(img.data)}" alt="${escapeHtml(img.name)}">`).join('')}</div>`:''}<div class="post-detail"><strong>${escapeHtml(p.detailTitle)}</strong><span>${escapeHtml(p.detail)}</span></div><div class="post-tags">${p.tags.map(t=>`<span>#${escapeHtml(t)}</span>`).join('')}</div><div class="post-footer"><span>${escapeHtml(p.stats)}</span><div>${p.actions.map((action,i)=>{
     const primary=i===p.actions.length-1
     if(action==='ดูประวัติทีม')return `<a class="button button-small button-neutral" href="/pages/team-detail.html?team=${p.team}">${action}</a>`
     const isToggle=['ติดตาม','สนใจไอเดียนี้'].includes(action)
@@ -45,6 +46,22 @@ function openComposer(){
   },()=>dialog.close())
   dialog.addEventListener('close',()=>{dispose();if(location.hash==='#post-project')history.replaceState(null,'',location.pathname)},{once:true})
 }
+function openEditPost(post){
+  const dialog=openDialog('แก้ไขโพสต์','<p class="dialog-description">ปรับรายละเอียดโพสต์ของคุณ แล้วกดบันทึกการแก้ไข</p>'+composerForm())
+  const dispose=bindComposer(dialog,()=>{
+    dialog.close();localPosts=readLocal(POSTS_KEY,[]);render();toast('บันทึกการแก้ไขแล้ว')
+  },()=>dialog.close(),post)
+  dialog.addEventListener('close',dispose,{once:true})
+}
+function openDeletePost(post){
+  const dialog=openDialog('ลบโพสต์',`<p class="dialog-description">ต้องการลบ “${escapeHtml(post.title)}” ใช่หรือไม่? เมื่อลบแล้วจะนำกลับคืนมาไม่ได้</p><div class="modal-footer"><span></span><div><button class="button button-neutral" type="button" data-cancel-delete>ยกเลิก</button><button class="inline-flex min-h-10 items-center justify-center rounded-lg border-0 bg-[#c9362b] px-5 py-[9px] text-sm font-semibold text-white transition-colors hover:bg-[#aa2e25]" type="button" data-confirm-delete>ลบโพสต์</button></div></div>`)
+  dialog.querySelector('[data-cancel-delete]').addEventListener('click',()=>dialog.close())
+  dialog.querySelector('[data-confirm-delete]').addEventListener('click',()=>{
+    const nextPosts=localPosts.filter(item=>item.id!==post.id)
+    if(!saveLocal(POSTS_KEY,nextPosts)){toast('ลบโพสต์ไม่ได้ กรุณาลองใหม่');return}
+    localPosts=nextPosts;dialog.close();render();toast('ลบโพสต์แล้ว')
+  })
+}
 document.querySelector('.header-actions a[href="/pages/post.html"]').addEventListener('click',e=>{e.preventDefault();openComposer()})
 document.querySelector('[data-feed-filters]').addEventListener('click',e=>{
   const b=e.target.closest('[data-filter]');if(!b)return
@@ -53,6 +70,14 @@ document.querySelector('[data-feed-filters]').addEventListener('click',e=>{
   render()
 })
 document.querySelector('#postStream').addEventListener('click',e=>{
+  const ownerAction=e.target.closest('[data-owner-action]')
+  if(ownerAction){
+    const post=localPosts.find(item=>item.id===ownerAction.dataset.post)
+    if(!post)return
+    if(ownerAction.dataset.ownerAction==='edit')openEditPost(post)
+    else if(ownerAction.dataset.ownerAction==='delete')openDeletePost(post)
+    return
+  }
   const b=e.target.closest('[data-action]');if(!b)return
   const p=allPosts().find(p=>p.id===b.dataset.post)
   const action=b.dataset.action
@@ -75,3 +100,10 @@ document.querySelector('#postStream').addEventListener('click',e=>{
 })
 render()
 if(location.hash==='#post-project')openComposer()
+else if(location.hash.startsWith('#post-'))requestAnimationFrame(()=>{
+  const target=document.getElementById(location.hash.slice(1))
+  if(!target)return
+  target.scrollIntoView({block:'center'})
+  target.classList.add('ring-2','ring-[#6d5dfb]','ring-offset-4')
+  setTimeout(()=>target.classList.remove('ring-2','ring-[#6d5dfb]','ring-offset-4'),2400)
+})

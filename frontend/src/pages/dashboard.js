@@ -1,5 +1,6 @@
-import { mountRefresh, readLocal, saveLocal, openDialog, toast } from '../components/refresh.js'
+import { mountRefresh, readLocal, saveLocal, openDialog, toast, escapeHtml } from '../components/refresh.js'
 import { designIcon } from '../components/design-assets.js'
+import { composerForm, bindComposer, POSTS_KEY } from '../components/composer.js'
 
 mountRefresh('dashboard')
 document.querySelector('[data-shared-footer]').remove()
@@ -21,6 +22,7 @@ const myProjects = [
 ]
 let state = readLocal('showkong.dashboard-demo', { accepted:[], read:[] })
 if(!Array.isArray(state.accepted)||!Array.isArray(state.read))state={accepted:[],read:[]}
+let localPosts = readLocal(POSTS_KEY, [])
 function requestRow(r) {
   return `<div class="request-row"><span class="avatar">${r.name[0]}</span><div class="request-copy"><strong>${r.name}</strong><small>${r.role}</small></div><button class="button button-small button-primary" type="button" data-accept="${r.id}" aria-label="รับ ${r.name} เข้าทีม">รับ</button><button class="button button-small button-neutral" type="button" data-request="${r.id}" aria-label="ดูคำขอของ ${r.name}">ดู</button></div>`
 }
@@ -29,6 +31,28 @@ function feedbackRow(f) {
 }
 function deadlines() {
   return `<div class="deadline-row"><span class="activity-icon">${designIcon('dashboard/imgCalendar')}</span><div><strong>SheetQuest · Demo รอบ 2</strong><small>18 ก.ย. 2026</small></div></div><div class="deadline-row"><span class="activity-icon">${designIcon('dashboard/imgCalendar1')}</span><div><strong>SafeWalk · สรุปผลทดสอบ</strong><small>22 ก.ย. 2026</small></div></div>`
+}
+function myPostRows() {
+  if(!localPosts.length)return `<div class="rounded-2xl border border-dashed border-[#cbc6df] bg-[#faf9fd] px-5 py-8 text-center"><h3 class="text-lg font-semibold text-[#191629]">ยังไม่มีโพสต์ของคุณ</h3><p class="mt-2 text-sm text-[#625f75]">สร้างโพสต์แรก แล้วกลับมาจัดการทั้งหมดได้จากหน้านี้</p><a class="button button-primary mt-4" href="/pages/post.html">สร้างโพสต์</a></div>`
+  return `<div class="grid gap-3">${localPosts.map(post=>{
+    const tags=String(post.tags||'').split(/[,\s]+/).filter(Boolean).map(tag=>tag.replace(/^#/,''))
+    const createdAt=post.createdAt&&Number.isFinite(new Date(post.createdAt).getTime())?new Intl.DateTimeFormat('th-TH',{dateStyle:'medium'}).format(new Date(post.createdAt)):'บันทึกบนอุปกรณ์นี้'
+    return `<article class="rounded-2xl border border-[#e3e0ed] bg-white p-5 shadow-[0_4px_16px_rgba(23,21,43,0.04)]" data-dashboard-post="${escapeHtml(post.id)}"><div class="flex flex-wrap items-center gap-2"><span class="rounded-full bg-[#f1eeff] px-3 py-1 text-xs font-semibold text-[#5948ef]">${escapeHtml(post.type||'โพสต์')}</span><time class="text-xs text-[#777287]">${escapeHtml(createdAt)}</time></div><h3 class="mt-3 text-lg font-semibold text-[#191629]">${escapeHtml(post.title)}</h3><p class="mt-1.5 text-sm leading-6 text-[#625f75]">${escapeHtml(post.description)}</p>${tags.length?`<div class="mt-3 flex flex-wrap gap-1.5">${tags.map(tag=>`<span class="rounded-full bg-[#f7f5fc] px-2.5 py-1 text-xs text-[#625f75]">#${escapeHtml(tag)}</span>`).join('')}</div>`:''}<div class="mt-4 flex flex-wrap justify-end gap-2 border-t border-[#efedf5] pt-4"><a class="button button-small button-neutral" href="/pages/feed.html#post-${encodeURIComponent(post.id)}">ดูใน Feed</a><button class="button button-small button-neutral" type="button" data-edit-my-post="${escapeHtml(post.id)}">แก้ไข</button><button class="rounded-lg border border-[#f0c7c3] bg-[#fff7f6] px-4 py-2 text-sm font-semibold text-[#b42318] transition-colors hover:bg-[#fff0ee]" type="button" data-delete-my-post="${escapeHtml(post.id)}">ลบ</button></div></article>`
+  }).join('')}</div>`
+}
+function openEditPost(post) {
+  const dialog=openDialog('แก้ไขโพสต์','<p class="dialog-description">แก้รายละเอียดโพสต์ของคุณได้จากที่นี่</p>'+composerForm())
+  const dispose=bindComposer(dialog,()=>{dialog.close();localPosts=readLocal(POSTS_KEY,[]);render();toast('บันทึกการแก้ไขแล้ว')},()=>dialog.close(),post)
+  dialog.addEventListener('close',dispose,{once:true})
+}
+function openDeletePost(post) {
+  const dialog=openDialog('ลบโพสต์',`<p class="dialog-description">ต้องการลบ “${escapeHtml(post.title)}” ใช่หรือไม่? เมื่อลบแล้วจะนำกลับคืนมาไม่ได้</p><div class="modal-footer"><span></span><div><button class="button button-neutral" type="button" data-cancel-delete>ยกเลิก</button><button class="inline-flex min-h-10 items-center justify-center rounded-lg border-0 bg-[#c9362b] px-5 py-[9px] text-sm font-semibold text-white transition-colors hover:bg-[#aa2e25]" type="button" data-confirm-delete>ลบโพสต์</button></div></div>`)
+  dialog.querySelector('[data-cancel-delete]').addEventListener('click',()=>dialog.close())
+  dialog.querySelector('[data-confirm-delete]').addEventListener('click',()=>{
+    const nextPosts=localPosts.filter(item=>item.id!==post.id)
+    if(!saveLocal(POSTS_KEY,nextPosts)){toast('ลบโพสต์ไม่ได้ กรุณาลองใหม่');return}
+    localPosts=nextPosts;dialog.close();render();toast('ลบโพสต์แล้ว')
+  })
 }
 function render() {
   const pending = requests.filter(r=>!state.accepted.includes(r.id))
@@ -42,6 +66,7 @@ function render() {
     ['Deadlines','2','กำหนดส่งใกล้ถึง','deadlines'],
   ].map(([icon,count,label,key])=>`<button class="stat-card" type="button" data-view="${key}"><span class="stat-icon">${designIcon('dashboard/imgIcon'+icon)}</span><strong>${count}</strong><span>${label}</span></button>`).join('')}</section>
   <div class="dashboard-columns"><div class="dashboard-left"><section class="dashboard-panel my-projects" id="myProjects"><div class="section-heading-row"><h2>โปรเจกต์ของฉัน</h2><button class="text-link" data-view="projects" type="button">ดูทั้งหมด →</button></div>${myProjects.map((p,i)=>`<article class="dashboard-project"><div class="dashboard-cover ${i?'alt':''}"><span>กำลังทำ</span></div><div><h3>${p.name} — ${p.title}</h3><p>${p.description}</p><small>${p.meta}</small><div class="project-progress-row"><progress value="${p.progress}" max="100" aria-label="ความคืบหน้า ${p.name}">${p.progress}%</progress><span>${p.progress}%</span><button class="button button-small button-neutral" type="button" data-manage="${p.name}">จัดการโปรเจกต์</button></div></div></article>`).join('')}</section>
+  <section class="dashboard-panel" id="myPosts"><div class="section-heading-row"><div><h2>โพสต์ของฉัน</h2><p class="mt-1 text-sm text-[#777287]">จัดการโพสต์ทั้งหมดได้ แม้โพสต์จะเลื่อนลงไปจากหน้า Feed แล้ว</p></div><a class="text-link" href="/pages/post.html">สร้างโพสต์ใหม่ →</a></div>${myPostRows()}</section>
   <section class="dashboard-panel"><div class="section-heading-row"><h2>กิจกรรมล่าสุด</h2><button class="text-link" type="button" data-view="activity">ทั้งหมด</button></div>${[
     ['imgIcon','Mew อัปเดตความคืบหน้าใน SheetQuest','Prototype พร้อมทดสอบรอบที่ 2','2 ชม.'],
     ['imgIconFeedback','Nan แสดงความคิดเห็นใน SafeWalk','ขอให้เพิ่มจุดแจ้งเหตุบริเวณหอพัก','5 ชม.'],
@@ -50,6 +75,18 @@ function render() {
   <aside class="dashboard-panel action-center"><h2>ต้องจัดการ</h2><div class="action-summary">${designIcon('dashboard/imgIcon2')}<strong>มี ${pending.length+unread.length+2} รายการที่รอคุณอยู่</strong></div><section class="action-section"><h3>คำขอเข้าทีม</h3>${pending.slice(0,2).map(requestRow).join('')||'<p class="sample-note">ตอบรับคำขอทั้งหมดแล้ว</p>'}</section><section class="action-section"><h3>Feedback ที่ยังไม่ได้อ่าน</h3>${unread.slice(0,2).map(feedbackRow).join('')||'<p class="sample-note">อ่าน Feedback ครบแล้ว</p>'}</section><section class="action-section"><h3>กำหนดส่งใกล้ถึง</h3>${deadlines()}</section><button class="button button-neutral full-width" type="button" data-view="all">ดูงานทั้งหมด</button></aside></div><p class="sample-note">ข้อมูลตัวอย่างตามดีไซน์ · การตอบรับและการอ่านบันทึกบนอุปกรณ์นี้</p></div>`
 }
 document.addEventListener('click',e=>{
+  const editPost=e.target.closest('[data-edit-my-post]')
+  if(editPost){
+    const post=localPosts.find(item=>item.id===editPost.dataset.editMyPost)
+    if(post)openEditPost(post)
+    return
+  }
+  const deletePost=e.target.closest('[data-delete-my-post]')
+  if(deletePost){
+    const post=localPosts.find(item=>item.id===deletePost.dataset.deleteMyPost)
+    if(post)openDeletePost(post)
+    return
+  }
   const accept=e.target.closest('[data-accept]')
   if(accept) {
     const request=requests.find(r=>r.id===accept.dataset.accept)
@@ -91,6 +128,7 @@ document.addEventListener('click',e=>{
   const pending=requests.filter(r=>!state.accepted.includes(r.id))
   const unread=feedback.filter(f=>!state.read.includes(f.id))
   if(key==='projects'){document.querySelector('#myProjects').scrollIntoView({behavior:'smooth'});return}
+  if(key==='posts'){document.querySelector('#myPosts').scrollIntoView({behavior:'smooth'});return}
   if(key==='activity'){openDialog('กิจกรรมทั้งหมด',document.querySelector('.dashboard-left > section:last-child').innerHTML.replace(/<button[\s\S]*?<\/button>/,''));return}
   const content = (['requests','all'].includes(key)?'<h3>คำขอเข้าทีม</h3>'+(pending.map(requestRow).join('')||'<p class="dialog-description">ไม่มีคำขอค้างอยู่</p>'):'')+
     (['feedback','all'].includes(key)?'<h3 class="dialog-description">Feedback</h3>'+(unread.map(feedbackRow).join('')||'<p class="dialog-description">อ่านครบแล้ว</p>'):'')+
