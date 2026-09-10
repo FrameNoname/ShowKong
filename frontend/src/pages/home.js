@@ -3,6 +3,10 @@ import '../style.css'
 import { homeProjectCta, siteFooter } from '../components/shared.js'
 import { supabase } from '../lib/supabase.js'
 import { openLoginModal } from '../components/login-modal.js'
+import { supabase } from '../lib/supabase.js'
+import { designIcon } from '../components/design-assets.js'
+import { projects, categoryChips, projectCard, bindProjectDetails } from '../components/projects.js'
+import { setupHomeSpotlight } from '../components/home-spotlight.js'
 
 const ctaSlot = document.querySelector('[data-shared-cta]')
 const footerSlot = document.querySelector('[data-shared-footer]')
@@ -22,6 +26,10 @@ document.querySelectorAll('.js-open-login, [href="/pages/login.html"], [href="./
     openLoginModal()
   })
 })
+document.querySelector('.js-open-login').addEventListener('click',()=>openLoginModal())
+if(location.hash==='#login')openLoginModal()
+bindProjectDetails()
+setupHomeSpotlight()
 
 const menuButton = document.querySelector('.mobile-menu-button')
 
@@ -31,9 +39,7 @@ menuButton?.addEventListener('click', () => {
   menuButton.setAttribute('aria-expanded', String(isOpen))
 })
 
-async function redirectSignedInUser() {
-  if (!supabase) return
-
+if (supabase) {
   const { data, error } = await supabase.auth.getSession()
   if (!error && data.session) window.location.replace('/pages/feed.html')
 }
