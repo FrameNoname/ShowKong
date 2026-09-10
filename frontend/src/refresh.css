@@ -14,7 +14,7 @@
 .refresh-page .mobile-menu-button { display: none; margin-left: 0; }
 .refresh-page .site-header .header-actions { order: 0; }
 .refresh-page .header-actions .button { display: inline-flex; }
-.refresh-page .nav-link { padding-inline: 14px; font-size: 14px; white-space: nowrap; }
+.refresh-page .nav-link { padding-inline: 14px; font-size: 16px; white-space: nowrap; }
 .refresh-page .header-actions { flex-shrink: 0; }
 .refresh-page .avatar-active { outline: 3px solid #b5a8ff; outline-offset: 3px; }
 .refresh-page .mobile-dashboard-link { display: none; }
@@ -340,7 +340,7 @@
   .refresh-page .trending-section { min-height: 680px; display: flex; align-items: center; }
 }
 @media (max-width:1199px) {
-  .refresh-page .main-nav { gap: 0; }.refresh-page .nav-link { padding-inline: 10px; font-size: 13px; }
+  .refresh-page .main-nav { gap: 0; }.refresh-page .nav-link { padding-inline: 10px; font-size: 16px; }
   .refresh-page .discovery-hero-inner { grid-template-columns: minmax(0,1fr) 400px; gap: 0; }.refresh-page .collaboration-visual { transform: scale(.78); transform-origin: left center; }
   .refresh-page .discovery-hero-copy h1 { font-size: 40px; }
   .refresh-page .weekly-project { grid-template-columns: minmax(0,1fr) 300px; gap: 36px; padding-block: 48px 84px; }.refresh-page .weekly-project h2 { font-size: 28px; }
