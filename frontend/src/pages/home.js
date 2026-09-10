@@ -19,19 +19,13 @@ document.querySelector('[data-shared-header]').innerHTML = `
 document.querySelector('main').innerHTML = `
 <section class="discovery-hero">
   ${designIcon('home/imgHeroAmbientGlow', 'hero-ambient')}
-  <div class="page-container discovery-hero-inner">
+  <div class="page-container discovery-hero-inner home-discovery-hero-inner">
     <div class="discovery-hero-copy">
       <p class="eyebrow">SHOWKONG — พื้นที่ของนักสร้างรุ่นใหม่</p>
       <h1>เริ่มสร้างโปรเจกต์กับเรา</h1>
       <p>ค้นหาโปรเจกต์ที่สนใจ เจอเพื่อนร่วมทีม และช่วยกันเปลี่ยนไอเดียให้เป็นผลงานจริง</p>
       <form action="/pages/explore-projects.html" class="hero-search"><input name="q" aria-label="ค้นหาโปรเจกต์ ทักษะ หรือทีม" type="search" placeholder="ค้นหาโปรเจกต์ ทักษะ หรือทีมที่สนใจ"><button type="submit" aria-label="ค้นหา">${designIcon('home/imgSearchIcon')}</button></form>
       <a class="start-project-link" href="/pages/post.html">หรือเริ่มสร้างโปรเจกต์ของคุณ →</a>
-    </div>
-    <div class="collaboration-visual" aria-label="ตัวอย่างโปรเจกต์ SheetQuest">
-      <div class="collaboration-background has-image"><img class="collaboration-background-image" src="/projects/sheetquest.webp" alt="" width="960" height="600">${designIcon('home/imgVisualGlow', 'visual-ambient')}</div>
-      <article class="collaboration-card"><span class="status-pill">${designIcon('home/imgStatusDot')}เปิดรับสมาชิกใหม่</span><h2>SheetQuest</h2><p>เปลี่ยนไฟล์เรียนให้เป็นเกม พร้อมสร้างแบบทดสอบและแฟลชการ์ดด้วย AI</p><div class="mini-tags"><span>EdTech</span><span>AI</span><span>Gamification</span></div><div class="collaboration-members"><span>สมาชิกปัจจุบัน 3 คน</span>${designIcon('home/imgTeamAvatars', 'team-avatars')}</div></article>
-      <div class="collaboration-proof">${designIcon('home/imgProofIcon')}พร้อมทดลองกับผู้ใช้</div>
-      <div class="collaboration-role"><small>ตำแหน่งที่เปิดรับ</small><strong>UX Researcher</strong></div>
     </div>
   </div>
 </section>
