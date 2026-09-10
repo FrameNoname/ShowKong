@@ -1,8 +1,8 @@
-import { mountRefresh } from '../components/refresh.js'
-import { openJoinRequest } from '../components/join-request.js'
+import '../style.css'
+import { mountAuthenticatedShell } from '../components/shared.js'
 import { supabase } from '../lib/supabase.js'
 
-mountRefresh('teams')
+mountAuthenticatedShell('teams')
 
 if (supabase) {
   const { data } = await supabase.auth.getSession()
@@ -96,10 +96,14 @@ setText('detailOpenRole', `เปิดรับ ${team.role} ${team.open} ค�
 setText('detailAvailability', team.availability)
 setText('timelineTitle', `Timeline ของ ${team.name}`)
 setText('detailEvidence', team.evidence)
+setText('detailReview', team.review)
 setText('memberCount', team.members.length)
 setText('detailWorkingStyle', team.workingStyle)
 setText('sidebarRole', `${team.role} · ${team.open} คน`)
 setText('sidebarRoleDescription', team.roleDescription)
+setText('detailJoinTitle', `ขอ Join ทีม ${team.name}`)
+setText('detailJoinSummary', `${team.name} · ${team.role}`)
+setText('detailJoinMeta', `ตรงกับคุณ ${team.match}% · ${team.availability.replace('ประมาณ ', '')}`)
 
 document.querySelector('#detailTags').innerHTML = team.tags.map((tag) => `<span class="chip is-active">${escapeHtml(tag)}</span>`).join('')
 document.querySelector('#sidebarSkills').innerHTML = team.roleSkills.map((skill) => `<span class="chip">${escapeHtml(skill)}</span>`).join('')
@@ -111,6 +115,40 @@ document.querySelector('#detailMembers').innerHTML = team.members.map(([name, ro
   </div>
 `).join('')
 
-document.querySelectorAll('.js-detail-join').forEach(button => {
-  button.addEventListener('click', () => openJoinRequest(team.name, team.role))
+const joinModal = document.querySelector('#detailJoinModal')
+const joinSuccess = document.querySelector('#detailJoinSuccess')
+
+function setJoinOpen(isOpen) {
+  joinModal.hidden = !isOpen
+  document.body.classList.toggle('modal-open', isOpen)
+  if (isOpen) setTimeout(() => joinModal.querySelector('input')?.focus(), 20)
+}
+
+document.querySelectorAll('.js-detail-join').forEach((button) => button.addEventListener('click', () => setJoinOpen(true)))
+document.querySelectorAll('#closeDetailJoin, #cancelDetailJoin').forEach((button) => button.addEventListener('click', () => setJoinOpen(false)))
+joinModal.addEventListener('click', (event) => { if (event.target === joinModal) setJoinOpen(false) })
+document.querySelector('#detailJoinForm').addEventListener('submit', (event) => {
+  event.preventDefault()
+  event.currentTarget.reset()
+  setJoinOpen(false)
+  joinSuccess.hidden = false
+  document.body.classList.add('modal-open')
+})
+document.querySelector('#closeDetailJoinSuccess').addEventListener('click', () => {
+  joinSuccess.hidden = true
+  document.body.classList.remove('modal-open')
+})
+
+document.querySelectorAll('.js-open-post').forEach((button) => {
+  button.addEventListener('click', () => { window.location.href = '/pages/feed.html#post-project' })
+})
+
+document.addEventListener('keydown', (event) => {
+  if (event.key !== 'Escape') return
+  if (!joinSuccess.hidden) {
+    joinSuccess.hidden = true
+    document.body.classList.remove('modal-open')
+  } else if (!joinModal.hidden) {
+    setJoinOpen(false)
+  }
 })
