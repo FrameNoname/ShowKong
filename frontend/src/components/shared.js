@@ -72,6 +72,26 @@ export function communityCta() {
   `
 }
 
+// Home-only CTA. The shared communityCta above remains unchanged for authenticated pages.
+export function homeProjectCta() {
+  return `
+    <section class="home-project-cta page-container" aria-labelledby="home-project-cta-title">
+      <div class="home-project-cta__content">
+        <p class="home-project-cta__eyebrow">ถึงตาของไอเดียคุณแล้ว</p>
+        <h2 id="home-project-cta-title">
+          <span>ไอเดียของคุณ อาจเป็นโปรเจกต์ต่อไป</span>
+          <span>บน ShowKong</span>
+        </h2>
+        <p class="home-project-cta__description">สร้างโปรเจกต์ บอกทักษะที่กำลังหา และพบเพื่อนร่วมทีมที่พร้อมเปลี่ยนไอเดียให้เป็นผลงานจริง</p>
+        <div class="home-project-cta__actions">
+          <button class="button home-project-cta__primary js-open-post" type="button">สร้างโปรเจกต์ของฉัน</button>
+          <a class="button home-project-cta__secondary" href="#paths">ดูวิธีเริ่มต้น</a>
+        </div>
+      </div>
+    </section>
+  `
+}
+
 export function mountAuthenticatedShell(activePage) {
   const header = document.querySelector('[data-shared-header]')
   const footer = document.querySelector('[data-shared-footer]')
@@ -90,3 +110,4 @@ export function mountAuthenticatedShell(activePage) {
 }
 
 export { pagePaths }
+  
