@@ -14,7 +14,7 @@ export function authenticatedHeader(activePage = '') {
     ['feed', 'Feed'],
     ['explore', 'สำรวจโปรเจกต์'],
     ['teams', 'หาทีม'],
-    ['showKong', 'ShowKong'],
+    ['showKong', 'โชว์ของ'],
     ['challenges', 'ชาเลนจ์'],
   ]
 
@@ -30,7 +30,7 @@ export function authenticatedHeader(activePage = '') {
         `).join('')}
       </nav>
       <div class="header-actions">
-        <a class="button button-primary" href="${pagePaths.post}">โพสต์โปรเจกต์</a>
+        <a class="button button-primary" href="${pagePaths.post}">โพสต์</a>
         <button class="avatar avatar-sm" type="button" aria-label="เปิดโปรไฟล์ของ Pluem">P</button>
       </div>
       <button class="mobile-menu-button" type="button" aria-label="เปิดเมนู" aria-expanded="false">เมนู</button>
@@ -49,7 +49,7 @@ export function siteFooter() {
         <nav aria-label="เมนูท้ายเว็บไซต์">
           <a href="${pagePaths.explore}">สำรวจโปรเจกต์</a>
           <a href="${pagePaths.teams}">หาทีม</a>
-          <a href="${pagePaths.showKong}">ShowKong (โชว์ผลงาน)</a>
+          <a href="${pagePaths.showKong}">โชว์ของ</a>
           <a href="${pagePaths.challenges}">ชาเลนจ์</a>
           <a href="#about">เกี่ยวกับเรา</a>
         </nav>
@@ -113,4 +113,3 @@ export function mountAuthenticatedShell(activePage) {
 }
 
 export { pagePaths }
-  
