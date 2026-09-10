@@ -109,12 +109,123 @@
   .preview-card { @apply min-h-[285px] rounded-2xl border border-line bg-white p-6; }
   .preview-card h3 { @apply mt-5; }
   .preview-card > span:last-child { @apply mt-5 block text-sm text-muted; }
+  .spotlight-carousel { @apply mt-10; }
+  .spotlight-carousel:focus { outline: none; }
+  .spotlight-carousel:focus-visible .spotlight-card { outline: 3px solid rgb(109 93 251 / 0.22); outline-offset: 3px; }
+  .spotlight-card {
+    --spotlight-accent: #6d5dfb;
+    --spotlight-soft: #f1eeff;
+    @apply grid min-h-[492px] overflow-hidden rounded-3xl border border-[#ded9f4] bg-white;
+    grid-template-columns: minmax(0, 55fr) minmax(390px, 45fr);
+    box-shadow: 0 24px 60px rgb(37 23 99 / 0.1);
+  }
+  .spotlight-card[data-theme="green"] { --spotlight-accent: #229b69; --spotlight-soft: #eaf8f1; }
+  .spotlight-card[data-theme="teal"] { --spotlight-accent: #14969b; --spotlight-soft: #e7f8f8; }
+.spotlight-media {
+  @apply relative flex min-w-0 items-center overflow-hidden p-8;
+  background: radial-gradient(
+    ellipse at center,
+    #9b8cf7 0%,
+    #6d5dfb 48%,
+    #3d2b8f 72%,
+    #171033 100%
+  );
+}
+
+/* GreenLoop */
+.spotlight-card[data-theme="green"] .spotlight-media {
+  background: radial-gradient(
+    ellipse at center,
+    #63c99a 0%,
+    #39866f 48%,
+    #285b59 72%,
+    #15162f 100%
+  );
+}
+
+/* SafeWalk */
+.spotlight-card[data-theme="teal"] .spotlight-media {
+  background: radial-gradient(
+    ellipse at center,
+    #65c8d0 0%,
+    #347d91 48%,
+    #285070 72%,
+    #14162f 100%
+  );
+}
+  .spotlight-media-glow {
+    @apply pointer-events-none absolute -left-20 -top-28 size-80 rounded-full;
+    background: radial-gradient(circle, rgb(255 255 255 / 0.42), transparent 68%);
+  }
+  .spotlight-media img {
+    @apply relative z-[1] w-full rounded-2xl border border-white/30 object-cover;
+    aspect-ratio: 1376 / 768;
+    box-shadow: 0 28px 55px rgb(10 8 35 / 0.45);  }
+  .spotlight-content { @apply relative flex min-w-0 flex-col items-start p-9; }
+  .spotlight-save {
+    @apply absolute right-6 top-6 grid size-10 place-items-center rounded-full border border-line bg-white text-muted transition;
+  }
+  .spotlight-save:hover { @apply border-[#c8c2e3] bg-brand-soft text-brand; }
+  .spotlight-save.is-saved { color: var(--spotlight-accent); background: var(--spotlight-soft); border-color: color-mix(in srgb, var(--spotlight-accent) 30%, white); }
+  .spotlight-save svg { @apply size-5; fill: transparent; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.8; }
+  .spotlight-save.is-saved svg { fill: currentColor; }
+  .spotlight-badge {
+    @apply inline-flex items-center gap-2 rounded-full px-3 py-2 text-[13px]/5 font-semibold;
+    max-width: calc(100% - 52px);
+    color: var(--spotlight-accent);
+    background: var(--spotlight-soft);
+  }
+  .spotlight-badge i { @apply size-2 shrink-0 rounded-full; background: var(--spotlight-accent); }
+  .spotlight-content h3 { @apply mt-5 text-[30px]/10 font-semibold tracking-[-0.5px]; }
+  .spotlight-hook { @apply mt-3 text-lg/7 font-semibold text-[#302b53]; }
+  .spotlight-summary { @apply mt-2 text-[15px]/6 text-muted; }
+  .spotlight-tags { @apply mt-5 flex flex-wrap gap-2; }
+  .spotlight-tags span { @apply rounded-full border border-line bg-page px-3 py-1.5 text-xs/5 font-medium text-muted; }
+  .spotlight-proof { @apply mt-5 grid w-full grid-cols-3 gap-2 border-y border-line py-4 text-[13px]/5 text-muted; }
+  .spotlight-proof span { @apply flex flex-col; }
+  .spotlight-proof strong { @apply text-base/6 font-semibold text-ink; }
+  .spotlight-role { @apply mt-4 flex w-full items-center justify-between gap-4 rounded-xl px-4 py-3; background: var(--spotlight-soft); }
+  .spotlight-role span { @apply text-xs/5 font-semibold; color: var(--spotlight-accent); }
+  .spotlight-role strong { @apply text-right text-sm/5 font-semibold text-ink; }
+  .spotlight-actions { @apply mt-auto flex w-full gap-2 pt-5; }
+  .spotlight-actions .button { @apply flex-1; }
+  .spotlight-controls { @apply mt-5 flex items-center justify-center gap-4; }
+  .spotlight-arrow { @apply grid size-10 place-items-center rounded-full border border-line bg-white text-muted transition; }
+  .spotlight-arrow:hover { @apply border-[#c8c2e3] bg-brand-soft text-brand; }
+  .spotlight-arrow svg { @apply size-5; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2; }
+  .spotlight-dots { @apply flex min-w-20 items-center justify-center gap-2; }
+  .spotlight-dots button { @apply h-2 w-2 rounded-full border-0 bg-[#cdc8df] p-0 transition-all; }
+  .spotlight-dots button:hover { @apply bg-[#aaa2ce]; }
+  .spotlight-dots button.is-active { @apply w-7 bg-brand; }
+  .spotlight-card.is-switching .spotlight-media img,
+  .spotlight-card.is-switching .spotlight-content > :not(.spotlight-save) { animation: spotlightSwap 260ms ease both; }
   .community-cta { @apply my-20 flex min-h-80 items-center justify-between gap-10 rounded-[28px] px-16 py-14 text-white; background: linear-gradient(110deg, #211552 0%, #6852ff 60%, #ff735d 100%); }
   .community-cta h2 { @apply mb-3 mt-2.5 text-4xl/12 tracking-[-0.6px]; }
   .community-cta p:not(.eyebrow) { @apply max-w-[640px] text-base/[26px] text-white/80; }
   .eyebrow-light { @apply text-white/85; }
   .cta-actions { @apply flex flex-col items-center gap-3; }
   .cta-actions a { @apply text-sm underline underline-offset-[3px]; }
+  .home-project-cta {
+    @apply relative my-20 flex min-h-[440px] items-end overflow-hidden rounded-[28px] p-16 text-white;
+    isolation: isolate;
+    background-image:
+      linear-gradient(to top, rgb(21 16 46 / 0.94) 0%, rgb(21 16 46 / 0.5) 48%, rgb(21 16 46 / 0.08) 100%),
+      linear-gradient(to right, rgb(21 16 46 / 0.84) 0%, rgb(21 16 46 / 0.52) 46%, rgb(21 16 46 / 0.1) 82%),
+      url('/images/home/project-cta-bg.webp');
+    background-position: center 55%;
+    background-size: cover;
+    box-shadow: 0 20px 50px rgb(37 23 99 / 0.12);
+  }
+  .home-project-cta__content { @apply relative z-[1] flex max-w-[720px] flex-col items-start; }
+  .home-project-cta__eyebrow { @apply text-sm/5 font-medium text-white/90; }
+  .home-project-cta h2 { @apply mt-3 text-[42px]/[54px] font-semibold tracking-[-0.7px]; }
+  .home-project-cta h2 span { @apply block; }
+  .home-project-cta__description { @apply mt-4 max-w-[680px] text-base/[26px] text-white/85; }
+  .home-project-cta__actions { @apply mt-6 flex items-center gap-3; }
+  .home-project-cta__primary { @apply border-white bg-white text-brand-dark; }
+  .home-project-cta__primary:hover { @apply bg-[#f8f6ff]; box-shadow: 0 7px 20px rgb(10 8 28 / 0.2); }
+  .home-project-cta__secondary { @apply border-white/50 bg-white/10 text-white; backdrop-filter: blur(5px); }
+  .home-project-cta__secondary:hover { @apply border-white/80 bg-white/20; }
   .site-footer { @apply flex min-h-[220px] items-start justify-between gap-10 border-t border-line bg-white py-12; padding-inline: max(24px, calc((100vw - 1248px) / 2)); }
   .footer-brand { @apply text-xl font-semibold text-brand; }
   .site-footer p { @apply mt-2.5 text-sm/5 text-muted; }
@@ -272,6 +383,16 @@
   .join-summary span { @apply text-[13px] text-muted; }
 }
 
+@keyframes spotlightSwap {
+  from { opacity: 0; transform: translateY(7px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spotlight-card.is-switching .spotlight-media img,
+  .spotlight-card.is-switching .spotlight-content > :not(.spotlight-save) { animation: none; }
+}
+
 @media (max-width: 1100px) {
   .site-header { @apply h-auto min-h-[72px] flex-wrap py-3.5; }
   .main-nav { @apply order-3 hidden w-full overflow-x-auto pt-1.5; }
@@ -290,6 +411,16 @@
   .team-grid { @apply grid-cols-1; }
   .team-detail-summary { @apply grid-cols-[minmax(0,1fr)_300px] gap-8; }
   .team-detail-content { @apply grid-cols-[minmax(0,1fr)_320px] gap-6; }
+  .spotlight-card { grid-template-columns: minmax(0, 52fr) minmax(360px, 48fr); }
+  .spotlight-media { @apply p-6; }
+  .spotlight-content { @apply p-7; }
+  .spotlight-content h3 { @apply text-[26px]/9; }
+}
+
+@media (max-width: 920px) {
+  .spotlight-card { @apply min-h-0; grid-template-columns: 1fr; }
+  .spotlight-media { @apply p-7; }
+  .spotlight-content { @apply min-h-[440px] p-8; }
 }
 
 @media (max-width: 760px) {
@@ -306,7 +437,22 @@
   .path-grid, .project-preview-grid { @apply grid-cols-1; }
   .discovery-section, .featured-section { @apply py-14; }
   .section-heading-row { @apply flex-col items-start; }
+  .spotlight-carousel { @apply mt-8; }
+  .spotlight-card { @apply rounded-[18px]; }
+  .spotlight-media { @apply p-4; }
+  .spotlight-media img { @apply rounded-xl; }
+  .spotlight-content { @apply min-h-0 p-6; }
+  .spotlight-content h3 { @apply mt-5 text-2xl/8; }
+  .spotlight-hook { @apply text-base/[26px]; }
+  .spotlight-proof { @apply gap-1; }
+  .spotlight-actions { @apply mt-1 flex-col; }
   .community-cta { @apply my-12 flex-col items-start px-7 py-10; }
+  .home-project-cta { @apply my-12 min-h-[520px] p-7; background-position: 50% 55%; }
+  .home-project-cta__content { @apply max-w-full; }
+  .home-project-cta h2 { @apply text-[34px]/[44px] tracking-[-0.4px]; }
+  .home-project-cta__description { @apply text-[15px]/6; }
+  .home-project-cta__actions { @apply w-full flex-col items-stretch; }
+  .home-project-cta__actions .button { @apply w-full; }
   .community-cta h2, .section-heading-row h2, .discovery-section h2, .featured-section h2, .team-matches h2 { @apply text-3xl/10; }
   .cta-actions { @apply items-start; }
   .site-footer { @apply min-h-0 flex-col py-10; }
@@ -342,8 +488,60 @@
   .featured-project-card { @apply left-4 w-[calc(100%-32px)] p-5; }
   .match-badge { @apply right-3 top-[26px]; }
   .role-badge { @apply bottom-3 right-3; }
+  .home-project-cta { @apply min-h-[540px] rounded-[20px] p-6; background-position: 48% 55%; }
+  .home-project-cta h2 { @apply text-[30px]/10; }
+  .home-project-cta__description { @apply text-sm/[23px]; }
+  .spotlight-content { @apply p-5; }
+  .spotlight-save { @apply right-4 top-4; }
+  .spotlight-badge { @apply pr-2 text-xs; }
+  .spotlight-proof { @apply grid-cols-1 gap-2.5; }
+  .spotlight-proof span { @apply flex-row items-baseline gap-1.5; }
+  .spotlight-role { @apply flex-col items-start; }
+  .spotlight-role strong { @apply text-left; }
+  .spotlight-controls { @apply mt-4; }
   .composer-card, .feed-post, .sidebar-card, .team-card, .match-profile, .evidence-card, .detail-side-card { @apply p-[18px]; }
   .team-card-actions, .post-footer > div { @apply w-full flex-col; }
   .team-card-actions .button, .post-footer .button { @apply w-full; }
 }
 
+/* ─── ShowKong Interactive Prototype & Showcase Styles ─── */
+.wave-bar {
+  animation: wavePulse 1.2s ease-in-out infinite alternate;
+}
+@keyframes wavePulse {
+  0% { height: 6px; }
+  50% { height: 28px; }
+  100% { height: 12px; }
+}
+
+.flashcard-inner {
+  transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transform-style: preserve-3d;
+}
+.flashcard-inner.is-flipped {
+  transform: rotateY(180deg);
+}
+.flashcard-front, .flashcard-back {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.flashcard-back {
+  transform: rotateY(180deg);
+}
+
+.laser-scan-line {
+  animation: laserScan 2s ease-in-out infinite;
+}
+@keyframes laserScan {
+  0% { top: 5%; opacity: 0.3; }
+  50% { top: 90%; opacity: 1; }
+  100% { top: 5%; opacity: 0.3; }
+}
+
+@keyframes mapRadar {
+  0% { transform: scale(0.8); opacity: 0.9; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+.map-radar-pulse {
+  animation: mapRadar 2s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
