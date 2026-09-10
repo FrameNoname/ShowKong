@@ -5,7 +5,6 @@ const pagePaths = {
   teams: '/pages/find-team.html',
   showcase: '/pages/show-kong.html',
   showKong: '/pages/show-kong.html',
-  challenges: '/pages/sponsored-challenge.html',
   post: '/pages/post.html',
 }
 
@@ -15,7 +14,6 @@ export function authenticatedHeader(activePage = '') {
     ['explore', 'สำรวจโปรเจกต์'],
     ['teams', 'หาทีม'],
     ['showKong', 'ShowKong'],
-    ['challenges', 'ชาเลนจ์'],
   ]
 
   return `
@@ -50,7 +48,6 @@ export function siteFooter() {
           <a href="${pagePaths.explore}">สำรวจโปรเจกต์</a>
           <a href="${pagePaths.teams}">หาทีม</a>
           <a href="${pagePaths.showKong}">ShowKong (โชว์ผลงาน)</a>
-          <a href="${pagePaths.challenges}">ชาเลนจ์</a>
           <a href="#about">เกี่ยวกับเรา</a>
         </nav>
         <p>© 2026 ShowKong — Built for student builders.</p>

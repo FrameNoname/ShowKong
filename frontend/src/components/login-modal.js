@@ -1,7 +1,6 @@
 import { isSupabaseConfigured, supabase } from '../lib/supabase.js'
 
 let isLoginModalMounted = false
-let loginRedirectTo = '/pages/feed.html'
 
 export function loginModalMarkup() {
   return `
@@ -56,10 +55,7 @@ export function loginModalMarkup() {
   `
 }
 
-export function openLoginModal(options = {}) {
-  loginRedirectTo = typeof options.redirectTo === 'string' && options.redirectTo.startsWith('/')
-    ? options.redirectTo
-    : '/pages/feed.html'
+export function openLoginModal() {
   ensureLoginModal()
   const modal = document.querySelector('#loginModal')
   const panel = document.querySelector('#loginPanel')
@@ -173,7 +169,7 @@ function bindLoginModalEvents() {
       if (error) {
         showError(error.message)
       } else {
-        window.location.replace(loginRedirectTo)
+        window.location.replace('/pages/feed.html')
       }
     } catch (err) {
       showError(err.message || 'เกิดข้อผิดพลาดในการเชื่อมต่อ')
