@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="รายละเอียด ประวัติ และหลักฐานของทีมบน ShowKong">
+    <title>รายละเอียดทีม — ShowKong</title>
+  </head>
+  <body class="app-page team-detail-page">
+    <div data-shared-header></div>
+    <main>
+      <section class="team-detail-hero">
+        <div class="page-container">
+          <a class="back-link" href="/pages/find-team.html">← กลับไปค้นหาทีม</a>
+          <div class="team-detail-summary">
+            <div class="team-summary-copy">
+              <p class="eyebrow" id="detailEyebrow">ทีมเปิดรับสมาชิก · Education</p>
+              <h1 id="detailName">SheetQuest</h1>
+              <h2 id="detailSubtitle">เรียนให้เหมือนเล่นเกม</h2>
+              <p id="detailDescription"></p>
+              <div class="chip-row" id="detailTags"></div>
+            </div>
+            <aside class="match-summary">
+              <strong id="detailMatch">ตรงกับคุณ 94%</strong>
+              <span id="detailOpenRole">เปิดรับ UX/UI Designer 1 คน</span>
+              <p id="detailAvailability">เริ่มงานได้ทันที · ประมาณ 6 ชม./สัปดาห์</p>
+              <button class="button button-primary full-width js-detail-join" type="button">ขอ Join ทีม</button>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="team-detail-content page-container">
+        <div class="team-history">
+          <h2>ประวัติและหลักฐานของทีม</h2>
+          <article class="evidence-card">
+            <span class="info-mark">i</span>
+            <h3 id="timelineTitle">Timeline ของ SheetQuest</h3>
+            <ul id="detailTimeline"></ul>
+          </article>
+          <article class="evidence-card">
+            <span class="info-mark">i</span>
+            <h3>ผลลัพธ์ที่ตรวจสอบได้</h3>
+            <p id="detailEvidence"></p>
+          </article>
+        </div>
+
+        <aside class="team-detail-sidebar">
+          <article class="detail-side-card">
+            <h2>สมาชิกปัจจุบัน · <span id="memberCount">3</span> คน</h2>
+            <div id="detailMembers"></div>
+          </article>
+          <article class="detail-side-card">
+            <h2>รูปแบบการทำงาน</h2>
+            <p id="detailWorkingStyle"></p>
+          </article>
+          <article class="detail-side-card open-role-card">
+            <h2>ตำแหน่งที่เปิดรับ</h2>
+            <strong id="sidebarRole">UX/UI Designer · 1 คน</strong>
+            <p id="sidebarRoleDescription"></p>
+            <div class="chip-row" id="sidebarSkills"></div>
+            <button class="button button-primary full-width js-detail-join" type="button">ขอ Join ทีม</button>
+          </article>
+        </aside>
+      </section>
+    </main>
+    <div data-shared-footer></div>
+
+    <script type="module" src="/src/pages/team-detail.js"></script>
+  </body>
+</html>
