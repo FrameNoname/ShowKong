@@ -1,0 +1,732 @@
+<!doctype html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="สร้างโพสต์โปรเจกต์ใหม่บน ShowKong — แชร์ไอเดีย หาทีม หรือขอความคิดเห็นจากชุมชน">
+  <title>สร้างโปรเจกต์ใหม่ — ShowKong</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body class="app-page post-page bg-[#f8f9fc] text-[var(--text)]">
+  <div data-shared-header></div>
+
+  <main>
+    <!-- Hero Header -->
+    <section
+      class="relative overflow-hidden bg-gradient-to-br from-[#120d2d] via-[#402da8] to-[#6d5dfb] py-10 md:py-14 text-white">
+      <div class="absolute inset-0 opacity-25"
+        style="background-image: radial-gradient(circle at 15% 75%, rgba(255,255,255,0.35) 0%, transparent 45%), radial-gradient(circle at 85% 25%, rgba(184,158,255,0.4) 0%, transparent 50%);">
+      </div>
+      <div class="relative mx-auto w-[min(calc(100%-48px),1248px)]">
+        <div class="flex items-center justify-between gap-4 mb-3">
+          <a href="/pages/feed.html"
+            class="inline-flex items-center gap-1.5 text-white/80 text-xs sm:text-sm hover:text-white transition-colors bg-white/10 hover:bg-white/20 px-3 py-1.5 rounded-full backdrop-blur-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+            กลับไปหน้า Feed
+          </a>
+          <!-- Draft Indicator -->
+          <span id="draftStatusBadge"
+            class="inline-flex items-center gap-1.5 text-xs text-white/70 bg-black/20 px-3 py-1 rounded-full backdrop-blur-sm">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span id="draftStatusText">ระบบบันทึกร่างอัตโนมัติ</span>
+          </span>
+        </div>
+
+        <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight">
+          สร้างและเปิดตัวโปรเจกต์ใหม่</h1>
+        <p class="mt-2 max-w-2xl text-white/85 text-xs sm:text-sm md:text-base leading-relaxed">
+          แชร์ไอเดีย หาทีมร่วมสร้างผลงาน ขอ Feedback ตัว Prototype หรือโชว์ความสำเร็จให้เพื่อนในคอมมูนิตี้ได้เห็น
+        </p>
+
+        <!-- Quick Templates Bar -->
+        <div class="mt-5 pt-4 border-t border-white/15 flex flex-wrap items-center gap-2">
+          <span class="text-xs font-bold text-white/90 mr-1 flex items-center gap-1">
+            <span>⚡</span> เทมเพลตด่วน:
+          </span>
+          <button type="button"
+            class="template-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/15 hover:bg-white/25 text-white text-xs font-medium backdrop-blur-md transition-all hover:scale-102"
+            data-template="find-team">
+            <span>👥</span> หาสมาชิกทีม Hackathon
+          </button>
+          <button type="button"
+            class="template-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/15 hover:bg-white/25 text-white text-xs font-medium backdrop-blur-md transition-all hover:scale-102"
+            data-template="feedback">
+            <span>🧪</span> ขอ Feedback Prototype
+          </button>
+          <button type="button"
+            class="template-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/15 hover:bg-white/25 text-white text-xs font-medium backdrop-blur-md transition-all hover:scale-102"
+            data-template="new-idea">
+            <span>💡</span> เสนอไอเดียใหม่
+          </button>
+          <button type="button"
+            class="template-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/15 hover:bg-white/25 text-white text-xs font-medium backdrop-blur-md transition-all hover:scale-102"
+            data-template="milestone">
+            <span>📈</span> ประกาศความคืบหน้า
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Visual Step Progress Indicator -->
+    <div class="mx-auto w-[min(calc(100%-48px),1248px)] -mt-5 relative z-10">
+      <div class="bg-white rounded-2xl border border-gray-200 p-4 sm:p-5 shadow-lg shadow-purple-500/5 flex items-center gap-3 sm:gap-0 sm:justify-between overflow-x-auto">
+        <div class="flex items-center gap-2.5 shrink-0" id="stepIndicator1">
+          <span class="step-dot w-9 h-9 rounded-full bg-[#6d5dfb] text-white text-sm font-bold grid place-items-center shadow-md shadow-purple-500/30 transition-all">1</span>
+          <div class="hidden sm:block">
+            <span class="block text-xs font-bold text-gray-900">ข้อมูลพื้นฐาน</span>
+            <span class="block text-[10px] text-gray-400">ประเภท & ชื่อ</span>
+          </div>
+        </div>
+        <div class="flex-1 mx-2 sm:mx-4 h-1 bg-gray-100 rounded-full overflow-hidden hidden sm:block">
+          <div id="stepBar1" class="h-full bg-gradient-to-r from-[#6d5dfb] to-[#a78bfa] rounded-full transition-all duration-500" style="width: 0%;"></div>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0" id="stepIndicator2">
+          <span class="step-dot w-9 h-9 rounded-full bg-gray-200 text-gray-500 text-sm font-bold grid place-items-center transition-all">2</span>
+          <div class="hidden sm:block">
+            <span class="block text-xs font-bold text-gray-400">รายละเอียด</span>
+            <span class="block text-[10px] text-gray-400">เรื่องราว & ทักษะ</span>
+          </div>
+        </div>
+        <div class="flex-1 mx-2 sm:mx-4 h-1 bg-gray-100 rounded-full overflow-hidden hidden sm:block">
+          <div id="stepBar2" class="h-full bg-gradient-to-r from-[#a78bfa] to-[#6d5dfb] rounded-full transition-all duration-500" style="width: 0%;"></div>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0" id="stepIndicator3">
+          <span class="step-dot w-9 h-9 rounded-full bg-gray-200 text-gray-500 text-sm font-bold grid place-items-center transition-all">3</span>
+          <div class="hidden sm:block">
+            <span class="block text-xs font-bold text-gray-400">สื่อ & ลิงก์</span>
+            <span class="block text-[10px] text-gray-400">รูปภาพ & Demo</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Form Section -->
+    <section class="mx-auto w-[min(calc(100%-48px),1248px)] py-6 md:py-10">
+
+      <!-- Draft restoration alert (hidden by default) -->
+      <div id="draftAlert"
+        class="mb-6 p-4 rounded-2xl bg-gradient-to-r from-purple-50 via-indigo-50 to-blue-50 border border-purple-200 flex flex-wrap items-center justify-between gap-3 shadow-xs"
+        hidden>
+        <div class="flex items-center gap-2.5">
+          <span class="text-xl">📝</span>
+          <div>
+            <strong class="text-xs sm:text-sm font-bold text-gray-900">ตรวจพบฉบับร่างที่เขียนค้างไว้</strong>
+            <p class="text-[11px] sm:text-xs text-gray-600">คุณต้องการกู้คืนข้อมูลโพสต์ที่เคยพิมพ์ไว้ล่าสุดหรือไม่?</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <button type="button" id="restoreDraftBtn"
+            class="px-3.5 py-1.5 rounded-xl bg-[#6d5dfb] hover:bg-[#5b4be0] text-white text-xs font-bold transition-all shadow-xs">
+            กู้คืนข้อมูล
+          </button>
+          <button type="button" id="discardDraftBtn"
+            class="px-3 py-1.5 rounded-xl bg-white hover:bg-gray-100 text-gray-600 text-xs font-semibold border border-gray-200 transition-all">
+            ละทิ้ง
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_400px] gap-8 items-start">
+
+        <!-- Left: Multi-section Form -->
+        <form id="postForm" class="space-y-6">
+
+          <!-- Section 1: ประเภทและข้อมูลผลงาน -->
+          <div class="bg-white border border-gray-200 rounded-3xl p-6 sm:p-8 shadow-xs space-y-6">
+            <div class="flex items-center justify-between border-b border-gray-100 pb-4">
+              <div class="flex items-center gap-2.5">
+                <span
+                  class="w-8 h-8 rounded-xl bg-purple-100 text-[#6d5dfb] font-bold text-sm grid place-items-center">1</span>
+                <div>
+                  <h2 class="text-base font-bold text-gray-900">ข้อมูลพื้นฐานและประเภทโพสต์</h2>
+                  <p class="text-xs text-gray-500">เลือกประเภทโพสต์ที่ตรงกับเป้าหมายของคุณมากที่สุด</p>
+                </div>
+              </div>
+              <span class="text-xs font-bold text-[#6d5dfb] bg-purple-50 px-2.5 py-1 rounded-full">ขั้นตอน 1 จาก
+                3</span>
+            </div>
+
+            <!-- Post Type Selection Cards -->
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-2.5">
+                ประเภทของโพสต์ <span class="text-rose-500">*</span>
+              </label>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5" data-post-types>
+                <button type="button"
+                  class="type-card group p-3.5 rounded-2xl border-2 text-left transition-all cursor-pointer border-[#6d5dfb] bg-[#f9f8ff] shadow-xs is-active"
+                  data-value="ไอเดียใหม่">
+                  <span class="text-2xl block mb-1">💡</span>
+                  <strong class="text-xs font-bold block text-gray-900 group-hover:text-[#6d5dfb]">ไอเดียใหม่</strong>
+                  <span class="text-[10px] text-gray-500 leading-tight block mt-0.5">แชร์แนวคิดและโจทย์</span>
+                </button>
+                <button type="button"
+                  class="type-card group p-3.5 rounded-2xl border-2 text-left transition-all cursor-pointer border-gray-200 hover:border-orange-300 hover:bg-orange-50/30"
+                  data-value="กำลังหาทีม">
+                  <span class="text-2xl block mb-1">👥</span>
+                  <strong class="text-xs font-bold block text-gray-900 group-hover:text-orange-600">หาสมาชิก</strong>
+                  <span class="text-[10px] text-gray-500 leading-tight block mt-0.5">ตามหาเพื่อนร่วมทีม</span>
+                </button>
+                <button type="button"
+                  class="type-card group p-3.5 rounded-2xl border-2 text-left transition-all cursor-pointer border-gray-200 hover:border-blue-300 hover:bg-blue-50/30"
+                  data-value="ขอ Feedback">
+                  <span class="text-2xl block mb-1">🧪</span>
+                  <strong class="text-xs font-bold block text-gray-900 group-hover:text-blue-600">ขอ Feedback</strong>
+                  <span class="text-[10px] text-gray-500 leading-tight block mt-0.5">ทดสอบ Prototype</span>
+                </button>
+                <button type="button"
+                  class="type-card group p-3.5 rounded-2xl border-2 text-left transition-all cursor-pointer border-gray-200 hover:border-emerald-300 hover:bg-emerald-50/30"
+                  data-value="ความคืบหน้า">
+                  <span class="text-2xl block mb-1">📈</span>
+                  <strong
+                    class="text-xs font-bold block text-gray-900 group-hover:text-emerald-600">ความคืบหน้า</strong>
+                  <span class="text-[10px] text-gray-500 leading-tight block mt-0.5">อัปเดต Milestone</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Project Title -->
+            <div>
+              <div class="flex items-center justify-between mb-1.5">
+                <label for="postTitle" class="text-xs font-bold uppercase tracking-wider text-gray-700">
+                  ชื่อโปรเจกต์ หรือ หัวข้อโพสต์ <span class="text-rose-500">*</span>
+                </label>
+                <span id="titleCharCount" class="text-[11px] text-gray-400">0/100</span>
+              </div>
+              <input id="postTitle" name="title" required maxlength="100"
+                placeholder="เช่น SafeWalk MFU — แอปช่วยนำทางกลับหอพักที่ปลอดภัยที่สุด"
+                class="w-full min-h-[50px] px-4 py-3 border border-gray-200 rounded-xl bg-white text-gray-900 placeholder:text-gray-400 focus:border-[#6d5dfb] focus:ring-3 focus:ring-[#6d5dfb]/10 outline-none transition-all text-sm font-medium">
+            </div>
+
+            <!-- Topic & Project Status -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="postTopic" class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1.5">
+                  หมวดหมู่หัวข้อ <span class="text-rose-500">*</span>
+                </label>
+                <select id="postTopic" name="topic" required
+                  class="w-full min-h-[48px] px-3.5 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-800 text-xs sm:text-sm focus:border-[#6d5dfb] focus:ring-3 focus:ring-[#6d5dfb]/10 outline-none transition-all cursor-pointer">
+                  <option value="">เลือกหมวดหมู่</option>
+                  <option value="เทคโนโลยี">💻 เทคโนโลยี & ซอฟต์แวร์</option>
+                  <option value="การศึกษา">🎓 การศึกษา & EdTech</option>
+                  <option value="ชุมชน">🏘️ ชุมชน & สังคมปลอดภัย</option>
+                  <option value="สิ่งแวดล้อม">🌿 สิ่งแวดล้อม & ความยั่งยืน</option>
+                  <option value="ธุรกิจ">💼 ธุรกิจ & สตาร์ตอัป</option>
+                  <option value="สุขภาพ">🏥 สุขภาพ & จิตวิทยา</option>
+                  <option value="ดีไซน์">🎨 ออกแบบ UX/UI & ศิลปะ</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="postMilestone"
+                  class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1.5">
+                  สถานะปัจจุบันของผลงาน
+                </label>
+                <select id="postMilestone" name="milestone"
+                  class="w-full min-h-[48px] px-3.5 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-800 text-xs sm:text-sm focus:border-[#6d5dfb] focus:ring-3 focus:ring-[#6d5dfb]/10 outline-none transition-all cursor-pointer">
+                  <option value="💭 ไอเดีย / วางแผน">💭 ไอเดีย / วางแผน (Ideation)</option>
+                  <option value="⚙️ กำลังพัฒนา">⚙️ กำลังพัฒนา (In Development)</option>
+                  <option value="🎮 มี Prototype / Demo ให้ลองแล้ว" selected>🎮 มี Prototype / Demo ให้ลองแล้ว</option>
+                  <option value="🚀 เปิดให้ใช้งานจริงแล้ว">🚀 เปิดให้ใช้งานจริงแล้ว (Launched)</option>
+                  <option value="🏆 ผลงานประกวด / รางวัล">🏆 ผลงานประกวด / รางวัล (Awarded)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: รายละเอียดและสมาชิกที่ตามหา -->
+          <div class="bg-white border border-gray-200 rounded-3xl p-6 sm:p-8 shadow-xs space-y-6">
+            <div class="flex items-center justify-between border-b border-gray-100 pb-4">
+              <div class="flex items-center gap-2.5">
+                <span
+                  class="w-8 h-8 rounded-xl bg-orange-100 text-orange-600 font-bold text-sm grid place-items-center">2</span>
+                <div>
+                  <h2 class="text-base font-bold text-gray-900">เรื่องราว รายละเอียด และทักษะที่เกี่ยวข้อง</h2>
+                  <p class="text-xs text-gray-500">ยิ่งเล่าปัญหาและเป้าหมายชัดเจน ยิ่งดึงดูดคนที่ใช่เข้ามาช่วย</p>
+                </div>
+              </div>
+              <span class="text-xs font-bold text-orange-600 bg-orange-50 px-2.5 py-1 rounded-full">ขั้นตอน 2 จาก
+                3</span>
+            </div>
+
+            <!-- Recruiting Roles Banner (Dynamic highlight when seeking team) -->
+            <div id="rolesRecruitingContainer"
+              class="p-4 rounded-2xl bg-orange-50/60 border border-orange-200 space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="text-base">👥</span>
+                  <strong class="text-xs sm:text-sm font-bold text-orange-950">ตำแหน่งที่กำลังเปิดรับ
+                    (คลิกเพื่อเลือก):</strong>
+                </div>
+                <span class="text-[11px] text-orange-700 font-medium">เลือกได้มากกว่า 1 ตำแหน่ง</span>
+              </div>
+              <div class="flex flex-wrap gap-2" id="rolePillsContainer">
+                <button type="button"
+                  class="role-pill px-3 py-1.5 rounded-xl border text-xs font-semibold bg-white text-gray-700 border-orange-200 hover:border-orange-400 transition-all"
+                  data-role="UX/UI Designer">
+                  + UX/UI Designer
+                </button>
+                <button type="button"
+                  class="role-pill px-3 py-1.5 rounded-xl border text-xs font-semibold bg-white text-gray-700 border-orange-200 hover:border-orange-400 transition-all"
+                  data-role="Frontend Developer">
+                  + Frontend Developer
+                </button>
+                <button type="button"
+                  class="role-pill px-3 py-1.5 rounded-xl border text-xs font-semibold bg-white text-gray-700 border-orange-200 hover:border-orange-400 transition-all"
+                  data-role="Backend Developer">
+                  + Backend Developer
+                </button>
+                <button type="button"
+                  class="role-pill px-3 py-1.5 rounded-xl border text-xs font-semibold bg-white text-gray-700 border-orange-200 hover:border-orange-400 transition-all"
+                  data-role="Mobile Dev (Flutter/React Native)">
+                  + Mobile Dev
+                </button>
+                <button type="button"
+                  class="role-pill px-3 py-1.5 rounded-xl border text-xs font-semibold bg-white text-gray-700 border-orange-200 hover:border-orange-400 transition-all"
+                  data-role="Data / AI Engineer">
+                  + Data / AI Engineer
+                </button>
+                <button type="button"
+                  class="role-pill px-3 py-1.5 rounded-xl border text-xs font-semibold bg-white text-gray-700 border-orange-200 hover:border-orange-400 transition-all"
+                  data-role="Product & Marketing">
+                  + Product & Marketing
+                </button>
+              </div>
+
+              <!-- ช่องใส่ตำแหน่งหรือทักษะอื่นๆ -->
+              <div class="pt-2 border-t border-orange-200/70 flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+                <div class="relative flex-1">
+                  <span class="absolute left-3 top-1/2 -translate-y-1/2 text-orange-400 text-xs">✏️</span>
+                  <input type="text" id="customRoleInput" placeholder="ระบุตำแหน่งหรือทักษะอื่นๆ ที่ต้องการ เช่น DevOps, Sound Designer, 3D Modeler..."
+                    class="w-full pl-8 pr-3 py-2 text-xs rounded-xl border border-orange-200 bg-white placeholder:text-gray-400 focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-200/50 transition-all">
+                </div>
+                <button type="button" id="addCustomRoleBtn"
+                  class="px-4 py-2 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold text-xs rounded-xl shadow-xs hover:shadow transition-all flex items-center justify-center gap-1.5 shrink-0">
+                  <span>+ เพิ่มตำแหน่งอื่นๆ</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Description with Format Toolbar -->
+            <div>
+              <div class="flex items-center justify-between mb-1.5">
+                <label for="postDescription" class="text-xs font-bold uppercase tracking-wider text-gray-700">
+                  รายละเอียดผลงานและสิ่งที่อยากให้ชุมชนช่วย <span class="text-rose-500">*</span>
+                </label>
+                <span id="descCharCount" class="text-[11px] text-gray-400">0 ตัวอักษร</span>
+              </div>
+
+              <!-- Markdown Formatting Shortcuts -->
+              <div class="flex items-center gap-1 mb-2 p-1 bg-gray-50 rounded-xl border border-gray-200 text-xs">
+                <button type="button"
+                  class="format-btn px-2.5 py-1 rounded-lg hover:bg-white text-gray-700 font-bold transition-colors"
+                  data-format="bold" title="ตัวหนา">
+                  B
+                </button>
+                <button type="button"
+                  class="format-btn px-2.5 py-1 rounded-lg hover:bg-white text-gray-700 italic transition-colors"
+                  data-format="italic" title="ตัวเอียง">
+                  I
+                </button>
+                <button type="button"
+                  class="format-btn px-2.5 py-1 rounded-lg hover:bg-white text-gray-700 transition-colors"
+                  data-format="bullet" title="รายการหัวข้อ">
+                  • ลิสต์
+                </button>
+                <button type="button"
+                  class="format-btn px-2.5 py-1 rounded-lg hover:bg-white text-gray-700 font-mono transition-colors"
+                  data-format="code" title="โค้ด">
+                  &lt;/&gt;
+                </button>
+                <span class="w-px h-4 bg-gray-300 mx-1"></span>
+                <button type="button" id="insertStructureBtn"
+                  class="px-2 py-1 rounded-lg hover:bg-white text-[#6d5dfb] font-semibold text-[11px] transition-colors">
+                  + แทรกโครงสร้างแนะนำ (ปัญหา / วิธีแก้ / จุดเด่น)
+                </button>
+              </div>
+
+              <textarea id="postDescription" name="description" required rows="7"
+                placeholder="โปรเจกต์นี้เริ่มจากปัญหาอะไร?&#10;แก้ปัญหาอย่างไรและมีฟีเจอร์เด่นอะไรบ้าง?&#10;ตอนนี้พัฒนาถึงขั้นตอนไหน และต้องการความช่วยเหลืออะไรเป็นพิเศษ?"
+                class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-white text-gray-900 placeholder:text-gray-400 focus:border-[#6d5dfb] focus:ring-3 focus:ring-[#6d5dfb]/10 outline-none transition-all resize-y leading-relaxed text-sm font-normal"></textarea>
+            </div>
+
+            <!-- Tags Input with Popular Suggestions -->
+            <div>
+              <label for="postTags" class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1.5">
+                แท็กทักษะและเทคโนโลยีที่ใช้ (คั่นด้วยเครื่องหมายจุลภาคหรือเว้นวรรค)
+              </label>
+              <input id="postTags" name="tags"
+                placeholder="เช่น Flutter, FastApi, Google Maps API, UX Research, PyTorch"
+                class="w-full min-h-[48px] px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-900 placeholder:text-gray-400 focus:border-[#6d5dfb] focus:ring-3 focus:ring-[#6d5dfb]/10 outline-none transition-all text-xs sm:text-sm">
+
+              <!-- Tag suggestion pills -->
+              <div class="flex flex-wrap items-center gap-1.5 mt-2.5">
+                <span class="text-[11px] text-gray-400 font-medium">แท็กยอดนิยม:</span>
+                <button type="button"
+                  class="tag-pill px-2.5 py-0.5 rounded-lg bg-gray-100 hover:bg-purple-100 hover:text-[#6d5dfb] text-gray-600 text-[11px] font-medium transition-colors"
+                  data-tag="UX/UI">#UX/UI</button>
+                <button type="button"
+                  class="tag-pill px-2.5 py-0.5 rounded-lg bg-gray-100 hover:bg-purple-100 hover:text-[#6d5dfb] text-gray-600 text-[11px] font-medium transition-colors"
+                  data-tag="React">#React</button>
+                <button type="button"
+                  class="tag-pill px-2.5 py-0.5 rounded-lg bg-gray-100 hover:bg-purple-100 hover:text-[#6d5dfb] text-gray-600 text-[11px] font-medium transition-colors"
+                  data-tag="Flutter">#Flutter</button>
+                <button type="button"
+                  class="tag-pill px-2.5 py-0.5 rounded-lg bg-gray-100 hover:bg-purple-100 hover:text-[#6d5dfb] text-gray-600 text-[11px] font-medium transition-colors"
+                  data-tag="AI/NLP">#AI/NLP</button>
+                <button type="button"
+                  class="tag-pill px-2.5 py-0.5 rounded-lg bg-gray-100 hover:bg-purple-100 hover:text-[#6d5dfb] text-gray-600 text-[11px] font-medium transition-colors"
+                  data-tag="Python">#Python</button>
+                <button type="button"
+                  class="tag-pill px-2.5 py-0.5 rounded-lg bg-gray-100 hover:bg-purple-100 hover:text-[#6d5dfb] text-gray-600 text-[11px] font-medium transition-colors"
+                  data-tag="FastAPI">#FastAPI</button>
+                <button type="button"
+                  class="tag-pill px-2.5 py-0.5 rounded-lg bg-gray-100 hover:bg-purple-100 hover:text-[#6d5dfb] text-gray-600 text-[11px] font-medium transition-colors"
+                  data-tag="Supabase">#Supabase</button>
+                <button type="button"
+                  class="tag-pill px-2.5 py-0.5 rounded-lg bg-gray-100 hover:bg-purple-100 hover:text-[#6d5dfb] text-gray-600 text-[11px] font-medium transition-colors"
+                  data-tag="Figma">#Figma</button>
+              </div>
+
+              <!-- ช่องใส่ทักษะ / เทคโนโลยีอื่นๆ -->
+              <div class="mt-3 flex flex-col sm:flex-row items-stretch sm:items-center gap-2 p-3 bg-purple-50/40 rounded-xl border border-purple-100">
+                <div class="relative flex-1">
+                  <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#6d5dfb] text-xs font-bold">#</span>
+                  <input type="text" id="customTagInput" placeholder="เพิ่มทักษะหรือเทคโนโลยีอื่นๆ เช่น Docker, Blender, TailwindCSS, Next.js..."
+                    class="w-full pl-7 pr-3 py-1.5 text-xs rounded-lg border border-purple-200 bg-white placeholder:text-gray-400 focus:outline-none focus:border-[#6d5dfb] focus:ring-2 focus:ring-[#6d5dfb]/15 transition-all">
+                </div>
+                <button type="button" id="addCustomTagBtn"
+                  class="px-3 py-1.5 bg-[#6d5dfb] hover:bg-[#5b4be0] text-white font-semibold text-xs rounded-lg shadow-xs hover:shadow transition-all flex items-center justify-center gap-1 shrink-0">
+                  <span>+ เพิ่มแท็ก</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 3: รูปภาพผลงานและลิงก์ทดลอง Prototype -->
+          <div class="bg-white border border-gray-200 rounded-3xl p-6 sm:p-8 shadow-xs space-y-6">
+            <div class="flex items-center justify-between border-b border-gray-100 pb-4">
+              <div class="flex items-center gap-2.5">
+                <span
+                  class="w-8 h-8 rounded-xl bg-blue-100 text-blue-600 font-bold text-sm grid place-items-center">3</span>
+                <div>
+                  <h2 class="text-base font-bold text-gray-900">รูปภาพผลงานและลิงก์ทดลอง Prototype</h2>
+                  <p class="text-xs text-gray-500">โพสต์ที่มีภาพหน้าจอหรือลิงก์ Demo มักได้รับความสนใจสูงกว่า 3 เท่า</p>
+                </div>
+              </div>
+              <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full">ขั้นตอน 3 จาก 3</span>
+            </div>
+
+            <!-- Image Drag & Drop Zone -->
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-gray-700">รูปภาพหน้าจอผลงาน หรือ UI
+                  Mockups</span>
+                <span class="text-xs text-gray-400" id="imageCountText">อัปโหลดได้สูงสุด 4 รูป</span>
+              </div>
+
+              <label id="dropZone"
+                class="flex flex-col items-center justify-center gap-2.5 min-h-[160px] border-2 border-dashed border-purple-200 hover:border-[#6d5dfb] rounded-2xl bg-purple-50/20 hover:bg-purple-50/40 cursor-pointer transition-all group p-6 text-center">
+                <input id="postImages" type="file" accept="image/png,image/jpeg,image/webp" multiple class="sr-only">
+                <div
+                  class="w-12 h-12 rounded-2xl bg-purple-100 text-[#6d5dfb] grid place-items-center transition-transform group-hover:scale-110 shadow-xs">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div>
+                  <strong
+                    class="text-sm font-bold text-gray-900 group-hover:text-[#6d5dfb] transition-colors">คลิกเพื่อเลือกภาพ
+                    หรือลากไฟล์มาวางที่นี่</strong>
+                  <p class="text-xs text-gray-500 mt-0.5">รองรับ PNG, JPG, WebP ขนาดไม่เกิน 10MB ต่อไฟล์</p>
+                </div>
+              </label>
+
+              <!-- Uploaded thumbnails preview -->
+              <div id="uploadPreview" class="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-3" hidden></div>
+            </div>
+
+            <!-- Links: Demo URL & GitHub -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="postDemoUrl" class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1.5">
+                  🎮 Live Demo หรือ Prototype URL <span class="text-gray-400 font-normal">(ถ้ามี)</span>
+                </label>
+                <div class="relative">
+                  <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-sm">🔗</span>
+                  <input id="postDemoUrl" name="demoUrl" type="url"
+                    placeholder="https://my-prototype.demo.app หรือ Figma Link"
+                    class="w-full min-h-[48px] pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-900 placeholder:text-gray-400 focus:border-[#6d5dfb] focus:ring-3 focus:ring-[#6d5dfb]/10 outline-none transition-all text-xs sm:text-sm">
+                </div>
+              </div>
+
+              <div>
+                <label for="postGithubUrl"
+                  class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1.5">
+                  🐙 GitHub Repository <span class="text-gray-400 font-normal">(ถ้ามี)</span>
+                </label>
+                <div class="relative">
+                  <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-sm">📁</span>
+                  <input id="postGithubUrl" name="githubUrl" type="url"
+                    placeholder="https://github.com/username/project"
+                    class="w-full min-h-[48px] pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-900 placeholder:text-gray-400 focus:border-[#6d5dfb] focus:ring-3 focus:ring-[#6d5dfb]/10 outline-none transition-all text-xs sm:text-sm">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Form Bottom Action Buttons -->
+          <div
+            class="bg-white border border-gray-200 rounded-3xl p-5 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2 text-xs text-gray-500">
+              <span class="text-emerald-600 font-bold">✓</span>
+              <span>ทุกการเปลี่ยนแปลงจะถูกบันทึกลงในเครื่องอัตโนมัติ</span>
+            </div>
+            <div class="flex items-center gap-3 w-full sm:w-auto">
+              <button type="button" id="saveDraftBtn"
+                class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-4 py-3 rounded-xl border border-gray-200 bg-white hover:bg-gray-50 text-gray-700 font-bold text-xs transition-all">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
+                </svg>
+                บันทึกฉบับร่าง
+              </button>
+              <button type="submit" id="submitPostBtn"
+                class="flex-1 sm:flex-initial min-w-[170px] inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#6d5dfb] hover:bg-[#5b4be0] text-white font-bold text-xs transition-all shadow-md hover:shadow-lg hover:scale-102">
+                <span>🚀</span>
+                <span>โพสต์โปรเจกต์</span>
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <!-- Right Sticky Sidebar: Quality Meter & Live Card Preview -->
+        <div class="flex flex-col gap-6 lg:sticky lg:top-6">
+
+          <!-- Quality Score Meter Card — Circular Ring -->
+          <div class="bg-white border border-gray-200 rounded-3xl p-5 sm:p-6 shadow-xs space-y-4 relative overflow-hidden">
+            <!-- Ambient glow -->
+            <div class="absolute -top-8 -right-8 w-24 h-24 bg-purple-400/10 rounded-full blur-2xl pointer-events-none"></div>
+            <div class="flex items-center gap-4">
+              <!-- Circular Progress Ring -->
+              <div class="relative w-20 h-20 shrink-0">
+                <svg class="w-full h-full -rotate-90" viewBox="0 0 80 80">
+                  <circle cx="40" cy="40" r="34" fill="none" stroke="#f0eaff" stroke-width="7" />
+                  <circle id="qualityRing" cx="40" cy="40" r="34" fill="none" stroke="url(#qualityGradient)" stroke-width="7" stroke-linecap="round" stroke-dasharray="213.6" stroke-dashoffset="160.2" class="transition-all duration-700 ease-out" />
+                  <defs>
+                    <linearGradient id="qualityGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stop-color="#6d5dfb" />
+                      <stop offset="100%" stop-color="#34d399" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+                <div class="absolute inset-0 flex flex-col items-center justify-center">
+                  <span id="qualityScoreText" class="text-lg font-extrabold text-[#6d5dfb] leading-none">25%</span>
+                  <span class="text-[9px] text-gray-400 font-semibold">สมบูรณ์</span>
+                </div>
+              </div>
+              <div class="flex-1">
+                <h3 class="text-sm font-bold text-gray-900">คะแนนความสมบูรณ์</h3>
+                <p class="text-[11px] text-gray-500 mt-0.5" id="qualityHint">เพิ่มข้อมูลให้ครบเพื่อโพสต์ที่น่าสนใจ</p>
+              </div>
+            </div>
+
+            <!-- Checklist -->
+            <ul class="space-y-2.5 text-xs" id="qualityChecklist">
+              <li id="checkType" class="flex items-center gap-2.5 text-gray-500 p-2 rounded-xl transition-colors">
+                <span class="check-icon w-5 h-5 rounded-full bg-gray-100 text-gray-300 grid place-items-center text-[11px] font-bold shrink-0 transition-all">○</span>
+                <span>เลือกประเภทโพสต์และหมวดหมู่</span>
+              </li>
+              <li id="checkTitle" class="flex items-center gap-2.5 text-gray-500 p-2 rounded-xl transition-colors">
+                <span class="check-icon w-5 h-5 rounded-full bg-gray-100 text-gray-300 grid place-items-center text-[11px] font-bold shrink-0 transition-all">○</span>
+                <span>ตั้งชื่อโปรเจกต์ให้กระชับและเข้าใจง่าย</span>
+              </li>
+              <li id="checkDesc" class="flex items-center gap-2.5 text-gray-500 p-2 rounded-xl transition-colors">
+                <span class="check-icon w-5 h-5 rounded-full bg-gray-100 text-gray-300 grid place-items-center text-[11px] font-bold shrink-0 transition-all">○</span>
+                <span>เขียนเล่ารายละเอียดและปัญหาอย่างน้อย 30 คำ</span>
+              </li>
+              <li id="checkMedia" class="flex items-center gap-2.5 text-gray-500 p-2 rounded-xl transition-colors">
+                <span class="check-icon w-5 h-5 rounded-full bg-gray-100 text-gray-300 grid place-items-center text-[11px] font-bold shrink-0 transition-all">○</span>
+                <span>ใส่รูปภาพตัวอย่างหรือลิงก์ Demo/Prototype</span>
+              </li>
+            </ul>
+
+            <!-- Hidden progress bar for JS compatibility -->
+            <div id="qualityProgressBar" class="hidden" style="width: 25%;"></div>
+          </div>
+
+          <!-- Live Card Preview — Enhanced with Gradient Banner -->
+          <div class="bg-white border border-gray-200 rounded-3xl p-5 sm:p-6 shadow-xs space-y-4">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="relative flex h-2.5 w-2.5">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#6d5dfb] opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#6d5dfb]"></span>
+                </span>
+                <h3 class="text-sm font-bold text-gray-900">ตัวอย่างโพสต์สดบน Feed</h3>
+              </div>
+              <span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">LIVE</span>
+            </div>
+
+            <!-- Simulated ShowKong-style Card -->
+            <article class="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+              <!-- Gradient Banner -->
+              <div id="previewBanner" class="relative h-28 bg-gradient-to-br from-[#160e3d] via-[#4d3db2] to-[#7f67fb] p-4 flex flex-col justify-between">
+                <div class="flex items-start justify-between gap-2 z-10">
+                  <span id="previewType" class="px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white bg-white/25 backdrop-blur-md border border-white/30">
+                    💡 ไอเดียใหม่
+                  </span>
+                  <span class="px-2 py-0.5 rounded-full text-[10px] font-bold text-white/80 bg-black/20 backdrop-blur-md">เมื่อสักครู่</span>
+                </div>
+                <div class="z-10">
+                  <h4 id="previewTitle" class="font-bold text-sm text-white leading-snug line-clamp-2 drop-shadow-sm">
+                    ชื่อโปรเจกต์ของคุณจะแสดงที่นี่
+                  </h4>
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                <div class="absolute -right-6 -bottom-6 w-20 h-20 rounded-full bg-white/10 blur-xl"></div>
+              </div>
+
+              <div class="p-4 space-y-3">
+                <!-- Author row -->
+                <div class="flex items-center gap-2.5">
+                  <span class="w-7 h-7 rounded-full bg-gradient-to-tr from-[#6d5dfb] to-[#a78bfa] text-white font-bold text-[10px] grid place-items-center shadow-xs">P</span>
+                  <div class="min-w-0">
+                    <strong class="text-[11px] font-bold text-gray-900 block truncate">คุณ (Pluem)</strong>
+                    <span class="text-[10px] text-gray-400 block" id="previewMeta">เมื่อสักครู่ · เทคโนโลยี</span>
+                  </div>
+                </div>
+
+                <!-- Body -->
+                <p id="previewBody" class="text-[11px] text-gray-600 leading-relaxed line-clamp-3">
+                  พิมพ์รายละเอียดในฟอร์มด้านซ้ายเพื่อดูตัวอย่างข้อความสด...
+                </p>
+
+                <!-- Roles Needed pills (if any) -->
+                <div id="previewRoles" class="p-2 rounded-xl bg-orange-50/70 border border-orange-100 text-xs space-y-1" hidden>
+                  <span class="text-[9px] font-bold text-orange-700 uppercase">👥 เปิดรับสมาชิก:</span>
+                  <div id="previewRolesList" class="flex flex-wrap gap-1"></div>
+                </div>
+
+                <!-- Tags -->
+                <div id="previewTags" class="flex flex-wrap gap-1" hidden></div>
+
+                <!-- Image preview thumb inside card -->
+                <div id="previewCardImages" class="grid grid-cols-2 gap-1.5 rounded-xl overflow-hidden" hidden></div>
+
+                <!-- Demo & Github badges -->
+                <div id="previewLinks" class="flex flex-wrap gap-1.5 pt-1" hidden></div>
+
+                <!-- Simulated engagement bar -->
+                <div class="pt-2.5 border-t border-gray-100 flex items-center justify-between text-[10px] text-gray-400">
+                  <span>0 สนใจ · 0 คอมเมนต์</span>
+                  <div class="flex items-center gap-1.5">
+                    <span class="px-2 py-0.5 rounded-lg bg-white border border-gray-200 text-gray-700 font-bold">🤍</span>
+                    <span class="px-2.5 py-1 rounded-lg bg-gradient-to-r from-[#6d5dfb] to-[#8c7bff] text-white font-bold">🎮 เล่น Prototype</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- AI Writing Assistant Panel -->
+          <div class="bg-gradient-to-br from-[#1a103d] via-[#2d1b6e] to-[#4d3db2] rounded-3xl p-5 sm:p-6 space-y-4 text-white relative overflow-hidden">
+            <div class="absolute -top-8 -right-8 w-28 h-28 bg-purple-400/15 rounded-full blur-2xl"></div>
+            <div class="absolute bottom-0 left-0 w-20 h-20 bg-pink-500/10 rounded-full blur-xl"></div>
+            <div class="relative z-10">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="w-7 h-7 rounded-xl bg-gradient-to-r from-purple-400 to-pink-400 grid place-items-center text-sm shadow-md">✨</span>
+                <h3 class="text-xs font-bold uppercase tracking-wide text-white/90">AI Writing Assistant</h3>
+                <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-white/15 text-purple-200 ml-auto">BETA</span>
+              </div>
+              <div class="space-y-2.5" id="aiSuggestions">
+                <button type="button" class="ai-suggest-btn w-full text-left p-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 transition-all group" data-suggest="problem">
+                  <span class="text-[11px] font-bold text-purple-200 block">💡 เสนอโครงสร้างโพสต์</span>
+                  <span class="text-[10px] text-white/60 group-hover:text-white/80">ใส่โครงสร้าง ปัญหา → วิธีแก้ → จุดเด่น ให้อัตโนมัติ</span>
+                </button>
+                <button type="button" class="ai-suggest-btn w-full text-left p-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 transition-all group" data-suggest="catchy-title">
+                  <span class="text-[11px] font-bold text-purple-200 block">🎯 ช่วยตั้งชื่อให้น่าสนใจ</span>
+                  <span class="text-[10px] text-white/60 group-hover:text-white/80">สร้างชื่อโปรเจกต์ที่จับตาคนอ่านจากเนื้อหาที่คุณเขียน</span>
+                </button>
+                <button type="button" class="ai-suggest-btn w-full text-left p-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 transition-all group" data-suggest="tags">
+                  <span class="text-[11px] font-bold text-purple-200 block">🏷️ แนะนำแท็กที่เกี่ยวข้อง</span>
+                  <span class="text-[10px] text-white/60 group-hover:text-white/80">วิเคราะห์เนื้อหาแล้วแนะนำ Tags ที่ตรงกับโปรเจกต์</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pro Tips Card -->
+          <div class="bg-gradient-to-br from-purple-50/70 via-indigo-50/40 to-white border border-purple-100 rounded-3xl p-5 sm:p-6 space-y-3">
+            <h3 class="text-xs font-bold text-[#6d5dfb] uppercase tracking-wide flex items-center gap-1.5">
+              <span>💡</span> เคล็ดลับเพื่อโพสต์ที่น่าสนใจ
+            </h3>
+            <ul class="space-y-2.5 text-xs text-gray-600 leading-relaxed">
+              <li class="flex items-start gap-2">
+                <span class="text-[#6d5dfb] font-bold mt-0.5">•</span>
+                <span><strong>ตั้งชื่อให้ชัดเจน:</strong> บอกฟีเจอร์เด่นหรือปัญหาที่แก้ในชื่อโพสต์</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-[#6d5dfb] font-bold mt-0.5">•</span>
+                <span><strong>ระบุทักษะที่ขาด:</strong> หากกำลังหาทีม บอกเลยว่าต้องการ Backend หรือ Designer</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-[#6d5dfb] font-bold mt-0.5">•</span>
+                <span><strong>ใส่ภาพตัวอย่าง:</strong> รูปภาพหน้าจอช่วยให้คนหยุดดูและเข้าใจไอเดียได้เร็วที่สุด</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-shared-footer></div>
+
+  <!-- Success Modal -->
+  <div class="fixed inset-0 z-[100] grid place-items-center p-4 bg-[rgba(17,13,38,0.65)] backdrop-blur-sm"
+    id="successModal" hidden>
+    <section
+      class="w-full max-w-[440px] p-8 flex flex-col items-center text-center bg-white rounded-3xl shadow-2xl animate-[modalIn_0.3s_ease-out] border border-gray-100"
+      role="dialog" aria-modal="true" aria-labelledby="successTitle">
+      <span
+        class="w-16 h-16 grid place-items-center text-white bg-emerald-500 rounded-full text-3xl shadow-lg shadow-emerald-500/30">✓</span>
+      <h2 id="successTitle" class="mt-5 text-xl font-bold text-gray-900">โพสต์ผลงานสำเร็จแล้ว! 🎉</h2>
+      <p class="mt-2 text-xs sm:text-sm text-gray-600 leading-relaxed">โปรเจกต์ของคุณถูกบันทึกและแสดงใน Feed แล้ว
+        พร้อมให้เพื่อนๆ เข้ามาทดลอง Demo หรือร่วมทีม</p>
+      <div class="mt-6 flex gap-3 w-full">
+        <a href="/pages/feed.html"
+          class="flex-1 py-3 px-4 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold text-xs transition-colors">
+          ไปที่หน้า Feed
+        </a>
+        <button
+          class="flex-1 py-3 px-4 rounded-xl bg-[#6d5dfb] hover:bg-[#5b4be0] text-white font-bold text-xs transition-colors shadow-md"
+          id="postAnother" type="button">
+          สร้างโพสต์ใหม่
+        </button>
+      </div>
+    </section>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="postToast"
+    class="fixed bottom-6 right-6 z-[120] transition-all duration-300 transform translate-y-16 opacity-0 pointer-events-none">
+    <div
+      class="flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-gray-900 text-white text-xs font-semibold shadow-xl border border-gray-700">
+      <span class="text-emerald-400 text-base">✓</span>
+      <span id="postToastMsg">บันทึกเรียบร้อย</span>
+    </div>
+  </div>
+
+  <script type="module" src="/src/pages/post.js"></script>
+</body>
+
+</html>

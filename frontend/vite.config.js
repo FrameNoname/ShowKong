@@ -11,8 +11,16 @@ export default defineConfig({
         main: resolve(import.meta.dirname, 'index.html'),
         login: resolve(import.meta.dirname, 'pages/login.html'),
         register: resolve(import.meta.dirname, 'pages/register.html'),
+        feed: resolve(import.meta.dirname, 'pages/feed.html'),
+        explore: resolve(import.meta.dirname, 'pages/explore-projects.html'),
+        challenges: resolve(import.meta.dirname, 'pages/sponsored-challenge.html'),
+        dashboard: resolve(import.meta.dirname, 'pages/dashboard.html'),
+        findTeam: resolve(import.meta.dirname, 'pages/find-team.html'),
+        teamDetail: resolve(import.meta.dirname, 'pages/team-detail.html'),
+        post: resolve(import.meta.dirname, 'pages/post.html'),
+        showKong: resolve(import.meta.dirname, 'pages/show-kong.html'),
+        showcase: resolve(import.meta.dirname, 'pages/showcase.html'),
       },
     },
   },
 })
-
