@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="รายละเอียด ประวัติ และหลักฐานของทีมบน ShowKong">
     <title>รายละเอียดทีม — ShowKong</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600&display=swap" rel="stylesheet">
   </head>
   <body class="app-page team-detail-page">
     <div data-shared-header></div>
@@ -46,11 +43,6 @@
             <h3>ผลลัพธ์ที่ตรวจสอบได้</h3>
             <p id="detailEvidence"></p>
           </article>
-          <article class="evidence-card review-card">
-            <span class="info-mark">i</span>
-            <h3>เสียงจากคนที่เคยร่วมทีม</h3>
-            <blockquote id="detailReview"></blockquote>
-          </article>
         </div>
 
         <aside class="team-detail-sidebar">
@@ -74,22 +66,6 @@
     </main>
     <div data-shared-footer></div>
 
-    <div class="modal-backdrop" id="detailJoinModal" hidden>
-      <section class="join-modal figma-join-modal" role="dialog" aria-modal="true" aria-labelledby="detailJoinTitle">
-        <div class="modal-header">
-          <div><h2 id="detailJoinTitle">ขอ Join ทีม</h2><p>บอกให้ทีมรู้จักคุณสั้น ๆ ระบบจะแนบโปรไฟล์และผลงานล่าสุดไปพร้อมคำขอ</p></div>
-          <button class="icon-button" id="closeDetailJoin" type="button" aria-label="ปิด">×</button>
-        </div>
-        <div class="join-summary"><strong id="detailJoinSummary"></strong><span id="detailJoinMeta"></span></div>
-        <form id="detailJoinForm">
-          <label>แนะนำตัวสั้น ๆ<input required placeholder="เช่น ฉันเรียนวิศวะคอม สนใจออกแบบประสบการณ์เรียน"></label>
-          <label>ทักษะที่ช่วยทีมได้<input required placeholder="เช่น UX/UI, User Research, Prototype"></label>
-          <label>ข้อความถึงทีม<textarea required rows="4" placeholder="เล่าว่าทำไมคุณถึงอยากร่วมทีม และคุณช่วยให้โปรเจกต์เดินหน้าต่ออย่างไร"></textarea></label>
-          <div class="modal-footer"><span></span><div><button class="button button-neutral" id="cancelDetailJoin" type="button">ยกเลิก</button><button class="button button-primary" type="submit">ส่งคำขอ Join</button></div></div>
-        </form>
-      </section>
-    </div>
-    <div class="modal-backdrop" id="detailJoinSuccess" hidden><section class="success-modal" role="dialog" aria-modal="true"><span class="success-check">✓</span><h2>ส่งคำขอแล้ว!</h2><p>ทีมได้รับโปรไฟล์และข้อความของคุณแล้ว สามารถติดตามสถานะได้จากรายการของฉัน</p><button class="button button-primary" id="closeDetailJoinSuccess" type="button">กลับไปดูรายละเอียดทีม</button></section></div>
     <script type="module" src="/src/pages/team-detail.js"></script>
   </body>
 </html>

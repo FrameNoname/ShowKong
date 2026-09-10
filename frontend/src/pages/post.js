@@ -1,9 +1,8 @@
-import '../style.css'
-import { mountAuthenticatedShell } from '../components/shared.js'
+import { mountRefresh } from '../components/refresh.js'
+import { composerForm, bindComposer, showPostSuccess } from '../components/composer.js'
 import { supabase } from '../lib/supabase.js'
 
-mountAuthenticatedShell('post')
-
+mountRefresh('post')
 if (supabase) {
   const { data } = await supabase.auth.getSession()
   if (!data.session) window.location.replace('/pages/login.html')
