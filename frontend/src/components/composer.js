@@ -16,9 +16,10 @@ export function composerForm() {
 }
 export function bindComposer(root, onComplete, onCancel, preset = {}) {
   const form = root.querySelector('#postForm')
-  const saved = readLocal(DRAFT_KEY,{})
+  const isEditing = Boolean(preset.id)
+  const saved = isEditing ? {} : readLocal(DRAFT_KEY,{})
   let type = preset.type || saved.type || 'ไอเดียใหม่'
-  let images = []
+  let images = Array.isArray(preset.images) ? [...preset.images] : []
   let disposed = false
   let revision = 0
   const error = message => { const el=root.querySelector('#postError');el.textContent=message;el.hidden=!message }
@@ -27,6 +28,10 @@ export function bindComposer(root, onComplete, onCancel, preset = {}) {
   setType()
   function draft() {
     const data={...Object.fromEntries(new FormData(form)),type}
+    if (isEditing) {
+      root.querySelector('.draft-status').textContent='กำลังแก้ไขโพสต์ของคุณ'
+      return
+    }
     root.querySelector('.draft-status').textContent=saveLocal(DRAFT_KEY,data)?'บันทึกร่างบนอุปกรณ์นี้แล้ว':'ไม่สามารถบันทึกร่างได้'
   }
   form.addEventListener('input',draft)
@@ -35,6 +40,11 @@ export function bindComposer(root, onComplete, onCancel, preset = {}) {
     const el=root.querySelector('#uploadPreview')
     el.hidden=!images.length
     el.innerHTML=images.map((img,i)=>`<div class="upload-item"><img src="${img.data}" alt="${escapeHtml(img.name)}"><div><div><strong>${escapeHtml(img.name)}</strong><small>${(img.size/1024/1024).toFixed(1)} MB · พร้อมแนบ</small></div><button class="soft-link" type="button" data-remove="${i}" aria-label="ลบรูป ${escapeHtml(img.name)}">ลบ</button></div></div>`).join('')
+  }
+  previews()
+  if (isEditing) {
+    root.querySelector('.draft-status').textContent='กำลังแก้ไขโพสต์ของคุณ'
+    root.querySelector('#submitPostBtn').textContent='บันทึกการแก้ไข'
   }
   async function addImages(files) {
     const chosen=[...files]
@@ -64,9 +74,10 @@ export function bindComposer(root, onComplete, onCancel, preset = {}) {
       if(values[key]&&!/^https?:\/\//i.test(values[key])){error('ลิงก์ต้องขึ้นต้นด้วย https:// หรือ http://');return}
     }
     const posts=readLocal(POSTS_KEY,[])
-    const post={...values,id:crypto.randomUUID(),type,images,createdAt:new Date().toISOString()}
-    if(!saveLocal(POSTS_KEY,[post,...posts])){error('พื้นที่จัดเก็บไม่พอ ลองลดจำนวนรูปหรือขนาดไฟล์แล้วโพสต์อีกครั้ง');return}
-    saveLocal(DRAFT_KEY,{})
+    const post={...values,id:preset.id||crypto.randomUUID(),type,images,createdAt:preset.createdAt||new Date().toISOString()}
+    const nextPosts=isEditing?posts.map(item=>item.id===preset.id?post:item):[post,...posts]
+    if(!saveLocal(POSTS_KEY,nextPosts)){error('พื้นที่จัดเก็บไม่พอ ลองลดจำนวนรูปหรือขนาดไฟล์แล้วบันทึกอีกครั้ง');return}
+    if(!isEditing)saveLocal(DRAFT_KEY,{})
     disposed=true
     onComplete(post)
   })
