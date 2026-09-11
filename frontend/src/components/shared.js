@@ -21,8 +21,10 @@ export function authenticatedHeader(activePage = '') {
   return `
     <header class="site-header">
       <a class="brand" href="${pagePaths.feed}" aria-label="ShowKong Feed">
-        <span class="brand-mark">S</span>
-        <span>ShowKong</span>
+        <span class="brand-mark">
+          <img class="brand-logo-img" src="/images/logo-sk-icon.png" alt="ShowKong Logo">
+        </span>
+        <span class="brand-text">ShowKong</span>
       </a>
       <nav class="main-nav" aria-label="เมนูหลัก">
         ${navItems.map(([key, label]) => `
