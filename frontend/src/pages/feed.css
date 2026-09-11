@@ -1,0 +1,1409 @@
+/* Feed Page Dedicated Stylesheet */
+
+.feed-page-wrapper {
+  background-color: #f8f7fd;
+  min-height: calc(100vh - 88px);
+  padding: 24px 0 80px;
+}
+
+.feed-container {
+  width: min(calc(100% - 32px), 1140px);
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   1. Hero Spotlight Carousel
+   ========================================================================== */
+.feed-hero-carousel-wrapper {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.feed-hero-carousel {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  background: transparent;
+  box-shadow: 0 16px 40px -10px rgba(45, 23, 100, 0.3), 0 4px 16px rgba(45, 23, 100, 0.1);
+}
+
+.feed-hero-track {
+  display: flex;
+  align-items: stretch;
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+  height: 100%;
+}
+
+.feed-hero-slide {
+  flex: 0 0 100%;
+  min-width: 100%;
+  display: flex;
+}
+
+.feed-hero-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  color: #ffffff;
+  padding: 40px 48px 44px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 1fr);
+  gap: 36px;
+  align-items: center;
+  min-height: 410px;
+  width: 100%;
+  flex: 1;
+  box-sizing: border-box;
+}
+
+.feed-hero-card.theme-violet {
+  background: linear-gradient(135deg, #5720d6 0%, #763ced 48%, #9353f8 100%);
+}
+
+.feed-hero-card.theme-blue {
+  background: linear-gradient(135deg, #0f1e56 0%, #1d4ed8 52%, #0284c7 100%);
+}
+
+.feed-hero-card.theme-green {
+  background: linear-gradient(135deg, #043d2e 0%, #059669 50%, #10b981 100%);
+}
+
+.feed-hero-card.theme-indigo {
+  background: linear-gradient(135deg, #260d54 0%, #6366f1 52%, #8b5cf6 100%);
+}
+
+/* Carousel Navigation Arrows */
+.feed-carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+  display: grid;
+  place-items: center;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
+  opacity: 0.85;
+}
+
+.feed-carousel-arrow:hover {
+  background: rgba(255, 255, 255, 0.42);
+  transform: translateY(-50%) scale(1.08);
+  opacity: 1;
+}
+
+.feed-carousel-arrow.prev {
+  left: 14px;
+}
+
+.feed-carousel-arrow.next {
+  right: 14px;
+}
+
+/* Carousel Indicators / Dots */
+.feed-carousel-dots {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 10;
+}
+
+.feed-carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.4);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.feed-carousel-dot.is-active {
+  width: 28px;
+  background: #ffffff;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+}
+
+.feed-hero-card::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  right: -40px;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.feed-hero-card::after {
+  content: '';
+  position: absolute;
+  bottom: -50px;
+  left: 20%;
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(circle, rgba(147, 83, 248, 0.35) 0%, rgba(147, 83, 248, 0) 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.feed-hero-copy {
+  position: relative;
+  z-index: 2;
+}
+
+.feed-hero-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 14px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  font-size: 12px;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0.02em;
+  backdrop-filter: blur(8px);
+}
+
+.feed-hero-pill .sparkle {
+  font-size: 13px;
+  color: #fde047;
+}
+
+.feed-hero-title {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.35;
+  color: #ffffff;
+  margin: 14px 0 10px;
+  letter-spacing: -0.02em;
+}
+
+.feed-hero-desc {
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: #ede7ff;
+  margin-bottom: 14px;
+  max-width: 520px;
+}
+
+.feed-hero-meta {
+  font-size: 13px;
+  color: #ded4fc;
+  margin-bottom: 22px;
+}
+
+.feed-hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 24px;
+  border-radius: 99px;
+  background: #ffffff;
+  color: #5720d6;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+}
+
+.feed-hero-cta:hover {
+  transform: translateY(-2px);
+  background-color: #fbf9ff;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+}
+
+/* Hero Right Visual: Phone Mockup & Fast Feedback */
+.feed-hero-visual {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.feed-phone-mockup {
+  position: relative;
+  width: 240px;
+  background: #ffffff;
+  border: 4px solid rgba(255, 255, 255, 0.9);
+  border-radius: 26px;
+  padding: 14px 12px;
+  box-shadow: 0 20px 36px -8px rgba(27, 9, 68, 0.38);
+  color: #191629;
+}
+
+.feed-phone-screen {
+  background: linear-gradient(180deg, #f4f1fc 0%, #ffffff 100%);
+  border-radius: 18px;
+  padding: 12px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.feed-phone-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 800;
+  color: #6332ea;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #e7e2f5;
+  letter-spacing: 0.03em;
+}
+
+.feed-quest-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 7px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  border: 1px solid #ebe8f3;
+}
+
+.feed-quest-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+  display: grid;
+  place-items: center;
+  font-size: 10px;
+}
+
+.feed-quest-icon.checked {
+  background: #22c55e;
+  color: white;
+}
+
+.feed-quest-icon.ongoing {
+  background: #f59e0b;
+  color: white;
+}
+
+.feed-quest-icon.star {
+  background: #8b5cf6;
+  color: white;
+}
+
+.feed-float-badge {
+  position: absolute;
+  padding: 6px 12px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.16);
+  font-size: 11px;
+  font-weight: 750;
+  color: #5720d6;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  z-index: 10;
+  white-space: nowrap;
+  animation: feedFloat 3s ease-in-out infinite alternate;
+}
+
+.feed-float-badge.left {
+  left: -18px;
+  top: 14px;
+}
+
+.feed-float-badge.right {
+  right: -18px;
+  bottom: 14px;
+  animation-delay: 1.5s;
+}
+
+@keyframes feedFloat {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-6px); }
+}
+
+.feed-feedback-card {
+  width: 100%;
+  max-width: 290px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 12px 16px;
+  color: #191629;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  text-align: left;
+}
+
+.feed-feedback-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  color: #6d5dfb;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 2px;
+}
+
+.feed-feedback-card h4 {
+  font-size: 13px;
+  font-weight: 700;
+  margin: 2px 0 3px;
+  color: #191629;
+}
+
+.feed-feedback-card p {
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: #66617a;
+  margin: 0;
+}
+
+/* ==========================================================================
+   2. Toolbar (Search, Filter Chips, Sort)
+   ========================================================================== */
+.feed-toolbar-panel {
+  background: #ffffff;
+  border: 1px solid #ebe7f5;
+  border-radius: 20px;
+  padding: 18px 24px;
+  box-shadow: 0 2px 10px rgba(26, 20, 64, 0.03);
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.feed-toolbar-top {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.feed-search-box {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.feed-search-box svg {
+  position: absolute;
+  left: 16px;
+  width: 18px;
+  height: 18px;
+  color: #8c86a2;
+  pointer-events: none;
+}
+
+.feed-search-input {
+  width: 100%;
+  padding: 11px 16px 11px 44px;
+  border-radius: 12px;
+  border: 1px solid #e7e3f2;
+  background: #f8f7fc;
+  font-size: 14px;
+  color: #191629;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.feed-search-input:focus {
+  background: #ffffff;
+  border-color: #6d5dfb;
+  box-shadow: 0 0 0 3px rgba(109, 93, 251, 0.14);
+}
+
+.feed-sort-select {
+  padding: 10px 18px;
+  border-radius: 12px;
+  border: 1px solid #e7e3f2;
+  background: #f8f7fc;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #464257;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.feed-sort-select:focus {
+  border-color: #6d5dfb;
+  background: #ffffff;
+}
+
+.feed-filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.feed-chip {
+  padding: 7px 16px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  background: #f5f4fa;
+  color: #555169;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.16s ease;
+  user-select: none;
+}
+
+.feed-chip:hover {
+  background: #ebe8f7;
+  color: #191629;
+}
+
+.feed-chip.is-active {
+  background: #6d5dfb;
+  color: #ffffff;
+  border-color: #6d5dfb;
+  box-shadow: 0 3px 10px rgba(109, 93, 251, 0.28);
+}
+
+/* ==========================================================================
+   3. Main 2-Column Feed Layout
+   ========================================================================== */
+.feed-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 310px;
+  gap: 24px;
+  align-items: start;
+}
+
+.feed-stream {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ==========================================================================
+   4. Feed Cards
+   ========================================================================== */
+.feed-card {
+  background: #ffffff;
+  border: 1px solid #ebe7f5;
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 2px 12px rgba(26, 20, 64, 0.03);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.feed-card:hover {
+  border-color: #dad4ee;
+  box-shadow: 0 8px 24px rgba(26, 20, 64, 0.06);
+}
+
+/* Post Header */
+.feed-post-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.feed-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 14px;
+  color: #ffffff;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.feed-avatar.violet { background: linear-gradient(135deg, #7c3aed, #9333ea); }
+.feed-avatar.coral  { background: linear-gradient(135deg, #f97316, #ef4444); }
+.feed-avatar.blue   { background: linear-gradient(135deg, #2563eb, #0284c7); }
+.feed-avatar.green  { background: linear-gradient(135deg, #059669, #10b981); }
+.feed-avatar.teal   { background: linear-gradient(135deg, #0d9488, #14b8a6); }
+.feed-avatar.amber  { background: linear-gradient(135deg, #d97706, #f59e0b); }
+
+.feed-author-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.feed-author-name {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #191629;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.feed-author-meta {
+  font-size: 12px;
+  color: #79748c;
+  margin-top: 2px;
+}
+
+.feed-badge {
+  padding: 4px 11px;
+  border-radius: 99px;
+  font-size: 11.5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.feed-badge.showcase {
+  background: #f1eeff;
+  color: #6d5dfb;
+}
+
+.feed-badge.challenge {
+  background: #fff0ed;
+  color: #ea580c;
+}
+
+.feed-badge.recruitment {
+  background: #f3e8ff;
+  color: #8b5cf6;
+}
+
+.feed-badge.discussion {
+  background: #e0f2fe;
+  color: #0284c7;
+}
+
+.feed-more-btn {
+  background: none;
+  border: none;
+  color: #a09cb0;
+  padding: 6px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: color 0.15s, background 0.15s;
+}
+
+.feed-more-btn:hover {
+  background: #f5f3fc;
+  color: #191629;
+}
+
+/* Post Media Banner */
+.feed-post-media {
+  border-radius: 14px;
+  overflow: hidden;
+  margin: 12px 0 16px;
+  max-height: 320px;
+  background: #1e1938;
+}
+
+.feed-post-media img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.feed-card:hover .feed-post-media img {
+  transform: scale(1.02);
+}
+
+/* Post Titles & Texts */
+.feed-post-title {
+  font-size: 18.5px;
+  font-weight: 800;
+  color: #191629;
+  line-height: 1.4;
+  margin: 8px 0 4px;
+}
+
+.feed-post-link {
+  display: inline-block;
+  font-size: 13px;
+  color: #6d5dfb;
+  font-weight: 500;
+  text-decoration: none;
+  margin-bottom: 8px;
+}
+
+.feed-post-link:hover {
+  text-decoration: underline;
+}
+
+.feed-post-desc {
+  font-size: 14px;
+  line-height: 1.65;
+  color: #4c4860;
+  margin: 0 0 14px;
+}
+
+.feed-post-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.feed-tag {
+  background: #f4f1fc;
+  color: #6d5dfb;
+  border-radius: 99px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.feed-tag:hover {
+  background: #6d5dfb;
+  color: #ffffff;
+}
+
+/* Primary Dark Action Button (e.g. ลองใช้ Prototype) */
+.feed-primary-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 20px;
+  border-radius: 99px;
+  background: #191629;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.16s ease;
+}
+
+.feed-primary-btn:hover {
+  background: #312952;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(25, 22, 41, 0.2);
+}
+
+/* Specific Card Styles */
+
+/* 1. Sponsored Challenge Prize Box */
+.feed-prize-box {
+  background: linear-gradient(135deg, #fff3f0 0%, #ffedea 100%);
+  border: 1px solid #ffd8cf;
+  border-radius: 16px;
+  padding: 18px 22px;
+  margin: 14px 0 16px;
+}
+
+.feed-prize-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #ea580c;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.feed-prize-amount {
+  font-size: 28px;
+  font-weight: 800;
+  color: #191629;
+  margin: 4px 0 10px;
+}
+
+.feed-prize-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-size: 12.5px;
+  color: #6e5e5a;
+}
+
+.feed-challenge-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  background: #191629;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.16s ease;
+  display: block;
+  text-decoration: none;
+}
+
+.feed-challenge-btn:hover {
+  background: #312952;
+  box-shadow: 0 4px 14px rgba(25, 22, 41, 0.2);
+}
+
+/* 2. Team Recruitment Accent Box */
+.feed-role-box {
+  background: #fbf9ff;
+  border: 1px solid #eeebfa;
+  border-left: 4px solid #8b5cf6;
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin: 12px 0 16px;
+}
+
+.feed-role-box.blue { border-left-color: #0ea5e9; }
+.feed-role-box.amber { border-left-color: #f59e0b; }
+
+.feed-role-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #191629;
+}
+
+.feed-role-desc {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: #555169;
+  margin: 6px 0 10px;
+}
+
+.feed-project-context {
+  font-size: 12.5px;
+  color: #79738c;
+  font-weight: 500;
+  padding-top: 8px;
+  border-top: 1px dashed #e6e2f2;
+}
+
+.feed-role-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.feed-btn-secondary {
+  padding: 8px 18px;
+  border-radius: 99px;
+  background: #ffffff;
+  border: 1px solid #dcd7ed;
+  color: #464257;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.feed-btn-secondary:hover {
+  background: #f6f4fc;
+  border-color: #cac3e4;
+  color: #191629;
+}
+
+/* 3. Discussion Content Box */
+.feed-discussion-box {
+  background: #f9f8fe;
+  border: 1px solid #eeebfa;
+  border-radius: 14px;
+  padding: 18px 20px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #26223d;
+  margin: 10px 0 14px;
+}
+
+/* Post Action Footer */
+.feed-post-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #f2eff9;
+  padding-top: 14px;
+  margin-top: 16px;
+}
+
+.feed-footer-left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.feed-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  color: #736e84;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 6px;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.feed-action-btn:hover {
+  color: #191629;
+}
+
+.feed-action-btn.liked {
+  color: #e11d48;
+}
+
+.feed-action-btn.liked svg {
+  fill: #e11d48;
+}
+
+.feed-action-btn.bookmarked {
+  color: #6d5dfb;
+}
+
+.feed-action-btn.bookmarked svg {
+  fill: #6d5dfb;
+}
+
+/* ==========================================================================
+   5. Right Sidebar Widgets
+   ========================================================================== */
+.feed-sidebar {
+  position: sticky;
+  top: 104px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.feed-widget {
+  background: #ffffff;
+  border: 1px solid #ebe7f5;
+  border-radius: 20px;
+  padding: 22px;
+  box-shadow: 0 2px 10px rgba(26, 20, 64, 0.03);
+}
+
+.feed-widget-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 750;
+  color: #191629;
+  margin-bottom: 16px;
+}
+
+.feed-widget-header svg {
+  width: 18px;
+  height: 18px;
+  color: #6d5dfb;
+}
+
+/* Widget 1: Trending Tags */
+.feed-trending-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.feed-trending-tag-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #f6f4fc;
+  border: 1px solid #ebe6f8;
+  border-radius: 99px;
+  padding: 5px 12px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #554a9b;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.feed-trending-tag-item:hover {
+  background: #6d5dfb;
+  color: #ffffff;
+  border-color: #6d5dfb;
+}
+
+.feed-trending-tag-item small {
+  font-size: 10.5px;
+  opacity: 0.75;
+}
+
+/* Widget 2: Spotlight Recruitment */
+.feed-spotlight-widget {
+  background: linear-gradient(180deg, #fcfaff 0%, #f6f3ff 100%);
+  border-color: #e5defc;
+}
+
+.feed-spotlight-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: 99px;
+  background: #ffede8;
+  color: #ea580c;
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.feed-spotlight-project {
+  font-size: 15px;
+  font-weight: 800;
+  color: #191629;
+  margin-bottom: 4px;
+}
+
+.feed-spotlight-role {
+  font-size: 13px;
+  font-weight: 600;
+  color: #6d5dfb;
+  margin-bottom: 8px;
+}
+
+.feed-spotlight-desc {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #635f75;
+  margin-bottom: 14px;
+}
+
+.feed-spotlight-btn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 9px;
+  border-radius: 10px;
+  background: #6d5dfb;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: all 0.16s ease;
+}
+
+.feed-spotlight-btn:hover {
+  background: #5b4be0;
+  box-shadow: 0 4px 12px rgba(109, 93, 251, 0.25);
+}
+
+/* Widget 3: Creators */
+.feed-creator-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.feed-creator-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.feed-creator-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+}
+
+.feed-creator-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.feed-creator-name {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #191629;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.feed-creator-bio {
+  font-size: 11.5px;
+  color: #79748c;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.feed-follow-btn {
+  padding: 5px 12px;
+  border-radius: 99px;
+  border: 1px solid #dcd7ed;
+  background: #ffffff;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #464257;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.feed-follow-btn:hover {
+  background: #6d5dfb;
+  color: #ffffff;
+  border-color: #6d5dfb;
+}
+
+.feed-follow-btn.is-following {
+  background: #f1eeff;
+  color: #6d5dfb;
+  border-color: #d7cefa;
+}
+
+/* Load More Button */
+.feed-load-more-wrap {
+  text-align: center;
+  margin-top: 28px;
+}
+
+.feed-load-more-btn {
+  padding: 11px 28px;
+  border-radius: 99px;
+  background: #ffffff;
+  border: 1px solid #d9d4ea;
+  font-size: 14px;
+  font-weight: 600;
+  color: #3b3751;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.18s ease;
+}
+
+.feed-load-more-btn:hover {
+  background: #6d5dfb;
+  color: #ffffff;
+  border-color: #6d5dfb;
+  box-shadow: 0 4px 14px rgba(109, 93, 251, 0.25);
+  transform: translateY(-1px);
+}
+
+/* Empty State */
+.feed-empty-state {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 48px 24px;
+  text-align: center;
+  border: 1px solid #ebe7f5;
+  color: #66617a;
+}
+
+.feed-empty-state h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #191629;
+  margin-bottom: 8px;
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+@media (max-width: 960px) {
+  .feed-hero-card {
+    grid-template-columns: 1fr;
+    padding: 28px 24px;
+    gap: 28px;
+  }
+
+  .feed-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .feed-sidebar {
+    position: static;
+  }
+}
+
+/* ==========================================================================
+   6. Feed Composer Card & Feed Modal
+   ========================================================================== */
+.feed-composer-card {
+  background: #ffffff;
+  border: 1px solid #ebe7f5;
+  border-radius: 20px;
+  padding: 18px 20px;
+  box-shadow: 0 2px 10px rgba(26, 20, 64, 0.03);
+  margin-bottom: 4px;
+}
+
+.feed-composer-trigger-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.feed-composer-trigger-btn {
+  flex: 1;
+  text-align: left;
+  background: #f7f6fb;
+  border: 1px solid #e7e2f4;
+  border-radius: 99px;
+  padding: 11px 20px;
+  font-size: 14px;
+  color: #79738c;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.18s ease;
+}
+
+.feed-composer-trigger-btn:hover {
+  background: #f1edfa;
+  border-color: #d6ccf5;
+  color: #29253d;
+}
+
+.feed-composer-quick-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #f2eff9;
+  padding-top: 12px;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.feed-quick-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: none;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #555169;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.feed-quick-action:hover {
+  background: #f3f0fc;
+  color: #6d5dfb;
+}
+
+.feed-quick-action .quick-icon {
+  font-size: 15px;
+}
+
+/* Feed Modal Specifics */
+.feed-composer-modal {
+  width: min(calc(100% - 32px), 640px);
+  max-height: calc(100dvh - 40px);
+  overflow-y: auto;
+  border-radius: 24px;
+  padding: 24px 28px;
+  border: 1px solid #e6e2f2;
+  box-shadow: 0 24px 60px rgba(23, 20, 48, 0.28);
+}
+
+.feed-composer-modal::backdrop {
+  background: rgba(18, 14, 38, 0.55);
+  backdrop-filter: blur(4px);
+}
+
+.feed-modal-user-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 16px 0 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f0edf8;
+}
+
+.feed-modal-user-info {
+  flex: 1;
+}
+
+.feed-modal-user-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #191629;
+}
+
+.feed-modal-dest-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #f1eeff;
+  color: #6d5dfb;
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 6px;
+  margin-top: 3px;
+}
+
+.feed-type-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.feed-type-btn {
+  padding: 7px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  background: #f6f4fa;
+  color: #555169;
+  border: 1px solid #ebe7f5;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.feed-type-btn:hover {
+  background: #ede8f7;
+  color: #191629;
+}
+
+.feed-type-btn.is-active {
+  background: #6d5dfb;
+  color: #ffffff;
+  border-color: #6d5dfb;
+  box-shadow: 0 3px 10px rgba(109, 93, 251, 0.28);
+}
+
+.feed-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.feed-form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #3b3751;
+}
+
+.feed-form-input,
+.feed-form-textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid #e5e1f0;
+  background: #f9f8fc;
+  font-size: 14px;
+  color: #191629;
+  outline: none;
+  transition: all 0.18s ease;
+  font-family: inherit;
+}
+
+.feed-form-textarea {
+  resize: vertical;
+  min-height: 100px;
+  line-height: 1.6;
+}
+
+.feed-form-input:focus,
+.feed-form-textarea:focus {
+  background: #ffffff;
+  border-color: #6d5dfb;
+  box-shadow: 0 0 0 3px rgba(109, 93, 251, 0.14);
+}
+
+.feed-upload-box {
+  border: 2px dashed #dcd5f0;
+  border-radius: 14px;
+  padding: 16px;
+  text-align: center;
+  background: #faf8fe;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.feed-upload-box:hover {
+  border-color: #6d5dfb;
+  background: #f4effd;
+}
+
+.feed-upload-preview {
+  position: relative;
+  margin-top: 10px;
+  border-radius: 12px;
+  overflow: hidden;
+  max-height: 200px;
+  border: 1px solid #e7e2f2;
+}
+
+.feed-upload-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.feed-remove-img-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(18, 14, 38, 0.75);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+}
+
+.feed-new-post-highlight {
+  animation: feedHighlight 2.5s ease-out;
+}
+
+@keyframes feedHighlight {
+  0% { box-shadow: 0 0 0 4px rgba(109, 93, 251, 0.45); transform: translateY(-4px); }
+  100% { box-shadow: 0 2px 12px rgba(26, 20, 64, 0.03); transform: translateY(0); }
+}
+
+@media (max-width: 640px) {
+  .feed-composer-quick-actions {
+    justify-content: flex-start;
+  }
+  .feed-quick-action {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+  .feed-composer-modal {
+    padding: 18px 16px;
+  }
+}
+
