@@ -11,7 +11,7 @@ const pagePaths = {
 
 export function authenticatedHeader(activePage = '') {
   const navItems = [
-    ['feed', 'Feed'],
+    ['feed', 'ฟีด'],
     ['explore', 'สำรวจโปรเจกต์'],
     ['teams', 'หาทีม'],
     ['showKong', 'โชว์ของ'],
@@ -21,7 +21,9 @@ export function authenticatedHeader(activePage = '') {
   return `
     <header class="site-header">
       <a class="brand" href="${pagePaths.feed}" aria-label="ShowKong Feed">
-        <span class="brand-mark">S</span>
+        <span class="showkong-logo" aria-hidden="true">
+          <img src="/showkong-logo.png" alt="" width="1024" height="559">
+        </span>
         <span>ShowKong</span>
       </a>
       <nav class="main-nav" aria-label="เมนูหลัก">

@@ -369,7 +369,7 @@
 }
 @media (max-width:640px) {
   .refresh-page:not(.home-page) .header-actions .button { display: none; }
-  .refresh-page .site-header { padding-inline: 16px; gap: 10px; }.refresh-page .brand { font-size: 17px; gap: 8px; }.refresh-page .brand-mark { width: 34px; height: 34px; border-radius: 11px; }.refresh-page .header-actions .button { padding-inline: 10px; font-size: 12px; min-height: 34px; }.refresh-page .header-actions .avatar { display: none; }.refresh-page .mobile-menu-button { padding: 7px 9px; font-size: 12px; }
+  .refresh-page .site-header { padding-inline: 16px; gap: 10px; }.refresh-page .brand { font-size: 17px; gap: 8px; }.refresh-page .showkong-logo { width: 40px; height: 40px; }.refresh-page .header-actions .button { padding-inline: 10px; font-size: 12px; min-height: 34px; }.refresh-page .header-actions .avatar { display: none; }.refresh-page .mobile-menu-button { padding: 7px 9px; font-size: 12px; }
   .refresh-page .page-container,.refresh-page .page-container-narrow { width: calc(100% - 32px); }
   .refresh-page .main-nav.is-open::after { content: none; }
   .refresh-page .discovery-hero-copy h1 { font-size: 34px; }.refresh-page .discovery-hero-copy > p:not(.eyebrow) { font-size: 14px; }

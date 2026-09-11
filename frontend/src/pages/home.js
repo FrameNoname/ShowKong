@@ -11,7 +11,7 @@ import { setupHomeSpotlight } from '../components/home-spotlight.js'
 
 document.querySelector('[data-shared-header]').innerHTML = `
 <header class="site-header">
-  <a class="brand" href="/"><span class="brand-mark">S</span><span>ShowKong</span></a>
+  <a class="brand" href="/" aria-label="ShowKong หน้าแรก"><span class="showkong-logo" aria-hidden="true"><img src="/showkong-logo.png" alt="" width="1024" height="559"></span><span>ShowKong</span></a>
   <nav class="main-nav" aria-label="เมนูหลัก"><a class="nav-link is-active" href="/" aria-current="page">หน้าแรก</a><a class="nav-link" href="#featured">โปรเจกต์มาแรง</a><a class="nav-link" href="#works">ผลงานมาแรง</a><a class="nav-link" href="/pages/post.html">สร้างโปรเจกต์</a></nav>
   <div class="header-actions"><button class="button button-neutral js-open-login" type="button">เข้าสู่ระบบ</button></div>
   <button class="mobile-menu-button" type="button" aria-label="เปิดเมนู" aria-expanded="false">เมนู</button>
